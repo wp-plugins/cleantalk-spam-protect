@@ -348,7 +348,7 @@ function ct_check($comment) {
                 )
         );
     }
-file_put_contents($_SERVER['DOCUMENT_ROOT']."/log.txt", print_r($ct_result, true) . print_r($ct_request, true) . print_r($comment, true));
+    
     if ($ct_result->stop_queue == 1) {
         $err_text = '<center><b style="color: #49C73B;">Clean</b><b style="color: #349ebf;">Talk.</b> ' . __('Spam protection', 'cleantalk') . "</center><br><br>\n" . $ct_result->comment;
         $err_text .= '<script>setTimeout("history.back()", 5000);</script>';
