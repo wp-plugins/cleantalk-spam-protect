@@ -54,7 +54,7 @@ Plugin sends a comment's text and several previous approved comments to the serv
 
 = 2.4.11 2013-08-02 =
   * Removed spam tests for self-made pingbacks 
-  * Tested up to WP 3.5.2 
+  * Tested up to WP 3.6
 
 = 2.4.10 2013-07-24 =
   * Fixed warning in PHP 5.4
