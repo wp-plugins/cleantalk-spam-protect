@@ -49,7 +49,6 @@ Plugin sends a comment's text and several previous approved comments to the serv
 1. Plug-in's anti-spam work scheme 
 1. CleanTalk stops spammer comment
 1. CleanTalk settings to filter spam bots
-1. Service Control panel at cleantalk.org 
 
 == Changelog ==
 
