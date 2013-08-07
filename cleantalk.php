@@ -8,7 +8,7 @@
   Author URI: http://cleantalk.org
  */
 
-$ct_agent_version = 'wordpress-2411';
+$ct_agent_version = 'wordpress-2412';
 
 add_action('init', 'ct_init_locale');
 add_action('delete_comment', 'ct_delete_comment_meta');    // param - comment ID
