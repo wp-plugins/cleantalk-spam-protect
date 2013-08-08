@@ -48,7 +48,7 @@ function ct_get_options() {
 function ct_def_options() {
     $lang = get_bloginfo('language');
     return array(
-        'server' => 'http://moderate.cleantalk.ru/api2.0',
+        'server' => 'http://moderate.cleantalk.ru',
         'apikey' => __('enter key', 'cleantalk'),
         'autoPubRevelantMess' => '1' 
     );

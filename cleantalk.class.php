@@ -2,7 +2,7 @@
 /**
  * Cleantalk base class
  *
- * @version 1.21.3
+ * @version 1.21.5
  * @package Cleantalk
  * @subpackage Base
  * @author Сleantalk team (welcome@cleantalk.ru)
@@ -375,6 +375,18 @@ class Cleantalk {
     public $stay_on_server = false;
     
     /**
+     * Codepage of the data 
+     * @var bool
+     */
+    public $data_codepage = null;
+    
+    /**
+     * API version to use 
+     * @var string
+     */
+    public $api_version = '/api2.0';
+    
+    /**
      * Function checks whether it is possible to publish the message
      * @param CleantalkRequest $request
      * @return type
@@ -549,14 +561,19 @@ class Cleantalk {
         switch ($method) {
             case 'check_message':
                 // Convert strings to UTF8
-                $request->message = $this->stringToUTF8($request->message);
-                $request->example = $this->stringToUTF8($request->example);
+                $request->message = $this->stringToUTF8($request->message, $this->data_codepage);
+                $request->example = $this->stringToUTF8($request->example, $this->data_codepage);
+                $request->sender_email = $this->stringToUTF8($request->sender_email, $this->data_codepage);
+                $request->sender_nickname = $this->stringToUTF8($request->sender_nickname, $this->data_codepage);
 
                 $request->message = $this->compressData($request->message);
 				$request->example = $this->compressData($request->example);
                 break;
 
             case 'check_newuser':
+                // Convert strings to UTF8
+                $request->sender_email = $this->stringToUTF8($request->sender_email, $this->data_codepage);
+                $request->sender_nickname = $this->stringToUTF8($request->sender_nickname, $this->data_codepage);
                 break;
 
             case 'send_feedback':
@@ -577,7 +594,6 @@ class Cleantalk {
      * @return boolean|\CleantalkResponse
      */
     private function sendRequest($data = null, $url, $server_timeout = 3) {
-        
         // Convert to array
         $data = json_decode(json_encode($data), true);
         
@@ -592,6 +608,9 @@ class Cleantalk {
             'timeout' => $server_timeout
           )
         );
+        
+        if (isset($this->api_version))
+            $url = $url . $this->api_version;
 
         $context  = stream_context_create($opts);
         $result = @file_get_contents($url, false, $context);
@@ -829,13 +848,17 @@ class Cleantalk {
     /**
     * Function convert string to UTF8 and removes non UTF8 characters 
     * param string
+    * param string
     * @return string
     */
-    function stringToUTF8($str){
-        
+    function stringToUTF8($str, $data_codepage = null){
         if (!preg_match('//u', $str) && function_exists('mb_detect_encoding') && function_exists('mb_convert_encoding')) {
+            
+            if ($data_codepage !== null)
+                return mb_convert_encoding($str, 'UTF-8', $data_codepage);
+
             $encoding = mb_detect_encoding($str);
-            $srt = mb_convert_encoding($str, 'UTF-8', $encoding);
+            return mb_convert_encoding($str, 'UTF-8', $encoding);
         }
         
         return $str;
