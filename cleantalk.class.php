@@ -2,7 +2,7 @@
 /**
  * Cleantalk base class
  *
- * @version 1.21.7
+ * @version 1.21.8
  * @package Cleantalk
  * @subpackage Base
  * @author Сleantalk team (welcome@cleantalk.ru)
@@ -336,7 +336,7 @@ class Cleantalk {
 	* Server connection timeout in seconds 
 	* @var int
 	*/
-	private $server_timeout = 3;
+	private $server_timeout = 5;
 
     /**
      * Cleantalk server url
@@ -806,7 +806,12 @@ class Cleantalk {
      */
     public function delCleantalkComment($message) {
         $message = preg_replace('/\n\n\*\*\*.+\*\*\*$/', '', $message);
+
+        // DLE sign cut
+        $message = preg_replace('/<br\s?\/><br\s?\/>\*\*\*.+\*\*\*$/', '', $message);
+
         $message = preg_replace('/\<br.*\>[\n]{0,1}\<br.*\>[\n]{0,1}\*\*\*.+\*\*\*$/', '', $message);
+        
         return $message;
     }
 
