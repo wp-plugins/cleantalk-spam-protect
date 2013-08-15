@@ -686,12 +686,8 @@ function admin_notice_message(){
     $options = ct_get_options();
 	if ($options['apikey'] === 'enter key' || $options['apikey'] === '')
 		echo '<div class="updated"><p>' . __("Please enter the Access Key in <a href=\"options-general.php?page=cleantalk\">CleanTalk plugin</a> settings to enable protection from spam in comments!", 'cleantalk') . '</p></div>';
-    
-    $allow_url_fopen = ini_get('allow_url_fopen');
-    if (!isset($allow_url_fopen) || $allow_url_fopen == '')
-		echo '<div class="updated"><p>' . __("Please enable PHP <b>allow_url_fopen</b> setting to use CleanTalk plugin!", 'cleantalk') . '</p></div>';
-
-	ct_send_feedback();
+	
+    ct_send_feedback();
 
 	return true;
 }
