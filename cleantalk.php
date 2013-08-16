@@ -25,7 +25,6 @@ if (is_admin()) {
     add_action('comment_approved_to_unapproved', 'ct_comment_unapproved'); // param - comment object
     add_action('comment_unapproved_to_spam', 'ct_comment_spam');  // param - comment object
     add_action('comment_approved_to_spam', 'ct_comment_spam');   // param - comment object
-    add_action('trash_comment', 'ct_comment_trash');    // param - comment ID
     add_filter('get_comment_text', 'ct_get_comment_text');   // param - current comment text
     add_filter('unspam_comment', 'ct_unspam_comment');
 }
@@ -101,7 +100,7 @@ function ct_feedback($hash, $message, $allow) {
 	} else {
 		$_SESSION['feedback_request'] .= $ct_feedback; 
 	}
-	
+
 	return $resultMessage;
 }
 
