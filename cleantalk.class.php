@@ -604,25 +604,40 @@ class Cleantalk {
             $url = $url . $this->api_version;
       
         $result = false;
-		if(!function_exists('curl_init')) {
-            $response = null;
-            $response['errno'] = 1;
-            $response['errstr'] = 'No CURL support compiled in.';
-            $response = json_decode(json_encode($response));
-            
-            return $response;
-        }
-        
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_TIMEOUT, $server_timeout);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        // receive server response ...
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		if(function_exists('curl_init')) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $server_timeout);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            // receive server response ...
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-        $result = curl_exec($ch);
-        curl_close($ch); 
+            $result = curl_exec($ch);
+            curl_close($ch); 
+        } else {
+            $allow_url_fopen = ini_get('allow_url_fopen');
+            if (isset($allow_url_fopen) && $allow_url_fopen == '1') {
+                $opts = array('http' =>
+                  array(
+                    'method'  => 'POST',
+                    'header'  => "Content-Type: text/html\r\n",
+                    'content' => $data,
+                    'timeout' => $server_timeout
+                  )
+                );
+
+                $context  = stream_context_create($opts);
+                $result = @file_get_contents($url, false, $context);
+            } else {
+                $response = null;
+                $response['errno'] = 1;
+                $response['errstr'] = 'No CURL support compiled in. Disabled allow_url_fopen in php.ini.'; 
+                $response = json_decode(json_encode($response));
+                
+                return $response;
+            }
+        }
 
         $errstr = null;
         $response = json_decode($result);
