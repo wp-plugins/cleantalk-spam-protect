@@ -2,7 +2,7 @@
 /**
  * Cleantalk base class
  *
- * @version 1.21.8
+ * @version 1.21.9
  * @package Cleantalk
  * @subpackage Base
  * @author Сleantalk team (welcome@cleantalk.ru)
@@ -617,7 +617,7 @@ class Cleantalk {
             curl_close($ch); 
         } else {
             $allow_url_fopen = ini_get('allow_url_fopen');
-            if (isset($allow_url_fopen) && $allow_url_fopen == '1') {
+            if (function_exists('file_get_contents') && isset($allow_url_fopen) && $allow_url_fopen == '1') {
                 $opts = array('http' =>
                   array(
                     'method'  => 'POST',
