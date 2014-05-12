@@ -1,9 +1,9 @@
 === Anti-spam by CleanTalk ===
 Contributors: znaeff, shagimuratov
-Tags: antispam, anti-spam, anti spam, spam, spammers, captcha, comments, registration, contact form, blacklists, math, signup, formidable, bot, spam bots, спам, quiz, spammy, капча
+Tags: antispam, anti-spam, anti spam, spam, spammers, captcha, comments, registration, contact form, blacklists, math, signup, formidable, bot, spam bots, спам, quiz, spammy, капча, s2member
 Requires at least: 3.0
-Tested up to: 3.9
-Stable tag: 2.42
+Tested up to: 3.9.1
+Stable tag: 2.44
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 
 = Anti-spam protection =
 * WordPress, JetPack comments.
-* WordPress, BuddyPress, bbPress signups.
+* WordPress, BuddyPress, bbPress, S2Member signups.
 * Formiadble forms, Contact form 7, JetPack Contact form.
 * WooCommerce review form.
 * Fast Secure Contact form.
@@ -34,6 +34,13 @@ CleanTalk is a transparent antispam protection, we provide detailed statistics o
 We have developed anti-spam for WordPress that would provide **maximum protection from spam** and you can provide for your visitors **a simple and convenient form of comments/registrations without annoying CAPTCHAs and puzzles**. Used to detect spam multistage test that allows us to block up to 100% of spam bots.
 
 The plugin developers had a long time experience in front-end, backend and server-side PHP programming, client side JavaScript and HTML programming. We were looking for an anti spam tool which is strong for spam bots and invisible to visitors, but nothing matched their criteria. So, we are started an anti-spam project called CleanTalk.
+
+The CleanTalk is premium anti-spam for WordPress, please look at the <a href="http://cleantalk.org/price">pricing</a>. We try to provide the service at the highest level and we can not afford to offer a free version of our service, as this will immediately affect the quality of providing anti spam protection. Paying for a year of service, you save a lot more and get:
+
+* Up to 100% protection from spam bots.
+* Simple and convenient form of commenting/registrations without captcha.
+* Always actual and regular updates.
+* Technical support.
 
 = Additional features =
 * Online, daily and weekly anti spam reports traffic VS spam. 
@@ -125,6 +132,12 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 1. Anti spam stopped spam bot at the registration form. 
 
 == Changelog ==
+= 2.44 2014-05-12 =
+  * Added: Anti-spam protection for S2Member framework. 
+  * Improved: JavaScript anti-spam test. 
+  * Improved: Plugin load time for backend and frontend. 
+  * Fixed: PHP warning mb_convert_encoding()  
+
 = 2.42 2014-04-29 =
   * Fixed: JavaScript anti-spam test for comments. 
 
@@ -300,6 +313,12 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
   * First version
 
 == Upgrade Notice ==
+= 2.44 2014-05-12 =
+  * Added: Anti-spam protection for S2Member framework. 
+  * Improved: Plugin load time for backend and frontend. 
+  * Improved: JavaScript anti-spam test. 
+  * Fixed: PHP warning mb_convert_encoding()
+
 = 2.42 2014-04-29 =
   * Fixed: JavaScript anti-spam test for comments.
    
