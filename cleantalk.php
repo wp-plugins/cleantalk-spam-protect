@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: SPAM defender 
+  Plugin Name: Anti-spam by CleanTalk 
   Plugin URI: http://cleantalk.org
   Description:  Cloud antispam for comments, registrations and contacts. The plugin doesn't use CAPTCHA, Q&A, math, counting animals or quiz to stop spam bots. 
   Version: 2.46
