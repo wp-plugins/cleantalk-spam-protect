@@ -146,7 +146,7 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 == Screenshots ==
 1. Plugin settings screen. 
 1. Android app main screen. 
-1. Anti spam stopped spam bot at the registration form. 
+1. Anti spam stopped spam bot at the CAPTCHA less registration form. 
 
 == Changelog ==
 = 3.4 2014-09-04 =
