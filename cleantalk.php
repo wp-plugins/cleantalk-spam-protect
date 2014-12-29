@@ -3,14 +3,14 @@
   Plugin Name: Anti-spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, captcha less, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms. 
-  Version: 4.13
+  Version: 4.14
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
  */
 
 define('CLEANTALK_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
-$ct_agent_version = 'wordpress-413';
+$ct_agent_version = 'wordpress-414';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
@@ -1887,6 +1887,15 @@ function get_sender_info() {
 
     $php_session = session_id() != '' ? 1 : 0;
     
+    // Raw data to validated JavaScript test in the cloud
+    $checkjs_data_cookies = null; 
+    if (isset($_COOKIE['ct_checkjs'])) {
+        $checkjs_data_cookies = $_COOKIE['ct_checkjs'];
+    }
+    $checkjs_data_post = null; 
+    if (isset($_POST['ct_checkjs'])) {
+        $checkjs_data_post = $_POST['ct_checkjs'];
+    }    
     return $sender_info = array(
         'cms_lang' => substr(get_locale(), 0, 2),
         'REFFERRER' => @$_SERVER['HTTP_REFERER'],
@@ -1894,6 +1903,8 @@ function get_sender_info() {
         'php_session' => $php_session, 
         'cookies_enabled' => ct_cookies_test(true), 
         'direct_post' => $ct_direct_post,
+        'checkjs_data_post' => $checkjs_data_post, 
+        'checkjs_data_cookies' => $checkjs_data_cookies, 
     );
 }
 
