@@ -160,7 +160,7 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 
 == Changelog ==
 = 4.13 2014-12-29 =
-  * Fixed bug with autimatically aprovement not spam comment. Now this option disabled and do not override local WordPress policy. 
+  * Fixed bug with autimatically aprovement not spam comments. Now this option disabled and do not override local WordPress policy. 
 
 = 4.12 2014-12-29 =
   * Fixed bug with 'Wrong Access key...' notice in WordPress dashboard.
