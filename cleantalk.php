@@ -856,7 +856,7 @@ function ct_preprocess_comment($comment) {
         // Change comment flow only for new authors
         if ((int) $approved_comments == 0 || $ct_result->stop_words !== null) { 
 
-            if ($ct_result->allow == 1 && $options['autoPubRevelantMess'] == 1 && get_option('comment_moderation') === '1') {
+            if ($ct_result->allow == 1 && $options['autoPubRevelantMess'] == 1 && get_option('comment_moderation') !== '1') {
                 add_filter('pre_comment_approved', 'ct_set_approved');
                 setcookie($ct_approved_request_id_label, $ct_result->id, 0, '/');
             }
