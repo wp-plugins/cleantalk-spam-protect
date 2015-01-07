@@ -1768,9 +1768,10 @@ function ct_s2member_registration_test() {
  * General test for any contact form
  */
 function ct_contact_form_validate () {
+	global $pagenow;
 
     if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
-        (isset($_POST['log']) && isset($_POST['pwd'])) // WordPress log in form
+        (isset($_POST['log']) && isset($_POST['pwd']) && isset($pagenow) && $pagenow == 'wp-login.php') // WordPress log in form
         ) {
         return null;
     }
@@ -1892,11 +1893,17 @@ function get_sender_info() {
     if (isset($_COOKIE['ct_checkjs'])) {
         $checkjs_data_cookies = $_COOKIE['ct_checkjs'];
     }
-    $checkjs_data_post = null; 
-    if (isset($_POST['ct_checkjs'])) {
-        $checkjs_data_post = $_POST['ct_checkjs'];
-    }    
-    return $sender_info = array(
+	
+	$checkjs_data_post = null;
+	if (count($_POST) > 0) {
+		foreach ($_POST as $k => $v) {
+			if (preg_match("/^ct_check.+/", $k)) {
+        		$checkjs_data_post = $v; 
+			}
+		}
+	}
+	
+	return $sender_info = array(
         'cms_lang' => substr(get_locale(), 0, 2),
         'REFFERRER' => @$_SERVER['HTTP_REFERER'],
         'USER_AGENT' => @$_SERVER['HTTP_USER_AGENT'],
