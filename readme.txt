@@ -7,7 +7,7 @@ Stable tag: 4.13
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Max power, all-in-one, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms. Just install and forget. 
+Max power, all-in-one, premium anti-spam plugin. No comment & registration spam, no contact spam, protects any WordPress forms. Just install and forget. 
 
 == Description ==
 No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam bots.
