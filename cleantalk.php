@@ -1903,6 +1903,11 @@ function get_sender_info() {
 		}
 	}
 	
+	$options = ct_get_options();
+	unset($options['js_keys']);
+	unset($options['js_keys_store_days']);
+	unset($options['js_key_lifetime']);
+
 	return $sender_info = array(
         'cms_lang' => substr(get_locale(), 0, 2),
         'REFFERRER' => @$_SERVER['HTTP_REFERER'],
@@ -1912,6 +1917,7 @@ function get_sender_info() {
         'direct_post' => $ct_direct_post,
         'checkjs_data_post' => $checkjs_data_post, 
         'checkjs_data_cookies' => $checkjs_data_cookies, 
+        'ct_options' => json_encode($options),
     );
 }
 

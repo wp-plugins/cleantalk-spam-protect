@@ -141,7 +141,7 @@ function ct_input_apikey() {
     $def_value = ''; 
     echo "<input id='cleantalk_apikey' name='cleantalk_settings[apikey]' size='20' type='text' value='$value' style=\"font-size: 14pt;\"/>";
     if (ct_valid_key($value) === false) {
-        echo "<a target='__blank' style='margin-left: 10px' href='http://cleantalk.org/install/wordpress?step=2'>".__('Click here to get access key', 'cleantalk')."</a>";
+        echo "<a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key', 'cleantalk')."</a>";
     } else{
         if (isset($_COOKIE[$ct_notice_online_label]) && $_COOKIE[$ct_notice_online_label] > 0) {
             echo '&nbsp;&nbsp;<span style="text-decoration: underline;">The key accepted!</span>&nbsp;<img src="' . plugin_dir_url(__FILE__) . 'inc/images/yes.png" alt=""  height="" />'; 
@@ -467,7 +467,7 @@ function ct_update_option($option_name) {
     if (function_exists('curl_init') && function_exists('json_decode')) {
         $api_key = $ct_options['apikey'];
         if (isset($_POST['cleantalk_settings']['apikey'])) {
-            $api_key = $_POST['cleantalk_settings']['apikey']; 
+            $api_key = trim($_POST['cleantalk_settings']['apikey']);
         }
         
         if (!ct_valid_key($api_key)) {
