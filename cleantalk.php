@@ -275,8 +275,12 @@ function ct_plugin_loaded() {
  */
 function ct_get_options() {
     $options = get_option('cleantalk_settings');
-    if (!is_array($options))
+    if (!is_array($options)){
         $options = array();
+    }else{
+	if(array_key_exists('apikey', $options))
+	    $options['apikey'] = trim($options['apikey']);
+    }
     return array_merge(ct_def_options(), (array) $options);
 }
 
