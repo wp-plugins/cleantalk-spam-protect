@@ -3,7 +3,7 @@ Contributors: znaeff, shagimuratov
 Tags: Akismet, anti spam, antispam, bbpress spam, buddypress spam, capcha, captcha antispam, cf7 spam, comments spam, contact form spam, fast secure contact form spam, form, Formidable spam, jetpack spam, landing pages, math, registration spam, s2member, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam
 Requires at least: 3.0
 Tested up to: 4.1 
-Stable tag: 4.13
+Stable tag: 4.14
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -159,8 +159,14 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
+= 4.14 2015-01-19 =
+  * Removed deprecated option from comment approvement code.
+  * New API key URL.
+  * Trimmed API key in admin panel.
+  * Added current options to array sended to CleanTalk servers.
+
 = 4.13 2014-12-29 =
-  * Fixed bug with autimatically aprovement not spam comments. Now this option disabled and do not override local WordPress policy. 
+  * Fixed bug with autimatically aprovement not spam comments. Now this option disabled and do not override local WordPress policy.
 
 = 4.12 2014-12-29 =
   * Fixed bug with 'Wrong Access key...' notice in WordPress dashboard.
@@ -463,6 +469,9 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
   * First version
 
 == Upgrade Notice ==
+= 4.14 2015-01-19 =
+Removed deprecated option from comment approvement code.
+
 = 4.13 2014-12-29 =
 Not spam comments auto approvement bug fix.
 
