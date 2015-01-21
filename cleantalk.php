@@ -3,14 +3,14 @@
   Plugin Name: Anti-spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, captcha less, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms. 
-  Version: 4.14
+  Version: 4.15
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
  */
 
 define('CLEANTALK_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
-$ct_agent_version = 'wordpress-414';
+$ct_agent_version = 'wordpress-415';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
@@ -118,10 +118,6 @@ add_filter('wpmu_validate_user_signup', 'ct_registration_errors_wpmu', 10, 3);
 add_action('bp_before_registration_submit_buttons','ct_register_form');
 add_filter('bp_signup_validate', 'ct_registration_errors');
 
-// Contact Form7 
-add_filter('wpcf7_form_elements', 'ct_wpcf7_form_elements');
-add_filter('wpcf7_spam', 'ct_wpcf7_spam');
-
 // JetPack Contact form
 add_filter('grunion_contact_form_field_html', 'ct_grunion_contact_form_field_html', 10, 2);
 add_filter('contact_form_is_spam', 'ct_contact_form_is_spam');
@@ -202,7 +198,16 @@ function ct_init() {
     } else {
         $_SESSION[$ct_formtime_label] = time();
     }
-    
+
+    // Contact Form7 
+    if(defined('WPCF7_VERSION')){
+	add_filter('wpcf7_form_elements', 'ct_wpcf7_form_elements');
+	if(WPCF7_VERSION >= '3.0.0'){
+	    add_filter('wpcf7_spam', 'ct_wpcf7_spam');
+	}else{
+	    add_filter('wpcf7_acceptance', 'ct_wpcf7_spam');
+	}
+    }
 
     add_action('comment_form', 'ct_comment_form');
 
@@ -1456,15 +1461,20 @@ function ct_wpcf7_form_elements($html) {
 /**
  * Test CF7 message for spam
  */
-function ct_wpcf7_spam($spam) {
+function ct_wpcf7_spam($param) {
     global $wpdb, $current_user, $ct_agent_version, $ct_checkjs_cf7, $ct_cf7_comment;
 
-    $options = ct_get_options();
-    if ($spam === true)
-        return $spam;
+    if (WPCF7_VERSION >= '3.0.0') {
+	if($param === true)
+    	    return $param;
+    }else{
+	if($param == false)
+    	    return $param;
+    }
 
+    $options = ct_get_options();
     if ($options['contact_forms_test'] == 0) {
-        return $spam;
+        return $param;
     }
 
     $checkjs = js_test('ct_checkjs', $_COOKIE, true);
@@ -1516,20 +1526,24 @@ function ct_wpcf7_spam($spam) {
     $ct_result = $ct_base_call_result['ct_result'];
    
     if ($ct_result->spam == 1) {
-        $spam = true;
+	if (WPCF7_VERSION >= '3.0.0') {
+    	    $param = true;
+	}else{
+    	    $param = false;
+	}
         $ct_cf7_comment = $ct_result->comment;
 	    add_filter('wpcf7_display_message', 'ct_wpcf7_display_message', 10, 2);
         
     }
 
-    return $spam;
+    return $param;
 }
 
 /**
  * Changes CF7 status message 
  * @param 	string $hook URL of hooked page
  */
-function ct_wpcf7_display_message($message, $status) {
+function ct_wpcf7_display_message($message, $status = 'spam') {
     global $ct_cf7_comment;
 
     if ($status == 'spam') {
