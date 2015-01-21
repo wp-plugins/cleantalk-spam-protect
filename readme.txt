@@ -66,9 +66,6 @@ At the sight of CAPTCHA and after input errors, many visitors leave the resource
 = We recommend =
 * Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
 
-== Description ==
-No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam bots.
-
 = Anti spam features =
 1. Stops spam comments.
 1. Stops spam registrations.
