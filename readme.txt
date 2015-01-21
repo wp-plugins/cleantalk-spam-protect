@@ -66,6 +66,64 @@ At the sight of CAPTCHA and after input errors, many visitors leave the resource
 = We recommend =
 * Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
 
+== Description ==
+No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam bots.
+
+= Anti spam features =
+1. Stops spam comments.
+1. Stops spam registrations.
+1. Stops spam contact emails.
+1. Stops spam orders.
+1. Stops spam bookings.
+1. Stops spam subscriptions.
+
+= Spam protection =
+* WordPress, JetPack comments.
+* WordPress, BuddyPress, bbPress, S2Member, WooCommerce registrations.
+* Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages and any themes/custom contact form.
+* WooCommerce review form.
+* WordPress Landing Pages.
+* Any WordPress form (with enabled anti-spam option 'Custom contact forms').
+
+= Cloud antispam for WordPress. CAPTCHA less, no spam comments, no spam registrations, no spam contact emails, no spam trackbacks =
+Spam is one of the most irritating factors. Spam become every year more and conventional anti spam can no longer handle all the spam bots. CleanTalk prevents spam and automatically blocks it. You'll be surprised of effective protection against spam.
+
+= Anti spam plugin info = 
+CleanTalk is an anti spam protection **4 in 1 for WordPress** that protects login, comment, contact and WooCommerce forms all at once. You don't need to install separate anti spam plugins for each form. This allows your blog to work faster and save resources. After installation **you will forget about spam**, CleanTalk plugin will do all the work. You won't have to deal with spam, CleanTalk will do this for you automatically.
+
+CleanTalk is a transparent anti spam protection, we provide detailed statistics of all entering comments and logins. You can always be sure that **there are no errors**. We have developed a mobile app for you to see anti spam statistics wherever.
+
+We have developed antispam for WordPress that would provide **maximum protection from spam bots** and you can provide for your visitors **a simple and convenient form of comments/registrations without annoying CAPTCHAs and puzzles**. Used to detect spam multistage test that allows us to block up to 100% of spam bots.
+
+The anti spam method offered by CleanTalk allows to switch from the methods that trouble the communication (CAPTCHA, question-answer etc.) to a more convenient one.
+
+The CleanTalk is premium anti spam for WordPress, please look at the <a href="http://cleantalk.org/price">pricing</a>. We try to provide anti spam service at the highest level and we can not afford to offer a free version of our service, as this will immediately affect the quality of providing anti spam protection. Paying for a year of anti spam service, you save a lot more and get: 
+ 
+ * 100% protection against spam bots
+ * Time and resources saving
+ * More registrations/comments/visitors
+ * Protect several websites at once at different CMS
+ * Easy to install and use
+ * Traffic acquisition and user loyalty
+ * 24/7 technical support
+ * Clear statistics
+ * No captcha, puzzles, etc.
+ * Free mobile app to control anti spam function at your website.
+
+= How to protect sites from spam bots without CAPTCHA? =
+The most popular method is CAPTCHA -- the annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots wonâ€™t discern these CAPTCHA, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. 
+Sometimes CAPTCHA reminds doodle 2x year old child. For users with vision problems captcha is just an insurmountable obstacle. Users hate captcha. Captcha for users means "hate". Unreadable CAPTCHA stops about 80% of site visitors. After 2 failed attempts to bring it up to 95% reject further attempts. 
+At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource both from bots and visitors. CAPTCHA is not a panacea from spam. Doubts Concerning the Need for CAPTCHA?
+
+= Additional features =
+* Online, daily and weekly anti spam reports traffic VS spam. 
+* Apps for iPhone, Android to control anti spam service, comments, signups, contacts. With traffic and spam statistics for last 7 days.
+* Anti spam apps for most popular CMS on cleantalk.org. 
+
+= We recommend =
+* Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
+
+
 == Installation ==
 1. Download, install and activate the plugin. 
 1. Get Access key <a href="http://cleantalk.org/register?platform=wordpress" target="_blank">http://cleantalk.org/register</a>
