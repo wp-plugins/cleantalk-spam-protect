@@ -86,21 +86,17 @@ function ct_admin_init() {
         }
         
         if ($result) {
-            setcookie($ct_notice_trial_label, (int) $show_ct_notice_trial, strtotime("+$trial_notice_showtime minutes"), '/');
+            setcookie($ct_notice_trial_label, (string) $show_ct_notice_trial, strtotime("+$trial_notice_showtime minutes"), '/');
         }
     }
 
     $show_ct_notice_online = '';
     if (isset($_COOKIE[$ct_notice_online_label])) {
-        if ($_COOKIE[$ct_notice_online_label] !== '0' && time() - $_COOKIE[$ct_notice_online_label] <= 5) {
-            $show_ct_notice_online = 'Y';
-	    } else {
-            $show_ct_notice_online = '';
-        }
-
-        if ($_COOKIE[$ct_notice_online_label] === '0') {
+        if ($_COOKIE[$ct_notice_online_label] === 'BAD_KEY') {
             $show_ct_notice_online = 'N';
-	    }
+	} else if (time() - $_COOKIE[$ct_notice_online_label] <= 5) {
+            $show_ct_notice_online = 'Y';
+        }
     }
 
     ct_init_session();
@@ -510,14 +506,14 @@ function ct_update_option($option_name) {
     if ($key_valid) {
         // Removes cookie for server errors
         if ($app_server_error) {
-            setcookie($ct_notice_online_label, null, -1, '/');
+            setcookie($ct_notice_online_label, '', 1, '/'); // time 1 is exactly in past even clients time() is wrong
             unset($_COOKIE[$ct_notice_online_label]);
         } else {
-            setcookie($ct_notice_online_label, time(), strtotime("+14 days"), '/');
+            setcookie($ct_notice_online_label, (string) time(), strtotime("+14 days"), '/');
         }
-        setcookie($ct_notice_trial_label, (int) 0, strtotime("+$trial_notice_showtime minutes"), '/');
+        setcookie($ct_notice_trial_label, '0', strtotime("+$trial_notice_showtime minutes"), '/');
     } else {
-        setcookie($ct_notice_online_label, 0, null, '/');
+        setcookie($ct_notice_online_label, 'BAD_KEY', 0, '/');
     }
 }
 
