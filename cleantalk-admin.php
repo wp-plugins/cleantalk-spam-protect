@@ -204,12 +204,13 @@ function ct_input_general_contact_forms_test() {
  * @return null
  */
 function ct_input_remove_old_spam() {
-    $options = ct_get_options();
-    $value = $options['remove_old_spam'];
+    global $ct_options;
+
+    $value = $ct_options['remove_old_spam'];
     echo "<input type='radio' id='cleantalk_remove_old_spam1' name='cleantalk_settings[remove_old_spam]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_remove_old_spam1'> " . __('Yes') . "</label>";
     echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     echo "<input type='radio' id='cleantalk_remove_old_spam0' name='cleantalk_settings[remove_old_spam]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_remove_old_spam0'> " . __('No') . "</label>";
-    admin_addDescriptionsFields(sprintf(__('Delete spam comments older than %d days.', 'cleantalk'),  $options['spam_store_days']));
+    admin_addDescriptionsFields(sprintf(__('Delete spam comments older than %d days.', 'cleantalk'),  $ct_options['spam_store_days']));
 }
 
 /**
@@ -261,16 +262,15 @@ input[type=submit] {padding: 10px; background: #3399FF; color: #fff; border:0 no
  * @return bool 
  */
 function admin_notice_message(){
-    global $show_ct_notice_trial, $show_ct_notice_online, $ct_plugin_name;
+    global $show_ct_notice_trial, $show_ct_notice_online, $ct_plugin_name, $ct_options;
 
-    $options = ct_get_options();
     $user_token = '';
-    if (isset($options['user_token']) && $options['user_token'] != '') {
-        $user_token = '&user_token=' . $options['user_token'];
+    if (isset($ct_options['user_token']) && $ct_options['user_token'] != '') {
+        $user_token = '&user_token=' . $ct_options['user_token'];
     }
 
     $show_notice = true;
-    if ($show_notice && ct_valid_key($options['apikey']) === false) {
+    if ($show_notice && ct_valid_key($ct_options['apikey']) === false) {
         echo '<div class="updated"><h3>' . sprintf(__("Please enter Access Key in %s settings to enable anti spam protection!", 'cleantalk'), "<a href=\"options-general.php?page=cleantalk\">CleanTalk plugin</a>") . '</h3></div>';
         $show_notice = false;
     }
@@ -310,9 +310,9 @@ function admin_addDescriptionsFields($descr = '') {
 * Test API key 
 */
 function ct_valid_key($apikey = null) {
+    global $ct_options;
     if ($apikey === null) {
-        $options = ct_get_options();
-        $apikey = $options['apikey'];
+        $apikey = $ct_options['apikey'];
     }
 
     return ($apikey === 'enter key' || $apikey === '') ? false : true;

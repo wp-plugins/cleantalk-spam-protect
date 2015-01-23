@@ -154,7 +154,12 @@ add_action('ct_hourly_event_hook', 'ct_do_this_hourly');
  * On the scheduled action hook, run the function.
  */
 function ct_do_this_hourly() {
-	// do something every hour
+    global $ct_options;
+    // do something every hour
+
+    if (!isset($ct_options))
+	$ct_options = ct_get_options();
+
     delete_spam_comments();
     ct_send_feedback();
 }
@@ -187,7 +192,9 @@ if (is_admin()) {
  * @return 	mixed[] Array of options
  */
 function ct_init() {
-    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post;
+    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options;
+
+    $ct_options = ct_get_options();
 
     ct_init_session();
     
@@ -255,8 +262,7 @@ function ct_init() {
     if (ct_is_user_enable()) {
         ct_cookies_test();
 
-        $options = get_option('cleantalk_settings');
-        if (isset($options['general_contact_forms_test']) && $options['general_contact_forms_test'] == 1) {
+        if (isset($ct_options['general_contact_forms_test']) && $ct_options['general_contact_forms_test'] == 1) {
             
             if (!(defined( 'DOING_AJAX' ) && DOING_AJAX)) {
                 add_action('wp_footer', 'ct_footer_add_cookie', 1);
@@ -340,15 +346,15 @@ function ct_hash($new_hash = '') {
  * @return 	string comment_content w\o cleantalk resume
  */
 function ct_feedback($hash, $message = null, $allow) {
+    global $ct_options;
 
     require_once('cleantalk.class.php');
-    $options = ct_get_options();
 
     $config = get_option('cleantalk_server');
 
     $ct = new Cleantalk();
     $ct->work_url = $config['ct_work_url'];
-    $ct->server_url = $options['server'];
+    $ct->server_url = $ct_options['server'];
     $ct->server_ttl = $config['ct_server_ttl'];
     $ct->server_changed = $config['ct_server_changed'];
 
@@ -377,6 +383,7 @@ function ct_feedback($hash, $message = null, $allow) {
  * @return bool
  */
 function ct_send_feedback($feedback_request = null) {
+    global $ct_options;
 
     if (empty($feedback_request) && isset($_SESSION['feedback_request']) && preg_match("/^[a-z0-9\;\:]+$/", $_SESSION['feedback_request'])) {
 	$feedback_request = $_SESSION['feedback_request'];
@@ -385,18 +392,16 @@ function ct_send_feedback($feedback_request = null) {
 
     if ($feedback_request !== null) {
 	require_once('cleantalk.class.php');
-	$options = ct_get_options();
-
 	$config = get_option('cleantalk_server');
 
 	$ct = new Cleantalk();
 	$ct->work_url = $config['ct_work_url'];
-	$ct->server_url = $options['server'];
+	$ct->server_url = $ct_options['server'];
 	$ct->server_ttl = $config['ct_server_ttl'];
 	$ct->server_changed = $config['ct_server_changed'];
 
 	$ct_request = new CleantalkRequest();
-	$ct_request->auth_key = $options['apikey'];
+	$ct_request->auth_key = $ct_options['apikey'];
 	$ct_request->feedback = $feedback_request;
 
 	$ct->sendFeedback($ct_request);
@@ -467,7 +472,7 @@ function ct_cookies_test ($test = false) {
  * @return array array('ct'=> Cleantalk, 'ct_result' => CleantalkResponse)
  */
 function ct_base_call($params = array()) {
-    global $wpdb, $ct_agent_version, $ct_formtime_label;
+    global $wpdb, $ct_agent_version, $ct_formtime_label, $ct_options;
 
     require_once('cleantalk.class.php');
         
@@ -482,18 +487,17 @@ function ct_base_call($params = array()) {
         $sender_info = '';
 
     $config = get_option('cleantalk_server');
-    $options = ct_get_options();
 
     $ct = new Cleantalk();
     $ct->work_url = $config['ct_work_url'];
-    $ct->server_url = $options['server'];
+    $ct->server_url = $ct_options['server'];
     $ct->server_ttl = $config['ct_server_ttl'];
     $ct->server_changed = $config['ct_server_changed'];
-    $ct->ssl_on = $options['ssl_on'];
+    $ct->ssl_on = $ct_options['ssl_on'];
 
     $ct_request = new CleantalkRequest();
 
-    $ct_request->auth_key = $options['apikey'];
+    $ct_request->auth_key = $ct_options['apikey'];
     $ct_request->message = $params['message'];
     $ct_request->example = $params['example'];
     $ct_request->sender_email = $params['sender_email'];
@@ -528,12 +532,13 @@ function ct_base_call($params = array()) {
  * Adds hidden filed to comment form 
  */
 function ct_comment_form($post_id) {
+    global $ct_options;
+
     if (ct_is_user_enable() === false) {
         return false;
     }
 
-    $options = ct_get_options();
-    if ($options['comments_test'] == 0) {
+    if ($ct_options['comments_test'] == 0) {
         return false;
     }
     
@@ -626,10 +631,9 @@ function ct_is_user_enable() {
 * return null;
 */
 function ct_frm_entries_footer_scripts($fields, $form) {
-    global $current_user, $ct_checkjs_frm;
+    global $current_user, $ct_checkjs_frm, $ct_options;
 
-    $options = ct_get_options();
-    if ($options['contact_forms_test'] == 0) {
+    if ($ct_options['contact_forms_test'] == 0) {
         return false;
     }
     
@@ -652,10 +656,9 @@ function ct_frm_entries_footer_scripts($fields, $form) {
 * return @array with errors if spam has found
 */
 function ct_frm_validate_entry ($errors, $values) {
-    global $wpdb, $current_user, $ct_agent_version, $ct_checkjs_frm;
+    global $wpdb, $current_user, $ct_agent_version, $ct_checkjs_frm, $ct_options;
 
-    $options = ct_get_options();
-    if ($options['contact_forms_test'] == 0) {
+    if ($ct_options['contact_forms_test'] == 0) {
         return false;
     }
 
@@ -700,9 +703,9 @@ function ct_frm_validate_entry ($errors, $values) {
  * @return  mixed[] $comment Comment string 
  */
 function ct_bbp_new_pre_content ($comment) {
+    global $ct_options;
 
-    $options = ct_get_options();
-    if (ct_is_user_enable() === false || $options['comments_test'] == 0 || is_user_logged_in()) {
+    if (ct_is_user_enable() === false || $ct_options['comments_test'] == 0 || is_user_logged_in()) {
         return $comment;
     }
     
@@ -753,10 +756,9 @@ function ct_preprocess_comment($comment) {
     // this action is called just when WP process POST request (adds new comment)
     // this action is called by wp-comments-post.php
     // after processing WP makes redirect to post page with comment's form by GET request (see above)
-    global $wpdb, $current_user, $comment_post_id, $ct_agent_version, $ct_comment_done, $ct_approved_request_id_label, $ct_jp_comments;
+    global $wpdb, $current_user, $comment_post_id, $ct_agent_version, $ct_comment_done, $ct_approved_request_id_label, $ct_jp_comments, $ct_options;
 
-    $options = ct_get_options();
-    if (ct_is_user_enable() === false || $options['comments_test'] == 0 || $ct_comment_done) {
+    if (ct_is_user_enable() === false || $ct_options['comments_test'] == 0 || $ct_comment_done) {
         return $comment;
     }
 
@@ -805,7 +807,7 @@ function ct_preprocess_comment($comment) {
     }
     
     $example = null;
-    if ($options['relevance_test']) {
+    if ($ct_options['relevance_test']) {
         $post = get_post($comment_post_id);
         if ($post !== null){
             $example['title'] = $post->post_title;
@@ -914,6 +916,7 @@ function ct_die_extended($comment_body) {
  *
  */
 function js_test($field_name = 'ct_checkjs', $data = null, $random_key = false) {
+    global $ct_options;
 
     $checkjs = null;
     $js_post_value = null;
@@ -928,9 +931,8 @@ function js_test($field_name = 'ct_checkjs', $data = null, $random_key = false) 
         // Random key check
         //
         if ($random_key) {
-            $options = ct_get_options();
             
-            $keys = $options['js_keys'];
+            $keys = $ct_options['js_keys'];
             if (isset($keys[$js_post_value])) {
                 $checkjs = 1;
             } else {
@@ -1087,10 +1089,10 @@ function ct_plugin_active($plugin_name){
  * @return string
  */
 function ct_get_checkjs_value($random_key = false) {
-    $options = ct_get_options();
+    global $ct_options;
 
     if ($random_key) {
-        $keys = $options['js_keys'];
+        $keys = $ct_options['js_keys'];
         $keys_checksum = md5(json_encode($keys));
         
         $key = null;
@@ -1098,7 +1100,7 @@ function ct_get_checkjs_value($random_key = false) {
         foreach ($keys as $k => $t) {
 
             // Removing key if it's to old
-            if (time() - $t > $options['js_keys_store_days'] * 86400) {
+            if (time() - $t > $ct_options['js_keys_store_days'] * 86400) {
                 unset($keys[$k]);
                 continue;
             }
@@ -1110,17 +1112,17 @@ function ct_get_checkjs_value($random_key = false) {
         }
         
         // Get new key if the latest key is too old
-        if (time() - $latest_key_time > $options['js_key_lifetime']) {
+        if (time() - $latest_key_time > $ct_options['js_key_lifetime']) {
             $key = rand();
             $keys[$key] = time();
         }
         
         if (md5(json_encode($keys)) != $keys_checksum) {
-            $options['js_keys'] = $keys;
-            update_option('cleantalk_settings', $options);
+            $ct_options['js_keys'] = $keys;
+            update_option('cleantalk_settings', $ct_options);
         }
     } else {
-        $key = md5($options['apikey'] . '+' . get_option('admin_email'));
+        $key = md5($ct_options['apikey'] . '+' . get_option('admin_email'));
     }
 
     return $key; 
@@ -1132,10 +1134,9 @@ function ct_get_checkjs_value($random_key = false) {
  * @return null
  */
 function ct_register_form() {
-    global $ct_checkjs_register_form;
+    global $ct_checkjs_register_form, $ct_options;
 
-    $options = ct_get_options();
-    if ($options['registrations_test'] == 0) {
+    if ($ct_options['registrations_test'] == 0) {
         return false;
     }
 
@@ -1149,10 +1150,9 @@ function ct_register_form() {
  * @return null
  */
 function ct_login_message($message) {
-    global $errors, $ct_session_register_ok_label;
+    global $errors, $ct_session_register_ok_label, $ct_options;
 
-    $options = ct_get_options();
-    if ($options['registrations_test'] != 0) {
+    if ($ct_options['registrations_test'] != 0) {
         if( isset($_GET['checkemail']) && 'registered' == $_GET['checkemail'] ) {
 	    if (isset($_SESSION[$ct_session_register_ok_label])) {
 		unset($_SESSION[$ct_session_register_ok_label]);
@@ -1213,15 +1213,14 @@ function ct_register_post($sanitized_user_login = null, $user_email = null, $err
  * @return array with errors 
  */
 function ct_registration_errors($errors, $sanitized_user_login = null, $user_email = null) {
-    global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment;
+    global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options;
 
     // Go out if a registrered user action
     if (ct_is_user_enable() === false) {
         return $errors;
     }
     
-    $options = ct_get_options();
-    if ($options['registrations_test'] == 0) {
+    if ($ct_options['registrations_test'] == 0) {
         return $errors;
     }
     
@@ -1280,14 +1279,14 @@ function ct_registration_errors($errors, $sanitized_user_login = null, $user_ema
     $config = get_option('cleantalk_server');
     $ct = new Cleantalk();
     $ct->work_url = $config['ct_work_url'];
-    $ct->server_url = $options['server'];
+    $ct->server_url = $ct_options['server'];
 
     $ct->server_ttl = $config['ct_server_ttl'];
     $ct->server_changed = $config['ct_server_changed'];
-    $ct->ssl_on = $options['ssl_on'];
+    $ct->ssl_on = $ct_options['ssl_on'];
     
     $ct_request = new CleantalkRequest();
-    $ct_request->auth_key = $options['apikey'];
+    $ct_request->auth_key = $ct_options['apikey'];
     $ct_request->sender_email = $user_email; 
     $ct_request->sender_ip = $ct->ct_session_ip($_SERVER['REMOTE_ADDR']);
     $ct_request->sender_nickname = $sanitized_user_login; 
@@ -1309,7 +1308,7 @@ function ct_registration_errors($errors, $sanitized_user_login = null, $user_ema
     
     $ct_signup_done = true;
 
-    if ($ct_result->errno != 0 && $options['notice_api_errors']) {
+    if ($ct_result->errno != 0 && $ct_options['notice_api_errors']) {
         ct_send_error_notice($ct_result->comment);
         return $errors;
     }
@@ -1358,10 +1357,9 @@ function ct_user_register($user_id) {
  * Test for JetPack contact form 
  */
 function ct_grunion_contact_form_field_html($r, $field_label) {
-    global $ct_checkjs_jpcf, $ct_jpcf_patched, $ct_jpcf_fields;
+    global $ct_checkjs_jpcf, $ct_jpcf_patched, $ct_jpcf_fields, $ct_options;
 
-    $options = ct_get_options();
-    if ($options['contact_forms_test'] == 1 && $ct_jpcf_patched === false && preg_match("/[text|email]/i", $r)) {
+    if ($ct_options['contact_forms_test'] == 1 && $ct_jpcf_patched === false && preg_match("/[text|email]/i", $r)) {
 
         // Looking for element name prefix
         $name_patched = false;
@@ -1382,11 +1380,9 @@ function ct_grunion_contact_form_field_html($r, $field_label) {
  * Test for JetPack contact form 
  */
 function ct_contact_form_is_spam($form) {
-    global $ct_checkjs_jpcf;
+    global $ct_checkjs_jpcf, $ct_options;
 
-    $options = ct_get_options();
-
-    if ($options['contact_forms_test'] == 0) {
+    if ($ct_options['contact_forms_test'] == 0) {
         return null;
     }
 
@@ -1446,10 +1442,9 @@ function ct_contact_form_is_spam($form) {
  * Inserts anti-spam hidden to CF7
  */
 function ct_wpcf7_form_elements($html) {
-    global $wpdb, $current_user, $ct_checkjs_cf7;
+    global $wpdb, $current_user, $ct_checkjs_cf7, $ct_options;
 
-    $options = ct_get_options();
-    if ($options['contact_forms_test'] == 0) {
+    if ($ct_options['contact_forms_test'] == 0) {
         return $html;
     }
 
@@ -1462,7 +1457,7 @@ function ct_wpcf7_form_elements($html) {
  * Test CF7 message for spam
  */
 function ct_wpcf7_spam($param) {
-    global $wpdb, $current_user, $ct_agent_version, $ct_checkjs_cf7, $ct_cf7_comment;
+    global $wpdb, $current_user, $ct_agent_version, $ct_checkjs_cf7, $ct_cf7_comment, $ct_options;
 
     if (WPCF7_VERSION >= '3.0.0') {
 	if($param === true)
@@ -1472,8 +1467,7 @@ function ct_wpcf7_spam($param) {
     	    return $param;
     }
 
-    $options = ct_get_options();
-    if ($options['contact_forms_test'] == 0) {
+    if ($ct_options['contact_forms_test'] == 0) {
         return $param;
     }
 
@@ -1565,11 +1559,12 @@ function ct_si_contact_display_after_fields($string = '', $style = '', $form_err
  * Test for Fast Secure contact form
  */
 function ct_si_contact_form_validate($form_errors = array(), $form_id_num = 0) {
+    global $ct_options;
+
     if (!empty($form_errors))
 	return $form_errors;
 
-    $options = ct_get_options();
-    if ($options['contact_forms_test'] == 0)
+    if ($ct_options['contact_forms_test'] == 0)
 	return $form_errors;
 
     $checkjs = js_test('ct_checkjs', $_POST, true);
@@ -1640,11 +1635,10 @@ function ct_comment_text($comment_text) {
  * Checks WordPress Landing Pages raw $_POST values
 */
 function ct_check_wplp(){
-    global $ct_wplp_result_label;
+    global $ct_wplp_result_label, $ct_options;
     if (!isset($_COOKIE[$ct_wplp_result_label])) {
         // First AJAX submit of WPLP form
-        $options = ct_get_options();
-        if ($options['contact_forms_test'] == 0)
+        if ($ct_options['contact_forms_test'] == 0)
                 return;
 
         $checkjs = js_test('ct_checkjs', $_COOKIE, true);
@@ -1702,10 +1696,9 @@ function ct_check_wplp(){
  * @return array with errors 
  */
 function ct_s2member_registration_test() {
-    global $ct_agent_version, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label;
+    global $ct_agent_version, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_options;
     
-    $options = ct_get_options();
-    if ($options['registrations_test'] == 0) {
+    if ($ct_options['registrations_test'] == 0) {
         return null;
     }
     
@@ -1739,14 +1732,14 @@ function ct_s2member_registration_test() {
 
     $ct = new Cleantalk();
     $ct->work_url = $config['ct_work_url'];
-    $ct->server_url = $options['server'];
+    $ct->server_url = $ct_options['server'];
     $ct->server_ttl = $config['ct_server_ttl'];
     $ct->server_changed = $config['ct_server_changed'];
-    $ct->ssl_on = $options['ssl_on'];
+    $ct->ssl_on = $ct_options['ssl_on'];
 
     $ct_request = new CleantalkRequest();
 
-    $ct_request->auth_key = $options['apikey'];
+    $ct_request->auth_key = $ct_options['apikey'];
     $ct_request->sender_email = $sender_email; 
     $ct_request->sender_ip = $ct->ct_session_ip($_SERVER['REMOTE_ADDR']);
     $ct_request->sender_nickname = $sender_nickname; 
@@ -1902,7 +1895,7 @@ function ct_get_data_from_submit($value = null, $field_name = null) {
  * @return array 
  */
 function get_sender_info() {
-    global $ct_direct_post;
+    global $ct_direct_post, $ct_options;
 
     $php_session = session_id() != '' ? 1 : 0;
     
@@ -1921,10 +1914,10 @@ function get_sender_info() {
 		}
 	}
 	
-	$options = ct_get_options();
-	unset($options['js_keys']);
-	unset($options['js_keys_store_days']);
-	unset($options['js_key_lifetime']);
+	$my_options = $ct_options;
+	unset($my_options['js_keys']);
+	unset($my_options['js_keys_store_days']);
+	unset($my_options['js_key_lifetime']);
 
 	return $sender_info = array(
         'cms_lang' => substr(get_locale(), 0, 2),
@@ -1935,7 +1928,7 @@ function get_sender_info() {
         'direct_post' => $ct_direct_post,
         'checkjs_data_post' => $checkjs_data_post, 
         'checkjs_data_cookies' => $checkjs_data_cookies, 
-        'ct_options' => json_encode($options),
+        'ct_options' => json_encode($my_options),
     );
 }
 
@@ -1944,13 +1937,12 @@ function get_sender_info() {
  * @return null 
  */
 function delete_spam_comments() {
-    global $pagenow;
+    global $pagenow, $ct_options;
     
-    $options = ct_get_options();
-    if ($options['remove_old_spam'] == 1) {
+    if ($ct_options['remove_old_spam'] == 1) {
         $last_comments = get_comments(array('status' => 'spam', 'number' => 1000, 'order' => 'ASC'));
         foreach ($last_comments as $c) {
-            if (time() - strtotime($c->comment_date_gmt) > 86400 * $options['spam_store_days']) {
+            if (time() - strtotime($c->comment_date_gmt) > 86400 * $ct_options['spam_store_days']) {
                 // Force deletion old spam comments
                 wp_delete_comment($c->comment_ID, true);
             } 
