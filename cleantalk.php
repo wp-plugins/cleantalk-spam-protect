@@ -118,19 +118,8 @@ add_filter('wpmu_validate_user_signup', 'ct_registration_errors_wpmu', 10, 3);
 add_action('bp_before_registration_submit_buttons','ct_register_form');
 add_filter('bp_signup_validate', 'ct_registration_errors');
 
-// JetPack Contact form
-add_filter('grunion_contact_form_field_html', 'ct_grunion_contact_form_field_html', 10, 2);
-add_filter('contact_form_is_spam', 'ct_contact_form_is_spam');
-
-// Fast Secure contact form
-add_filter('si_contact_display_after_fields', 'ct_si_contact_display_after_fields');
-add_filter('si_contact_form_validate', 'ct_si_contact_form_validate');
-
 // Login form - for notifications only
 add_filter('login_message', 'ct_login_message');
-
-// WooCoomerse signups
-add_filter('woocommerce_register_post', 'ct_register_post', 1, 3);
 
 // bbPress
 add_filter('bbp_new_topic_pre_content', 'ct_bbp_new_pre_content', 1);
@@ -206,6 +195,30 @@ function ct_init() {
         $_SESSION[$ct_formtime_label] = time();
     }
 
+    // Fast Secure contact form
+    if(defined('FSCF_VERSION')){
+	add_filter('si_contact_display_after_fields', 'ct_si_contact_display_after_fields');
+	add_filter('si_contact_form_validate', 'ct_si_contact_form_validate');
+    }
+
+    // WooCoomerse signups
+    if(class_exists('WooCommerce')){
+	add_filter('woocommerce_register_post', 'ct_register_post', 1, 3);
+    }
+
+    // JetPack Contact form
+    $jetpack_active_modules = false;
+    if(defined('JETPACK__VERSION')){
+        $jetpack_active_modules = get_option('jetpack_active_modules');
+	if (
+	    (class_exists( 'Jetpack', false) && $jetpack_active_modules && in_array('comments', $jetpack_active_modules))
+	) {
+	    add_filter('grunion_contact_form_field_html', 'ct_grunion_contact_form_field_html', 10, 2);
+	    add_filter('contact_form_is_spam', 'ct_contact_form_is_spam');
+    	    $ct_jp_comments = true;
+	}
+    }
+
     // Contact Form7 
     if(defined('WPCF7_VERSION')){
 	add_filter('wpcf7_form_elements', 'ct_wpcf7_form_elements');
@@ -218,20 +231,14 @@ function ct_init() {
 
     add_action('comment_form', 'ct_comment_form');
 
-    $jetpack_active_modules = get_option('jetpack_active_modules');
     if (
-	(class_exists('Jetpack', false) && $jetpack_active_modules && in_array('comments', $jetpack_active_modules))
+	($ct_jp_comments === true)
 	|| (defined('LANDINGPAGES_CURRENT_VERSION'))
 	|| (defined('WS_PLUGIN__S2MEMBER_PRO_VERSION'))
 	|| (defined('WOOCOMMERCE_VERSION'))
 	|| (defined('WPCF7_VERSION'))
     ) {
 	    add_action('wp_footer', 'ct_footer_add_cookie', 1);
-    }
-    if (
-	(class_exists( 'Jetpack', false) && $jetpack_active_modules && in_array('comments', $jetpack_active_modules))
-    ) {
-        $ct_jp_comments = true;
     }
 
     //intercept WordPress Landing Pages POST
