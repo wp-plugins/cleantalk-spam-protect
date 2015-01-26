@@ -594,9 +594,7 @@ ctSetCookie("%s", "%s", "%s");
 		$html = '
 <input type="hidden" id="%s" name="%s" value="%s" />
 <script type="text/javascript">
-var ct_input_name = \'%s\';
-var ct_input_value = document.getElementById(ct_input_name).value;
-setTimeout(function(){ document.getElementById(ct_input_name).value = document.getElementById(ct_input_name).value.replace(ct_input_value, %s); }, 1000);
+setTimeout(function(){var ct_input_name = \'%s\';var ct_input_value = document.getElementById(ct_input_name).value;document.getElementById(ct_input_name).value = document.getElementById(ct_input_name).value.replace(ct_input_value, %s); }, 1000);
 </script>
 ';
 		$html = sprintf($html, $field_id, $field_name, $ct_checkjs_def, $field_id, $ct_input_challenge);
