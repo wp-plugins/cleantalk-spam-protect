@@ -231,15 +231,15 @@ function ct_init() {
 
     add_action('comment_form', 'ct_comment_form');
 
-//    if (
-//	($ct_jp_comments === true)
-//	|| (defined('LANDINGPAGES_CURRENT_VERSION'))
-//	|| (defined('WS_PLUGIN__S2MEMBER_PRO_VERSION'))
-//	|| (defined('WOOCOMMERCE_VERSION'))
-//	|| (defined('WPCF7_VERSION'))
-//    ) {
-//	    add_action('wp_footer', 'ct_footer_add_cookie', 1);
-//    }
+#    if (
+#	($ct_jp_comments === true)
+#	|| (defined('LANDINGPAGES_CURRENT_VERSION'))
+#	|| (defined('WS_PLUGIN__S2MEMBER_PRO_VERSION'))
+#	|| (defined('WOOCOMMERCE_VERSION'))
+#	|| (defined('WPCF7_VERSION'))
+#    ) {
+#	    add_action('wp_footer', 'ct_footer_add_cookie', 1);
+#    }
 
     //intercept WordPress Landing Pages POST
     if (defined('LANDINGPAGES_CURRENT_VERSION') && !empty($_POST)){
@@ -556,9 +556,9 @@ function ct_comment_form($post_id) {
  * Adds cookie script filed to footer
  */
 function ct_footer_add_cookie() {
-#    if (ct_is_user_enable() === false) {
+    if (ct_is_user_enable() === false) {
 #        return false;
-#    }
+    }
 
     ct_add_hidden_fields(true, 'ct_checkjs', false, true);
 
@@ -719,6 +719,10 @@ function ct_bbp_new_pre_content ($comment) {
 
     $example = null;
     
+    $sender_info = array(
+	    'sender_url' => isset($_POST['bbp_anonymous_website']) ? $_POST['bbp_anonymous_website'] : null 
+    );
+
     $post_info['comment_type'] = 'bbpress_comment'; 
     $post_info['post_url'] = bbp_get_topic_permalink(); 
 
@@ -733,7 +737,8 @@ function ct_bbp_new_pre_content ($comment) {
         'sender_email' => isset($_POST['bbp_anonymous_email']) ? $_POST['bbp_anonymous_email'] : null, 
         'sender_nickname' => isset($_POST['bbp_anonymous_name']) ? $_POST['bbp_anonymous_name'] : null, 
         'post_info' => $post_info,
-        'checkjs' => $checkjs
+        'checkjs' => $checkjs,
+        'sender_info' => $sender_info
     ));
     $ct = $ct_base_call_result['ct'];
     $ct_result = $ct_base_call_result['ct_result'];
@@ -783,6 +788,10 @@ function ct_preprocess_comment($comment) {
 
     $comment_post_id = $comment['comment_post_ID'];
 
+    $sender_info = array(
+	    'sender_url' => @$comment['comment_author_url']
+    );
+
     //
     // JetPack comments logic
     //
@@ -829,7 +838,8 @@ function ct_preprocess_comment($comment) {
         'sender_email' => $comment['comment_author_email'],
         'sender_nickname' => $comment['comment_author'],
         'post_info' => $post_info,
-        'checkjs' => $checkjs
+        'checkjs' => $checkjs,
+        'sender_info' => $sender_info
     ));
     $ct = $ct_base_call_result['ct'];
     $ct_result = $ct_base_call_result['ct_result'];
@@ -1387,6 +1397,10 @@ function ct_contact_form_is_spam($form) {
     
     $checkjs = js_test($js_field_name, $_POST, true);
 
+    $sender_info = array(
+	'sender_url' => @$form['comment_author_url']
+    );
+
     $post_info['comment_type'] = 'feedback';
     $post_info = json_encode($post_info);
     if ($post_info === false)
@@ -1410,6 +1424,7 @@ function ct_contact_form_is_spam($form) {
         'sender_email' => $sender_email,
         'sender_nickname' => $sender_nickname,
         'post_info' => $post_info,
+	'sender_info' => $sender_info,
         'checkjs' => $checkjs
     ));
     $ct = $ct_base_call_result['ct'];
@@ -1584,6 +1599,7 @@ function ct_si_contact_form_validate($form_errors = array(), $form_id_num = 0) {
         'sender_email' => $sender_email,
         'sender_nickname' => $sender_nickname,
         'post_info' => $post_info,
+	'sender_info' => $sender_info,
         'checkjs' => $checkjs
     ));
     $ct = $ct_base_call_result['ct'];
@@ -1840,6 +1856,7 @@ function ct_contact_form_validate () {
         'sender_email' => $sender_email,
         'sender_nickname' => $sender_nickname,
         'post_info' => $post_info,
+	    'sender_info' => $sender_info,
         'checkjs' => $checkjs
     ));
     
@@ -1900,13 +1917,20 @@ function get_sender_info() {
 		}
 	}
 	
-	$my_options = $ct_options;
-	unset($my_options['js_keys']);
-	unset($my_options['js_keys_store_days']);
-	unset($my_options['js_key_lifetime']);
+	$options2server = array(	// Options for sending to server for support information
+            'apikey' => $ct_options['apikey'],
+            'registrations_test' => $ct_options['registrations_test'],
+            'comments_test' => $ct_options['comments_test'],
+            'contact_forms_test' => $ct_options['contact_forms_test'],
+            'general_contact_forms_test' => $ct_options['general_contact_forms_test'],
+            'remove_old_spam' => $ct_options['remove_old_spam'],
+            'autoPubRevelantMess' => $ct_options['autoPubRevelantMess'],
+            'spam_store_days' => $ct_options['spam_store_days'],
+            'ssl_on' => $ct_options['ssl_on'],
+	);
 
 	return $sender_info = array(
-	'sender_url' => @$_SERVER['SERVER_NAME'] . @$_SERVER['REQUEST_URI'],
+	'page_url' => @$_SERVER['SERVER_NAME'] . @$_SERVER['REQUEST_URI'],
         'cms_lang' => substr(get_locale(), 0, 2),
         'REFFERRER' => @$_SERVER['HTTP_REFERER'],
         'USER_AGENT' => @$_SERVER['HTTP_USER_AGENT'],
@@ -1915,7 +1939,7 @@ function get_sender_info() {
         'direct_post' => $ct_direct_post,
         'checkjs_data_post' => $checkjs_data_post, 
         'checkjs_data_cookies' => $checkjs_data_cookies, 
-        'ct_options' => json_encode($my_options),
+        'ct_options' => json_encode($options2server),
     );
 }
 
