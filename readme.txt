@@ -133,7 +133,7 @@ The comments will be passed, becuase the plugin detect sender as a human. So, us
 = Can I use CleanTalk with cache plugins? =
 CleanTalk doesn't use static HTML code into templates, so all anti-spam functions will works correctly with any WordPress cache plugins.
 
-= Does the plugin protects against spam bots contact forms with third-party services? =
+= Does the plugin protects against spam bots at contact forms with third-party services? =
 If your contact or subscribe form sends data to third-party servers (like mailchimp.com and etc.) the plugin will not protect your form. Because the plugin protects against spam bots only forms wihc are sends data directly to your WordPress website.
 
 == Other notes ==
