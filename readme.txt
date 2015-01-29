@@ -131,7 +131,7 @@ The plugin has several options to detect spam bots and humans. If you just post 
 The comments will be passed, becuase the plugin detect sender as a human. So, use special email *stop_email@example.com* to test anti-spam or wait a few days to see how the plugin works. 
 
 = Is it free or paid? =
-The plugin is paid, but you have two weeks free trial to test anti-spam for comments, registrations, bookings, contacts or orders. When the trial is finished, you can renew the subscription for 1 year or deactivate anti-spam plugin.
+The plugin is paid, you have two weeks free trial to test anti-spam for comments, registrations, bookings, contacts or orders. When the trial is finished, you can renew the subscription for 1 year or deactivate anti-spam plugin.
 
 = Can I use CleanTalk with cache plugins? =
 Anti-spam by CleanTalk doesn't use static HTML code into templates, so all anti-spam functions will works correctly with any WordPress cache plugins.
