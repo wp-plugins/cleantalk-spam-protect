@@ -66,7 +66,9 @@ At the sight of CAPTCHA and after input errors, many visitors leave the resource
 = We recommend =
 Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
 
-    Max power, all-in-one, premium anti-spam plugin. No comment & registration spam, no contact spam, protects any forms. Just install and forget. 
+    Max power, all-in-one, premium anti-spam plugin.
+    No comment & registration spam, no contact spam, protects any forms.
+    Just install and forget. 
 
 
 == Installation ==
