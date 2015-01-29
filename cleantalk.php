@@ -1930,7 +1930,7 @@ function get_sender_info() {
 	);
 
 	return $sender_info = array(
-	'page_url' => htmlspecialchars(@$_SERVER['SERVER_NAME'] . @$_SERVER['REQUEST_URI']),
+	'page_url' => htmlspecialchars(@$_SERVER['SERVER_NAME'].@$_SERVER['REQUEST_URI']),
         'cms_lang' => substr(get_locale(), 0, 2),
         'REFFERRER' => htmlspecialchars(@$_SERVER['HTTP_REFERER']),
         'USER_AGENT' => htmlspecialchars(@$_SERVER['HTTP_USER_AGENT']),
