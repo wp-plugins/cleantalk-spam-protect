@@ -42,7 +42,7 @@ The anti spam method offered by CleanTalk allows to switch from the methods that
 
 The CleanTalk is premium anti spam for WordPress, please look at the <a href="http://cleantalk.org/price">pricing</a>. We try to provide anti spam service at the highest level and we can not afford to offer a free version of our service, as this will immediately affect the quality of providing anti spam protection. Paying for a year of anti spam service, you save a lot more and get: 
  
- * 100% protection against spam bots
+ * Up to 100% protection against spam bots
  * Time and resources saving
  * More registrations/comments/visitors
  * Protect several websites at once at different CMS
@@ -54,7 +54,7 @@ The CleanTalk is premium anti spam for WordPress, please look at the <a href="ht
  * Free mobile app to control anti spam function at your website.
 
 = How to protect sites from spam bots without CAPTCHA? =
-The most popular method is CAPTCHA -- the annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots wonâ€™t discern these CAPTCHA, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. 
+The most popular method is CAPTCHA -- the annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won't discern these CAPTCHA, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. 
 Sometimes CAPTCHA reminds doodle 2x year old child. For users with vision problems captcha is just an insurmountable obstacle. Users hate captcha. Captcha for users means "hate". Unreadable CAPTCHA stops about 80% of site visitors. After 2 failed attempts to bring it up to 95% reject further attempts. 
 At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource both from bots and visitors. CAPTCHA is not a panacea from spam. Doubts Concerning the Need for CAPTCHA?
 
@@ -64,15 +64,20 @@ At the sight of CAPTCHA and after input errors, many visitors leave the resource
 * Anti spam apps for most popular CMS on cleantalk.org. 
 
 = We recommend =
-* Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
+Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
+
+    Max power, all-in-one, premium anti-spam plugin. No comment & registration spam, no contact spam, protects any forms. Just install and forget. 
+
 
 == Installation ==
 1. Download, install and activate the plugin. 
 1. Get Access key <a href="http://cleantalk.org/register?platform=wordpress" target="_blank">http://cleantalk.org/register</a>
 1. Enter Access key at the plugin settings. 
-1. Make dummy spam comment with email **stop_email@example.com**. You should see notice,
+1. Make dummy spam comment with email **stop_email@example.com**.
 
-    *** Forbidden. Sender blacklisted. Request number . Antispam service cleantalk.org. ***
+You should see notice,
+
+    *** Forbidden. Sender blacklisted. Antispam service cleantalk.org. ***
 
 The setup is done! You can control anti spam plugin by <a href="http://cleantalk.org/my" target="_blank">Control panel</a> at the cleantalk.org or use <a href="https://play.google.com/store/apps/details?id=org.cleantalk.app">Android</a>, <a href="https://itunes.apple.com/us/app/cleantalk/id825479913?mt=8">iPhone</a> anti spam app. 
 
@@ -87,7 +92,6 @@ Plugin uses several simple tests to stop spammers.
 1. JavaScript anti spam test. 99% spam bots doesn't have all JavaScript functions support. So, the plugin has code which can run normal visitor and can't run the spam bot.
 1. Checks by Email, IP, domains at spam activities list. The plugin online use spam activity database at cleantalk.org, which are consist more then 1 billion records about spam activity IPs, Email, Domains and ASN. If the senders IP or Email matches with database, the sender gets some spam scores. To reduce false/positive rate the plugin doesn't use only blacklist test to ban spammers. The sender will be banned only if multiple spam test failed.
 1. Comment submit time. Spam bots usually send post immediately after page load, because spam bots not really fill the web form, they are only send $_POST data to the blog. The normal visitor send the data within several seconds or minutes.
-1. Relevance test for the comments. Spam bots posts send to the blog comments which are not matched with article by relevance, so the plugin can filter spam bots with offtop filter.
 
 = Will anti spam protects my theme? =
 Yes, it will. The plugin compatible with any WordPress themes.
@@ -125,7 +129,10 @@ The plugin has several options to detect spam bots and humans. If you just post 
 The comments will be passed, becuase the plugin detect sender as a human. So, use special email *stop_email@example.com* to test anti-spam or wait a few days to see how the plugin works. 
 
 = Can I use CleanTalk with cache plugins? =
-CleanTalk doesn't use static HTML code into templates, so all anit spam functions will works correctly with any WordPress cache plugins.
+CleanTalk doesn't use static HTML code into templates, so all anti-spam functions will works correctly with any WordPress cache plugins.
+
+= Does the plugin protects against spam bots contact forms with third-party services? =
+If your contact or subscribe form sends data to third-party servers (like mailchimp.com and etc.) the plugin will not protect your form. Because the plugin protects against spam bots only forms wihc are sends data directly to your WordPress website.
 
 == Other notes ==
 
@@ -136,8 +143,7 @@ If you're having trouble getting things to work after installing the plugin, her
 
 1. If you haven't yet, please upgrade plugin to the latest version.
 1. If you have error '*** Forbidden. Enable JavaScript. Anti-spam service cleantalk.org. ***' please check JavaScript support in your browser and do JavaScript test at this page <a href="http://cleantalk.org/checkout-javascript-support">Check out JavaScript support</a>.
-1. If you have spam comments, signups or contacts please check the Access key at plugin settings. The key should be same as you can find in service <a href="https://cleantalk.org/my/">Control panel</a>.
-1. If you have spam contact emails after plugin installation, please check your plugin with list of supported contact forms (see section **Anti-spam protection**). 
+1. If you have spam comments, signups or contacts please check the Access key at plugin settings. The key should be same as you can find in service <a href="https://cleantalk.org/my/">Dashboard</a>.
 
 = CAPTCHA = 
 The annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won’t discern these symbols, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource from visitors. Spam bots can automatically recognize Captcha. 
