@@ -1930,10 +1930,10 @@ function get_sender_info() {
 	);
 
 	return $sender_info = array(
-	'page_url' => @$_SERVER['SERVER_NAME'] . @$_SERVER['REQUEST_URI'],
+	'page_url' => htmlspecialchars(@$_SERVER['SERVER_NAME'] . @$_SERVER['REQUEST_URI']),
         'cms_lang' => substr(get_locale(), 0, 2),
-        'REFFERRER' => @$_SERVER['HTTP_REFERER'],
-        'USER_AGENT' => @$_SERVER['HTTP_USER_AGENT'],
+        'REFFERRER' => htmlspecialchars(@$_SERVER['HTTP_REFERER']),
+        'USER_AGENT' => htmlspecialchars(@$_SERVER['HTTP_USER_AGENT']),
         'php_session' => $php_session, 
         'cookies_enabled' => ct_cookies_test(true), 
         'direct_post' => $ct_direct_post,
