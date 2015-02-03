@@ -1,6 +1,6 @@
 === Anti-spam by CleanTalk (no CAPTCHA) ===
 Contributors: znaeff, shagimuratov
-Tags: Akismet, anti spam, antispam, bbpress spam, buddypress spam, capcha, captcha antispam, cf7 spam, comments spam, contact form spam, fast secure contact form spam, form, Formidable spam, jetpack spam, landing pages, math, registration spam, s2member, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments
+Tags: Akismet, anti spam, antispam, bbpress spam, buddypress spam, capcha, captcha antispam, cf7 spam, comments spam, contact form spam, fast secure contact form spam, form, Formidable spam, jetpack spam, landing pages, math, registration spam, s2member, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam
 Requires at least: 3.0
 Tested up to: 4.1 
 Stable tag: 4.15
@@ -23,7 +23,7 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 = Spam protection =
 * WordPress, JetPack comments.
 * WordPress, BuddyPress, bbPress, S2Member, WooCommerce registrations.
-* Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages and any themes/custom contact form.
+* Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages, Gravity forms and any themes/custom contact form.
 * WooCommerce review form.
 * WordPress Landing Pages.
 * Any WordPress form (with enabled anti-spam option 'Custom contact forms').
