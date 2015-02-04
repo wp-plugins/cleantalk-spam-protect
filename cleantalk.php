@@ -101,10 +101,6 @@ add_action( 'plugins_loaded', 'ct_plugin_loaded' );
 add_filter('preprocess_comment', 'ct_preprocess_comment', 1, 1);     // param - comment data array
 add_filter('comment_text', 'ct_comment_text' );
 
-// Formidable
-add_action('frm_validate_entry', 'ct_frm_validate_entry', 20, 2);
-add_action('frm_entries_footer_scripts', 'ct_frm_entries_footer_scripts', 20, 2);
-
 // Registrations
 add_action('register_form','ct_register_form');
 add_filter('registration_errors', 'ct_registration_errors', 1, 3);
@@ -114,18 +110,8 @@ add_action('user_register', 'ct_user_register');
 add_action('signup_extra_fields','ct_register_form');
 add_filter('wpmu_validate_user_signup', 'ct_registration_errors_wpmu', 10, 3);
 
-// BuddyPress
-add_action('bp_before_registration_submit_buttons','ct_register_form');
-add_filter('bp_signup_validate', 'ct_registration_errors');
-
 // Login form - for notifications only
 add_filter('login_message', 'ct_login_message');
-
-// bbPress
-add_filter('bbp_new_topic_pre_content', 'ct_bbp_new_pre_content', 1);
-add_filter('bbp_new_reply_pre_content', 'ct_bbp_new_pre_content', 1);
-add_action('bbp_theme_before_topic_form_content', 'ct_comment_form');
-add_action('bbp_theme_before_reply_form_content', 'ct_comment_form');
 
 register_activation_hook( __FILE__, 'ct_activation' );
 
@@ -227,6 +213,26 @@ function ct_init() {
 	}else{
 	    add_filter('wpcf7_acceptance', 'ct_wpcf7_spam');
 	}
+    }
+
+    // Formidable
+    if(class_exists('FrmSettings')){
+	add_action('frm_validate_entry', 'ct_frm_validate_entry', 20, 2);
+	add_action('frm_entries_footer_scripts', 'ct_frm_entries_footer_scripts', 20, 2);
+    }
+
+    // BuddyPress
+    if(class_exists('BuddyPress')){
+	add_action('bp_before_registration_submit_buttons','ct_register_form');
+	add_filter('bp_signup_validate', 'ct_registration_errors');
+    }
+
+    // bbPress
+    if(class_exists('bbPress')){
+	add_filter('bbp_new_topic_pre_content', 'ct_bbp_new_pre_content', 1);
+	add_filter('bbp_new_reply_pre_content', 'ct_bbp_new_pre_content', 1);
+	add_action('bbp_theme_before_topic_form_content', 'ct_comment_form');
+	add_action('bbp_theme_before_reply_form_content', 'ct_comment_form');
     }
 
     add_action('comment_form', 'ct_comment_form');
