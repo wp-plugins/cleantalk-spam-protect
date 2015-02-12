@@ -10,9 +10,9 @@ function ct_init() {
     $ct_options = ct_get_options();
 
     ct_init_session();
-    
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (!array_key_exists($ct_formtime_label, $_SESSION) && session_id() != '') {
+        if (is_array($_SESSION) && !array_key_exists($ct_formtime_label, $_SESSION) && session_id() != '') {
             $ct_direct_post = 1;
         }
     } else {
