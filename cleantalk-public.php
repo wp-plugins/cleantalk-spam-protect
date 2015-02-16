@@ -1481,6 +1481,7 @@ function ct_contact_form_validate () {
     $skip_params = array(
 	    'ipn_track_id', // PayPal IPN #
 	    'txn_type', // PayPal transaction type
+	    'payment_status', // PayPal payment status
     );
     if (is_array($_POST)) {
         foreach ($_POST as $k => $v) {
