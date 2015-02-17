@@ -3,7 +3,7 @@ Contributors: znaeff, shagimuratov
 Tags: akismet, anti spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, fast secure contact form spam, form, Formidable spam, jetpack spam, landing pages, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam
 Requires at least: 3.0
 Tested up to: 4.1 
-Stable tag: 4.17
+Stable tag: 4.18
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -171,6 +171,11 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
+= 4.18 2015-02-17 =
+  * Fixed bug with comments approvement - moved ct_unmark_red() to cleantalk-admin.php 
+  * Added PayPal 'payment_status' in skip list.
+  * Added Akismet 'spam' status processing.
+
 = 4.17 2015-02-12 =
   * New base class.
   * Divided code to 3 separate files - common, public and admin.
@@ -497,6 +502,9 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
   * First version
 
 == Upgrade Notice ==
+= 4.18 2015-02-17 =
+Bugfix - fixed bug with comments approvement, PayPal 'payment_status' and Akismet 'spam' status processing.
+
 = 4.17 2015-02-12 =
 New base class, divided code to 3 separate files - common, public and admin.
 
