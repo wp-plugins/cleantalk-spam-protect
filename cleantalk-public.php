@@ -545,7 +545,7 @@ function ct_preprocess_comment($comment) {
         if ((int) $approved_comments == 0 || $ct_result->stop_words !== null) { 
 
             if ($ct_result->allow == 1 && get_option('comment_moderation') !== '1') {
-                add_filter('pre_comment_approved', 'ct_set_approved');
+                add_filter('pre_comment_approved', 'ct_set_approved', 99, 2);
                 setcookie($ct_approved_request_id_label, $ct_result->id, 0, '/');
             }
             if ($ct_result->allow == 0) {
@@ -680,11 +680,15 @@ function ct_set_not_approved() {
 
 /**
  * @author Artem Leontiev
- * Public filter 'pre_comment_approved' - Mark comment approved always
+ * Public filter 'pre_comment_approved' - Mark comment approved if it's not 'spam' only
  * @return 	int 1
  */
-function ct_set_approved() {
-    return 1;
+function ct_set_approved($approved, $comment) {
+    if ($approved == 'spam'){
+        return $approved;
+    }else {
+        return 1;
+    }
 }
 
 /**
@@ -736,17 +740,6 @@ function ct_mark_red($comment_id, $comment_status) {
     $comment['comment_content'] = $message;
     kses_remove_filters();
     wp_update_comment($comment);
-}
-
-/**
- * Unmark bad words
- * @param string $message
- * @return string Cleat comment
- */
-function ct_unmark_red($message) {
-    $message = preg_replace("/\<font rel\=\"cleantalk\" color\=\"\#FF1000\"\>(\S+)\<\/font>/iu", '$1', $message);
-
-    return $message;
 }
 
 /**

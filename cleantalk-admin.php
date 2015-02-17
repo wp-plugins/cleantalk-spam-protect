@@ -517,4 +517,15 @@ function ct_update_option($option_name) {
     }
 }
 
+/**
+ * Unmark bad words
+ * @param string $message
+ * @return string Cleat comment
+ */
+function ct_unmark_red($message) {
+    $message = preg_replace("/\<font rel\=\"cleantalk\" color\=\"\#FF1000\"\>(\S+)\<\/font>/iu", '$1', $message);
+
+    return $message;
+}
+
 ?>
