@@ -1,6 +1,6 @@
 <?php
 
-$ct_agent_version = 'wordpress-418';
+$ct_agent_version = 'wordpress-419';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
@@ -136,8 +136,8 @@ function ct_def_options() {
         'relevance_test' => 0, // Test comment for relevance 
         'notice_api_errors' => 0, // Send API error notices to WP admin 
         'js_keys' => array(), // Keys to do JavaScript antispam test 
-        'js_keys_store_days' => 1, // JavaScript keys store days 
-        'js_key_lifetime' => 3600, // JavaScript key life time in seconds 
+        'js_keys_store_days' => 8, // JavaScript keys store days - 8 days now
+        'js_key_lifetime' => 86400, // JavaScript key life time in seconds - 1 day now
     );
 }
 
