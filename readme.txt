@@ -1,6 +1,6 @@
 === Anti-spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov
-Tags: akismet, anti spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, fast secure contact form spam, form, Formidable spam, jetpack spam, landing pages, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam
+Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, fast secure contact form spam, form, Formidable spam, jetpack spam, landing pages, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam
 Requires at least: 3.0
 Tested up to: 4.1.1 
 Stable tag: 4.19
@@ -26,21 +26,21 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 * Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages, Gravity forms and any themes/custom contact form.
 * WooCommerce review form.
 * WordPress Landing Pages.
-* Any WordPress form (with enabled anti-spam option 'Custom contact forms').
+* Any WordPress form (option 'Custom contact forms').
 
-= Cloud antispam for WordPress. CAPTCHA less, no spam comments, no spam registrations, no spam contact emails, no spam trackbacks =
-Spam is one of the most irritating factors. Spam become every year more and conventional anti spam can no longer handle all the spam bots. CleanTalk prevents spam and automatically blocks it. You'll be surprised of effective protection against spam.
+= Cloud anti-spam for WordPress. CAPTCHA less, no spam comments, no spam registrations, no spam contact emails, no spam trackbacks =
+Spam is one of the most irritating factors. Spam become every year more and conventional anti-spam can no longer handle all the spam bots. CleanTalk prevents spam and automatically blocks it. You'll be surprised of effective protection against spam.
 
 = Anti spam plugin info = 
-CleanTalk is an anti spam protection **4 in 1 for WordPress** that protects login, comments, contact and WooCommerce forms all at once. You don't need to install separate anti spam plugins for each form. This allows your blog to work faster and save resources. After installation **you will forget about spam**, CleanTalk plugin will do all the work. You won't have to deal with spam, CleanTalk will do this for you automatically.
+CleanTalk is an anti-spam protection **4 in 1 for WordPress** that protects login, comments, contact and WooCommerce forms all at once. You don't need to install separate anti-spam plugins for each form. This allows your blog to work faster and save resources. After installation **you will forget about spam**, CleanTalk plugin will do all the work. You won't have to deal with spam, CleanTalk will do this for you automatically.
 
-CleanTalk is a transparent anti spam protection, we provide detailed statistics of all entering comments and logins. You can always be sure that **there are no errors**. We have developed a mobile app for you to see anti spam statistics wherever.
+CleanTalk is a transparent anti-spam protection, we provide detailed statistics of all entering comments and logins. You can always be sure that **there are no errors**. We have developed a mobile app for you to see anti-spam statistics wherever.
 
 We have developed antispam for WordPress that would provide **maximum protection from spam bots** and you can provide for your visitors **a simple and convenient form of comments/registrations without annoying CAPTCHAs and puzzles**. Used to detect spam multistage test that allows us to block up to 100% of spam bots.
 
-The anti spam method offered by CleanTalk allows to switch from the methods that trouble the communication (CAPTCHA, question-answer etc.) to a more convenient one.
+The anti-spam method offered by CleanTalk allows to switch from the methods that trouble the communication (CAPTCHA, question-answer etc.) to a more convenient one.
 
-The CleanTalk is premium anti spam for WordPress, please look at the <a href="http://cleantalk.org/price">pricing</a>. We try to provide anti spam service at the highest level and we can not afford to offer a free version of our service, as this will immediately affect the quality of providing anti spam protection. Paying for a year of anti spam service, you save a lot more and get: 
+The CleanTalk is premium anti-spam for WordPress, please look at the <a href="http://cleantalk.org/price">pricing</a>. We try to provide anti-spam service at the highest level and we can not afford to offer a free version of our service, as this will immediately affect the quality of providing anti-spam protection. Paying for a year of anti-spam service, you save a lot more and get: 
  
  * Up to 100% protection against spam bots
  * Time and resources saving
@@ -51,7 +51,7 @@ The CleanTalk is premium anti spam for WordPress, please look at the <a href="ht
  * 24/7 technical support
  * Clear statistics
  * No captcha, puzzles, etc.
- * Free mobile app to control anti spam function at your website.
+ * Free mobile app to control anti-spam function at your website.
 
 = How to protect sites from spam bots without CAPTCHA? =
 The most popular method is CAPTCHA -- the annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won't discern these CAPTCHA, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. 
@@ -59,8 +59,8 @@ Sometimes CAPTCHA reminds doodle 2x year old child. For users with vision proble
 At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource both from bots and visitors. CAPTCHA is not a panacea from spam. Doubts Concerning the Need for CAPTCHA?
 
 = Additional features =
-* Online, daily and weekly anti spam reports traffic VS spam. 
-* Apps for iPhone, Android to control anti spam service, comments, signups, contacts. With traffic and spam statistics for last 7 days.
+* Online, daily and weekly anti-spam reports traffic VS spam. 
+* Apps for iPhone, Android to control anti-spam service, comments, signups, contacts. With traffic and spam statistics for last 7 days.
 * Anti spam apps for most popular CMS on cleantalk.org. 
 
 = We recommend =
@@ -81,7 +81,7 @@ You should see notice,
 
     *** Forbidden. Sender blacklisted. Antispam service cleantalk.org. ***
 
-The setup is done! You can control anti spam plugin by <a href="https://cleantalk.org/my" target="_blank">Dashboard</a> at the cleantalk.org or use <a href="https://play.google.com/store/apps/details?id=org.cleantalk.app">Android</a>, <a href="https://itunes.apple.com/us/app/cleantalk/id825479913?mt=8">iPhone</a> anti spam app. 
+The setup is done! You can control anti-spam plugin by <a href="https://cleantalk.org/my" target="_blank">Dashboard</a> at the cleantalk.org or use <a href="https://play.google.com/store/apps/details?id=org.cleantalk.app">Android</a>, <a href="https://itunes.apple.com/us/app/cleantalk/id825479913?mt=8">iPhone</a> anti-spam app. 
 
 == Frequently Asked Questions ==
 
@@ -111,7 +111,7 @@ Plugin by default pass pingbacks without any checks. All trackbacks will be bloc
 Sure, you can use CleanTalk with Akismet. In this case probably you will have bigger false/positive rate (when legitimate comments/signups denies), but you will have stronger antispam protection at website.
 
 = Should I use another anti-spam plugins? =
-CleanTalk stops up to 100% of spam bots, so you can disable other anti spam plugins (especially CAPTCHA like anti spam plugins). In some cases several anti-spam plugins can conflict, so it will be better use just one plugin.  
+CleanTalk stops up to 100% of spam bots, so you can disable other anti-spam plugins (especially CAPTCHA like anti-spam plugins). In some cases several anti-spam plugins can conflict, so it will be better use just one plugin.  
 
 = The plugin WordPress MultiUser (WPMU or WordPress network) compatible? =
 The plugin is WordPress MultiUser (WPMU or WordPress network) compatible. Each blog in multisite environment has individual anti-spam options for spam bots protection.
@@ -152,7 +152,7 @@ If you're having trouble getting things to work after installing the plugin, her
 
 = CAPTCHA = 
 The annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won’t discern these symbols, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource from visitors. Spam bots can automatically recognize Captcha. 
-Spam bots can not pass through the anti spam CleanTalk, complex invisible checks can immediately detect spam bots.
+Spam bots can not pass through the anti-spam CleanTalk, complex invisible checks can immediately detect spam bots.
 
 = Requirements =
 WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and enabled 'allow_url_fopen' setting. <a href="http://cleantalk.org/register?platform=wordpress">Sign up</a> to get an Access key.
@@ -166,8 +166,8 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 == Screenshots ==
 1. Anti spam plugin settings. 
 1. Anti spam stopped spam bot at the CAPTCHA less registration form. The plugin provide explanation to visitor and websites about eache rejected comment/registration or contact message. 
-1. Use anti spam analytics tool for each website in service Dashboard to have information about spam/legitimate statistics. 
-1. Use anti spam log to control anti spam plugin. 
+1. Use anti-spam analytics tool for each website in service Dashboard to have information about spam/legitimate statistics. 
+1. Use anti-spam log to control anti-spam plugin. 
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
@@ -209,29 +209,29 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
   * Fixed filtration bug in WordPress dashboard login form.
 
 = 4.11 2014-12-22 =
-  * Improved anti spam protection for custom contact/registration/subscribe forms.
-  * Improved anti spam protection for comments. 
+  * Improved anti-spam protection for custom contact/registration/subscribe forms.
+  * Improved anti-spam protection for comments. 
   * Accelerated plugin speed for comments, regirstrations and contacts. 
   * Added translation to French. 
 
 = 4.10 2014-12-10 =
-  * Improved anti spam protection for custom contact/registration/subscribe forms.
+  * Improved anti-spam protection for custom contact/registration/subscribe forms.
   * Option 'Custom contact forms' enabled by default for new setups.
   * Removed settings "Publish relevant comments", "Use encrypted (SSL) connection".
   * Added translation to Danish (thank you for Mikkel at KreativJul.dk).
 
 = 4.9 2014-11-24 =
-  * Fixed anti spam test for Contact Form 7. 
+  * Fixed anti-spam test for Contact Form 7. 
 
 = 4.8 2014-11-19 =
-  * Improved anti spam protection for BuddyPress registrations and custom contact forms. 
+  * Improved anti-spam protection for BuddyPress registrations and custom contact forms. 
 
 = 4.7 2014-11-16 =
   * Fixed JavaScript antispam test for FastSecure contact form.
 
 = 4.6 2014-11-11 =
-  * Improved anti spam protection on BuddyPress registrations.
-  * Improved anti spam protection on contact forms.
+  * Improved anti-spam protection on BuddyPress registrations.
+  * Improved anti-spam protection on contact forms.
   * Removed plugin sign from pending, spam comments. To get details about a comment please use Dashboard at cleantalk.org.
   * Improved Access key validation function. 
   * Added protection for bbPress comments via stop list. Stop list function is a list to reject comments by prefiled words. To fill the list please use Dashboard at cleantalk.org.
@@ -241,7 +241,7 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
   * Fixed rejects in bbPress guests comments.
 
 = 4.4 2014-10-29 =
-  * Improved anti spam JS test for CF7.
+  * Improved anti-spam JS test for CF7.
   * Fixed 'noscript' text in FaceBook Like preview in Valenti theme.
 
 = 4.2 2014-10-20 =
@@ -250,11 +250,11 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 
 = 4.1 2014-10-13 =
   * Optimized code for manual moderation feedback sending.
-  * Optimized anti spam algorithms for comments, contacts and signups. 
+  * Optimized anti-spam algorithms for comments, contacts and signups. 
 
 = 4.0 2014-10-06 =
-  * Improved anti spam protection for custom contact forms.
-  * Improved anti spam protection for registration forms.
+  * Improved anti-spam protection for custom contact forms.
+  * Improved anti-spam protection for registration forms.
 
 = 3.9 2014-10-01 =
   * Did exception to do not break to create new user in WordPress backend. 
@@ -265,30 +265,30 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 
 = 3.6 2014-09-15 =
   * Fixed preg_match() issue for Formidable forms and Custom contact forms.
-  * Improved anti spam protection for Custom contact forms.
+  * Improved anti-spam protection for Custom contact forms.
 
 = 3.4 2014-09-04 =
-  * We've added anti spam for themes contact forms and any untested contact forms plugins. To use this test enable option "Custom contact forms" in plugin settings.
+  * We've added anti-spam for themes contact forms and any untested contact forms plugins. To use this test enable option "Custom contact forms" in plugin settings.
   * We've added auto rotation for spam comments. Now the plugin removes comments in SPAM folder older then 15 days. This option is enabled by default.
 
 = 3.2 2014-08-27 =
   * Fixed submit_time() logic for failed submits (comments/registrations). Now form fill time resets after every failed submit. 
 
 = 3.1 2014-08-19 =
-  * Added anti spam test over senders Cookies.
-  * Improved form fill anti spam test.
+  * Added anti-spam test over senders Cookies.
+  * Improved form fill anti-spam test.
   * Improved speed selection of the nearest server to website.
-  * Improved anti spam speed for comments.
-  * Relevance anti spam test disabled by default. To enable test should be used option 'relevance_test'.
+  * Improved anti-spam speed for comments.
+  * Relevance anti-spam test disabled by default. To enable test should be used option 'relevance_test'.
 
 = 2.58 2014-08-06 =
-  * Added anti spam protection for signups posted via WooCommerce order form. 
-  * Improved anti spam protection for Contact Form 7.  
-  * Improved anti spam protection for registrations. Now the plugin looking for JavaScript antispam test results not only in POST array, but in COOKIES array too. This improvement allows protect signup forms for any untested signups plugins and themes.
+  * Added anti-spam protection for signups posted via WooCommerce order form. 
+  * Improved anti-spam protection for Contact Form 7.  
+  * Improved anti-spam protection for registrations. Now the plugin looking for JavaScript antispam test results not only in POST array, but in COOKIES array too. This improvement allows protect signup forms for any untested signups plugins and themes.
   * Updated PHP API. Now the plugin can resolve sender IP for websites behind proxy servers. If the proxy servers uses private IP address.  
 
 = 2.57 2014-07-29 =
-  * Improved anti spam protection for comments. The plugin now proccessing website url in the comments form.
+  * Improved anti-spam protection for comments. The plugin now proccessing website url in the comments form.
   * Fixed sign remove logic for approved comments. Previous version doesn't cut sign for comments approved via AJAX call in WordPress backend.
   * Fixed switching to SSL for comments. Previous version doesn't use secured connection for comments.
 
@@ -299,8 +299,8 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
   * Fixed bug with account status function. In backend the plugin showed notice 'Please don’t forget to disable CAPTCHA if you have it!' on every page. 
 
 = 2.54 2014-07-11 =
-  * Fixed signup anti spam protection logic for BuddyPress registrations. 
-  * Fixed anti spam protection for JetPack contact form.
+  * Fixed signup anti-spam protection logic for BuddyPress registrations. 
+  * Fixed anti-spam protection for JetPack contact form.
   * Changed account status check logic.
 
 = 2.53 2014-06-27 =
@@ -367,11 +367,11 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 
 = 2.28 2013-12-19 =
   * New: Added protection against spam bots for WooCommerce review form. 
-  * Fixed: JavaScript anti spam logic for WooCommerce review form.
+  * Fixed: JavaScript anti-spam logic for WooCommerce review form.
 
 = 2.27 2013-12-06 =
   * New: Added protection against spam bots for JetPack Contact form. 
-  * Fixed: JavaScript anti spam logic for registrations and Contact form 7.
+  * Fixed: JavaScript anti-spam logic for registrations and Contact form 7.
 
 = 2.25 2013-11-27 =
   * New: Added protection against spam bots for BuddyPress registrations. 
@@ -381,10 +381,10 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 = 2.23 2013-11-20 =
   * New: Added automatic training blacklists on spam bot account deletion. 
   * New: Added URL to project homepage at plugin options. 
-  * Changed: Improved anti spam logic. 
+  * Changed: Improved anti-spam logic. 
 
 = 2.21 2013-11-13 =
-  * Changed: WordPress blacklists settings get priority over plugin's anti spam settings 
+  * Changed: WordPress blacklists settings get priority over plugin's anti-spam settings 
   * Changed: Disabled management approval comments for regular commentators of the blog. Automatically approved for publication only the comments of the new blog authors. 
   * Changed: Removed form submit time test. Imporved JavaScript spam test. 
   * Changed: PHP code optimizations 
@@ -417,7 +417,7 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 = 2.4.12 2013-08-12 =
   * Removed RPC::XML library from plugin. 
   * Switched plugin to HTTP+JSON connection with servers.
-  * Fixed bug with comments anti spam tests with non UTF8 codepage.
+  * Fixed bug with comments anti-spam tests with non UTF8 codepage.
 
 = 2.4.11 2013-08-02 =
   * Removed spam tests for self-made pingbacks 
@@ -539,13 +539,13 @@ Minor improvements for custom contact/registration/subscribe forms.
 Minor bug fix for Contact form 7.
 
 = 4.8 2014-11-19 =
-Improved anti spam protection for BuddyPress registrations and custom contact forms. 
+Improved anti-spam protection for BuddyPress registrations and custom contact forms. 
 
 = 4.7 2014-11-16 =
 Fixed JavaScript antispam test for FastSecure contact form.
 
 = 4.6 2014-11-11 =
-Minor changes in anti spam logic for BuddyPress registrations, contact forms and bbPress guest posting.
+Minor changes in anti-spam logic for BuddyPress registrations, contact forms and bbPress guest posting.
 
 = 4.5 2014-11-04 =
 Bug fixes for Contact form 7 and bbPress guests posting.
@@ -557,19 +557,19 @@ Improved JS checking for CF7.
 Increased plugin perfomance for BuddyPress registrations.
 
 = 4.1 2014-10-13 =
-Minor anti spam improvements for contacts, registration and contact forms.
+Minor anti-spam improvements for contacts, registration and contact forms.
 
 = 4.0 2014-10-06 =
-Major anti spam improvements for registration and contact forms.
+Major anti-spam improvements for registration and contact forms.
 
 = 3.9 2014-10-01 =
 Did exception to do not break to create new user in WordPress backend. 
 
 = 3.8 2014-09-19 =
-Bug fix release. Minor fixes in API class and JavaScript anti spam test.
+Bug fix release. Minor fixes in API class and JavaScript anti-spam test.
 
 = 3.6 2014-09-15 =
-Minor fixes in anti spam protection for Formidable and custom contact forms.
+Minor fixes in anti-spam protection for Formidable and custom contact forms.
 
 = 3.4 2014-09-04 =
 Spam comments rotation. Custom (themes) contact forms support.
@@ -584,13 +584,13 @@ Minor changes in spam filtration logic.
   Antispam protection for bbPress guests posts. Improvement for JetPack comments and PHP API update.
 
 = 2.58 2014-08-06 =
-  * Added anti spam protection for signups posted via WooCommerce order form. 
-  * Improved anti spam protection for Contact Form 7.  
-  * Improved anti spam protection for registrations. Now the plugin looking for JavaScript antispam test results not only in POST array, but in COOKIES array too. This improvement allows protect signup forms for any untested signups plugins and themes.
+  * Added anti-spam protection for signups posted via WooCommerce order form. 
+  * Improved anti-spam protection for Contact Form 7.  
+  * Improved anti-spam protection for registrations. Now the plugin looking for JavaScript antispam test results not only in POST array, but in COOKIES array too. This improvement allows protect signup forms for any untested signups plugins and themes.
   * Updated PHP API. No the plugin can resolve sender IP for websites behind proxy servers. If the proxy servers uses private IP address.  
 
 = 2.57 2014-07-29 =
-  * Improved anti spam protection for comments. The plugin now proccessing website url in the comments form.
+  * Improved anti-spam protection for comments. The plugin now proccessing website url in the comments form.
   * Fixed sign remove logic for approved comments. Previous version doesn't cut sign for comments approved via AJAX call in WordPress backend.
   * Fixed switching to SSL for comments. Previous version doesn't use secured connection for comments.
 
@@ -601,8 +601,8 @@ Minor changes in spam filtration logic.
   * Fixed bug with account status function. In backend the plugin showed notice 'Please don’t forget to disable CAPTCHA if you have it!' on every page. 
 
 = 2.54 2014-07-11 =
-  * Fixed signup anti spam protection logic for BuddyPress registrations. 
-  * Fixed anti spam protection for JetPack contact form.
+  * Fixed signup anti-spam protection logic for BuddyPress registrations. 
+  * Fixed anti-spam protection for JetPack contact form.
   * Changed account status check logic.
 
 = 2.53 2014-06-27 =
@@ -665,7 +665,7 @@ Minor changes in spam filtration logic.
 
 = 2.27 2013-12-06 =
   * New: Added protection against spam bots for JetPack Contact form. 
-  * Fixed: JavaScript anti spam logic for registrations and Contact form 7.
+  * Fixed: JavaScript anti-spam logic for registrations and Contact form 7.
 
 = 2.25 2013-11-27 =
   * New: Added protection against spam bots for BuddyPress registrations. 
@@ -675,10 +675,10 @@ Minor changes in spam filtration logic.
 = 2.23 2013-11-20 =
   * New: Added automatic training blacklists on spam bot account deletion. 
   * New: Added URL to project homepage at plugin options. 
-  * Changed: Improved anti spam logic. 
+  * Changed: Improved anti-spam logic. 
 
 = 2.21 2013-11-13 =
-  * Changed: WordPress blacklists settings get priority over plugin's anti spam settings 
+  * Changed: WordPress blacklists settings get priority over plugin's anti-spam settings 
   * Changed: Disabled management approval comments for regular commentators of the blog. Automatically approved for publication only the comments of the new blog authors. 
   * Changed: PHP code optimizations
 
