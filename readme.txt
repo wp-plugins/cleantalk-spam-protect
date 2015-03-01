@@ -66,16 +66,16 @@ At the sight of CAPTCHA and after input errors, many visitors leave the resource
 = We recommend =
 Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
 
-    Max power, all-in-one, premium anti-spam plugin.
+    Max power, all-in-one, premium anti-spam WordPress plugin.
     No comments & registrations spam, no contact spam, protects any forms.
-    Just install and forget. 
+    Just install and forget spam. 
 
 
 == Installation ==
-1. Download, install and activate the plugin. 
+1. Download, install and activate Anti-spam by CleanTalk. 
 1. Get Access key <a href="https://cleantalk.org/register?platform=wordpress" target="_blank">https://cleantalk.org/register</a>
 1. Enter Access key at the plugin settings. 
-1. Make dummy spam comment with email **stop_email@example.com**.
+1. Do dummy spam comment (registration or contact message) with email **stop_email@example.com**.
 
 You should see notice,
 
