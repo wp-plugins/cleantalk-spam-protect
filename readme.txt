@@ -172,7 +172,7 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 
 == Changelog ==
 = 4.19 2015-02-24 =
-  * Increased JS keys lifetime.
+  * Increased keys lifetime for JS spam test.
 
 = 4.18 2015-02-17 =
   * Fixed bug with comments approvement - moved ct_unmark_red() to cleantalk-admin.php 
@@ -185,14 +185,14 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
 
 = 4.16 2015-02-05 =
   * New base class.
-  * Fixed JetPack filters logics.
-  * Optimized Formidable, bbPress, BuddyPress filters.
+  * Fixed JetPack spam filters logics.
+  * Optimized Formidable, bbPress, BuddyPress spam filters.
 
 = 4.15 2015-01-29 =
-  * Support of Contact Form 7 versions before 3.0.0.
-  * Fixed global JS-vars.
+  * Support spam test for Contact Form 7 versions before 3.0.0.
+  * Fixed global JS-vars for JS spam test.
   * Fixed online notice cookie logics.
-  * Optimized filters for FSCF, WooCommerce, JetPack.
+  * Optimized spam filters for FSCF, WooCommerce, JetPack.
   * Optimized option getting.
 
 = 4.14 2015-01-19 =
@@ -221,13 +221,13 @@ WordPress 3.0 at least. PHP 4, 5 with CURL or file_get_contents() function and e
   * Added translation to Danish (thank you for Mikkel at KreativJul.dk).
 
 = 4.9 2014-11-24 =
-  * Fixed anti-spam test for Contact Form 7. 
+  * Fixed spam test for Contact Form 7. 
 
 = 4.8 2014-11-19 =
   * Improved anti-spam protection for BuddyPress registrations and custom contact forms. 
 
 = 4.7 2014-11-16 =
-  * Fixed JavaScript antispam test for FastSecure contact form.
+  * Fixed JavaScript spam test for FastSecure contact form.
 
 = 4.6 2014-11-11 =
   * Improved anti-spam protection on BuddyPress registrations.
