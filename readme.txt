@@ -158,7 +158,7 @@ Spam bots can not pass through the anti-spam CleanTalk, complex invisible checks
 WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enabled 'allow_url_fopen' setting. <a href="http://cleantalk.org/register?platform=wordpress">Sign up</a> to get an Access key.
 
 = Translations =
-* Spain (es_ES) - thanks to Andrew Kurtis and <a href="http://www.webhostinghub.com/index-c.html">WebHostingHub</a>
+* Spanish (es_ES) - thanks to Andrew Kurtis and <a href="http://www.webhostinghub.com/index-c.html">WebHostingHub</a>
 * Danish (da_DK)
 * French (fr_FR)
 * Russian (ru_RU)

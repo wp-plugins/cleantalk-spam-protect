@@ -18,7 +18,7 @@ function ct_enqueue_scripts($hook) {
  * Admin action 'admin_menu' - Add the admin options page
  */
 function ct_admin_add_page() {
-    add_options_page(__('CleanTalk settings', 'cleantalk'), '<b style="color: #49C73B;">Clean</b><b style="color: #349ebf;">Talk</b>', 'manage_options', 'cleantalk', 'ct_settings_page');
+    add_options_page(__('CleanTalk settings', 'cleantalk'), 'CleanTalk', 'manage_options', 'cleantalk', 'ct_settings_page');
 }
 
 /**

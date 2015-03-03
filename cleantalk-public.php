@@ -996,7 +996,8 @@ function ct_registration_errors($errors, $sanitized_user_login = null, $user_ema
         if ($buddypress === true) {
             $bp->signup->errors['signup_username'] = $ct_result->comment;
         } else {
-            $errors->add('ct_error', $ct_result->comment);
+	    if(is_wp_error($errors))
+        	$errors->add('ct_error', $ct_result->comment);
             $ct_negative_comment = $ct_result->comment;
         }
     } else {
