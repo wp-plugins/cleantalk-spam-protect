@@ -3,7 +3,7 @@ Contributors: znaeff, shagimuratov
 Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, fast secure contact form spam, form, Formidable spam, jetpack spam, landing pages, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam
 Requires at least: 3.0
 Tested up to: 4.1.1 
-Stable tag: 4.19
+Stable tag: 4.20
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,9 +158,13 @@ Spam bots can not pass through the anti-spam CleanTalk, complex invisible checks
 WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enabled 'allow_url_fopen' setting. <a href="http://cleantalk.org/register?platform=wordpress">Sign up</a> to get an Access key.
 
 = Translations =
-* Spanish (es_ES) - thanks to Andrew Kurtis and <a href="http://www.webhostinghub.com/index-c.html">WebHostingHub</a>
 * Danish (da_DK)
 * French (fr_FR)
+* German (de_DE)
+* Italian (it_IT)
+* Polish (pl_PL)
+* Portuguese (pt_PT)
+* Spanish (es_ES) - thanks to Andrew Kurtis and <a href="http://www.webhostinghub.com/index-c.html">WebHostingHub</a>
 * Russian (ru_RU)
 
 == Screenshots ==
@@ -171,6 +175,10 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
+= 4.20 2015-03-03 =
+  * Added German, Italian, Polish, Portuguese translations.
+  * Minor code fixes.
+
 = 4.19 2015-02-24 =
   * Increased keys lifetime for JS spam test.
 
@@ -505,6 +513,9 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * First version
 
 == Upgrade Notice ==
+= 4.20 2015-03-03 =
+German, Italian, Polish, Portuguese translations, minor code fixes.
+
 = 4.19 2015-02-24 =
 Increased JS keys lifetime.
 
