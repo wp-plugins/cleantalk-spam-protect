@@ -41,9 +41,8 @@ function ct_admin_init() {
             $show_ct_notice_renew = true;
         }
     }
-///$aaa = strtotime("+24 minutes", time());
+
     if (time() > $ct_options['next_account_status_check']) {
-//    if (TRUE) {
         $result = false;
 	    if (function_exists('curl_init') && function_exists('json_decode') && ct_valid_key($ct_options['apikey'])) {
             $url = 'https://api.cleantalk.org';
@@ -71,8 +70,6 @@ function ct_admin_init() {
             if ($result) {
                 $result = json_decode($result, true);
                 $result = $result['data']; // !!!! 
-//$result['show_notice'] = 1;
-//$result['renew'] = 1;
 
                 if (isset($result['show_notice'])) {
                     if ($result['show_notice'] == 1 && isset($result['trial']) && $result['trial'] == 1) {
@@ -95,8 +92,7 @@ function ct_admin_init() {
             }
             
             // Save next status request time
-//            $ct_options['next_account_status_check'] = strtotime("+$notice_check_timeout hours", time());
-            $ct_options['next_account_status_check'] = strtotime("+$notice_check_timeout minutes", time());	// MINUTES for debug
+            $ct_options['next_account_status_check'] = strtotime("+$notice_check_timeout hours", time());
             $ct_account_status_check = time(); 
             update_option('cleantalk_settings', $ct_options);
         }
