@@ -1,6 +1,6 @@
 <?php
 
-$ct_agent_version = 'wordpress-420';
+$ct_agent_version = 'wordpress-421';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
@@ -35,6 +35,12 @@ $ct_notice_trial_label = 'ct_notice_trial';
 // Flag to show trial notice
 $show_ct_notice_trial = false;
 
+// COOKIE label for renew notice flag
+$ct_notice_renew_label = 'ct_notice_renew';
+
+// Flag to show renew notice
+$show_ct_notice_renew = false;
+
 // COOKIE label for online notice flag
 $ct_notice_online_label = 'ct_notice_online';
 
@@ -49,6 +55,10 @@ $account_notice_check_timeout = 24;
 
 // Trial notice show time in minutes
 $trial_notice_showtime = 10;
+
+// Renew notice show time in minutes
+//$renew_notice_showtime = 10;
+$renew_notice_showtime = 2;
 
 // COOKIE label for WP Landing Page proccessing result
 $ct_wplp_result_label = 'ct_wplp_result';
