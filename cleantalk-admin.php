@@ -41,9 +41,8 @@ function ct_admin_init() {
             $show_ct_notice_renew = true;
         }
     }
-///$aaa = strtotime("+24 minutes", time());
+
     if (time() > $ct_options['next_account_status_check']) {
-//    if (TRUE) {
         $result = false;
 	    if (function_exists('curl_init') && function_exists('json_decode') && ct_valid_key($ct_options['apikey'])) {
             $url = 'https://api.cleantalk.org';
@@ -71,8 +70,6 @@ function ct_admin_init() {
             if ($result) {
                 $result = json_decode($result, true);
                 $result = $result['data']; // !!!! 
-//$result['show_notice'] = 1;
-//$result['renew'] = 1;
 
                 if (isset($result['show_notice'])) {
                     if ($result['show_notice'] == 1 && isset($result['trial']) && $result['trial'] == 1) {
@@ -95,8 +92,7 @@ function ct_admin_init() {
             }
             
             // Save next status request time
-//            $ct_options['next_account_status_check'] = strtotime("+$notice_check_timeout hours", time());
-            $ct_options['next_account_status_check'] = strtotime("+$notice_check_timeout minutes", time());	// MINUTES for debug
+            $ct_options['next_account_status_check'] = strtotime("+$notice_check_timeout hours", time());
             $ct_account_status_check = time(); 
             update_option('cleantalk_settings', $ct_options);
         }
@@ -302,8 +298,8 @@ function admin_notice_message(){
     }
 
     if ($show_notice && $show_ct_notice_renew) {
-	$button_html = "<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20renew$user_token\" target=\"_blank\">" . '<input type="button" class="button button-primary" value="RENEW ANTI-SPAM"  />' . "</a>";
-        echo '<div class="updated"><h3>' . sprintf(__("Please renew your anti-spam license for %s.", 'cleantalk'), "<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20renew$user_token\" target=\"_blank\"><b>next year</b></a>") . '<br /><br />' . $button_html . '</h3></div>';
+	$button_html = "<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20renew$user_token\" target=\"_blank\">" . '<input type="button" class="button button-primary" value="' . __('RENEW ANTI-SPAM', 'cleantalk') . '"  />' . "</a>";
+        echo '<div class="updated"><h3>' . sprintf(__("Please renew your anti-spam license for %s.", 'cleantalk'), "<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20renew$user_token\" target=\"_blank\"><b>" . __('next year', 'cleantalk') ."</b></a>") . '<br /><br />' . $button_html . '</h3></div>';
         $show_notice = false;
     }
 

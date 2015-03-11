@@ -57,8 +57,7 @@ $account_notice_check_timeout = 24;
 $trial_notice_showtime = 10;
 
 // Renew notice show time in minutes
-//$renew_notice_showtime = 10;
-$renew_notice_showtime = 2;
+$renew_notice_showtime = 10;
 
 // COOKIE label for WP Landing Page proccessing result
 $ct_wplp_result_label = 'ct_wplp_result';
