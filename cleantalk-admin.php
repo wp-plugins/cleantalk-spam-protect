@@ -155,7 +155,10 @@ function ct_input_apikey() {
     echo "<input id='cleantalk_apikey' name='cleantalk_settings[apikey]' size='20' type='text' value='$value' style=\"font-size: 14pt;\"/>";
     if (ct_valid_key($value) === false) {
         echo "<a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key', 'cleantalk')."</a>";
-    } else{
+	echo '<br /><br /><input type="button" class="button button-primary" value="' . __('Get Access key', 'cleantalk') . '"  />';
+	admin_addDescriptionsFields(__('Admin e-mail will be used for registration', 'cleantalk'));
+	admin_addDescriptionsFields(sprintf('<a target="__blank" style="color:#BBB;" href="https://cleantalk.org/publicoffer">%s</a>', __('License agreement', 'cleantalk')));
+    } else {
         if (isset($_COOKIE[$ct_notice_online_label]) && $_COOKIE[$ct_notice_online_label] > 0) {
             echo '&nbsp;&nbsp;<span style="text-decoration: underline;">The key accepted!</span>&nbsp;<img src="' . plugin_dir_url(__FILE__) . 'inc/images/yes.png" alt=""  height="" />'; 
         }
