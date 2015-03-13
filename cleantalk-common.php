@@ -1,6 +1,6 @@
 <?php
 
-$ct_agent_version = 'wordpress-421';
+$ct_agent_version = 'wordpress-422';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
@@ -89,6 +89,15 @@ $ct_admin_notoice_period = 10800;
 // Sevice negative comment to visitor.
 // It uses for BuddyPress registrations to avoid double checks
 $ct_negative_comment = null;
+
+// Flag to show apikey automatic getting error
+$show_ct_notice_autokey = false;
+
+// Apikey automatic getting label  
+$ct_notice_autokey_label = 'ct_autokey'; 
+
+// Apikey automatic getting error text
+$ct_notice_autokey_value = '';
 
 /**
  * Public action 'plugins_loaded' - Loads locale, see http://codex.wordpress.org/Function_Reference/load_plugin_textdomain

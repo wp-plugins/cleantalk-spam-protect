@@ -25,7 +25,7 @@ function ct_admin_add_page() {
  * Admin action 'admin_init' - Add the admin settings and such
  */
 function ct_admin_init() {
-    global $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label, $ct_account_status_check;
+    global $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label, $ct_account_status_check;
 
     $ct_options = ct_get_options();
 
@@ -40,6 +40,52 @@ function ct_admin_init() {
         if ($_COOKIE[$ct_notice_renew_label] == 1) {
             $show_ct_notice_renew = true;
         }
+    }
+    $show_ct_notice_autokey = false;
+    if (isset($_COOKIE[$ct_notice_autokey_label]) && !empty($_COOKIE[$ct_notice_autokey_label])) {
+        if (!empty($_COOKIE[$ct_notice_autokey_label])) {
+            $show_ct_notice_autokey = true;
+            $ct_notice_autokey_value = base64_decode($_COOKIE[$ct_notice_autokey_label]);
+    	    setcookie($ct_notice_autokey_label, '', 1, '/');
+        }
+    }
+
+    if (isset($_POST['get_apikey_auto']) && function_exists('curl_init') && function_exists('json_decode')){
+            $url = 'https://api.cleantalk.org';
+            $server_timeout = 2;
+            $data = array();
+            $data['method_name'] = 'get_api_key'; 
+            $data['email'] = get_option('admin_email');
+            $data['website'] = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+            $data['platform'] = 'wordpress';
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $server_timeout);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+
+            // receive server response ...
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            // resolve 'Expect: 100-continue' issue
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
+
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+            $result = curl_exec($ch);
+            curl_close($ch);
+            
+            if ($result) {
+                $result = json_decode($result, true);
+                //$result = $result['data']; // !!!! 
+
+                if (isset($result['api_key']) && !empty($result['api_key'])) {
+		    $_POST['cleantalk_settings']['apikey'] = $result['api_key'];
+                } else {
+		    setcookie($ct_notice_autokey_label, (string) base64_encode($result['error_message']), 0, '/');
+		}
+            }
     }
 
     if (time() > $ct_options['next_account_status_check']) {
@@ -154,10 +200,12 @@ function ct_input_apikey() {
     $def_value = ''; 
     echo "<input id='cleantalk_apikey' name='cleantalk_settings[apikey]' size='20' type='text' value='$value' style=\"font-size: 14pt;\"/>";
     if (ct_valid_key($value) === false) {
-        echo "<a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key', 'cleantalk')."</a>";
-	echo '<br /><br /><input type="button" class="button button-primary" value="' . __('Get Access key', 'cleantalk') . '"  />';
-	admin_addDescriptionsFields(__('Admin e-mail will be used for registration', 'cleantalk'));
-	admin_addDescriptionsFields(sprintf('<a target="__blank" style="color:#BBB;" href="https://cleantalk.org/publicoffer">%s</a>', __('License agreement', 'cleantalk')));
+        echo "<a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key manually', 'cleantalk')."</a>";
+        if (function_exists('curl_init') && function_exists('json_decode')) {
+            echo '<br /><br /><input name="get_apikey_auto" type="submit" value="' . __('Get access key automatically', 'cleantalk') . '"  />';
+            admin_addDescriptionsFields(__('Admin e-mail will be used for registration', 'cleantalk'));
+            admin_addDescriptionsFields(sprintf('<a target="__blank" style="color:#BBB;" href="https://cleantalk.org/publicoffer">%s</a>', __('License agreement', 'cleantalk')));
+        }
     } else {
         if (isset($_COOKIE[$ct_notice_online_label]) && $_COOKIE[$ct_notice_online_label] > 0) {
             echo '&nbsp;&nbsp;<span style="text-decoration: underline;">The key accepted!</span>&nbsp;<img src="' . plugin_dir_url(__FILE__) . 'inc/images/yes.png" alt=""  height="" />'; 
@@ -282,7 +330,7 @@ input[type=submit] {padding: 10px; background: #3399FF; color: #fff; border:0 no
  * @return bool 
  */
 function admin_notice_message(){
-    global $show_ct_notice_trial, $show_ct_notice_renew, $show_ct_notice_online, $ct_plugin_name, $ct_options;
+    global $show_ct_notice_trial, $show_ct_notice_renew, $show_ct_notice_online, $show_ct_notice_autokey, $ct_notice_autokey_value, $ct_plugin_name, $ct_options;
 
     $user_token = '';
     if (isset($ct_options['user_token']) && $ct_options['user_token'] != '') {
@@ -290,13 +338,18 @@ function admin_notice_message(){
     }
 
     $show_notice = true;
+
+    if ($show_notice && $show_ct_notice_autokey) {
+        echo '<div class="error"><h3>' . sprintf(__("Unable to get Access key automatically: %s", 'cleantalk'), $ct_notice_autokey_value) . '</h3></div>';
+    }
+
     if ($show_notice && ct_valid_key($ct_options['apikey']) === false) {
-        echo '<div class="updated"><h3>' . sprintf(__("Please enter Access Key in %s settings to enable anti spam protection!", 'cleantalk'), "<a href=\"options-general.php?page=cleantalk\">CleanTalk plugin</a>") . '</h3></div>';
+        echo '<div class="error"><h3>' . sprintf(__("Please enter Access Key in %s settings to enable anti spam protection!", 'cleantalk'), "<a href=\"options-general.php?page=cleantalk\">CleanTalk plugin</a>") . '</h3></div>';
         $show_notice = false;
     }
 
     if ($show_notice && $show_ct_notice_trial) {
-        echo '<div class="updated"><h3>' . sprintf(__("%s trial period ends, please upgrade to %s!", 'cleantalk'), "<a href=\"options-general.php?page=cleantalk\">$ct_plugin_name</a>", "<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20trial$user_token\" target=\"_blank\"><b>premium version</b></a>") . '</h3></div>';
+        echo '<div class="error"><h3>' . sprintf(__("%s trial period ends, please upgrade to %s!", 'cleantalk'), "<a href=\"options-general.php?page=cleantalk\">$ct_plugin_name</a>", "<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20trial$user_token\" target=\"_blank\"><b>premium version</b></a>") . '</h3></div>';
         $show_notice = false;
     }
 
@@ -307,15 +360,17 @@ function admin_notice_message(){
     }
 
     if ($show_notice && $show_ct_notice_online != '') {
-        echo '<div class="updated"><h3><b>';
         if($show_ct_notice_online === 'Y'){
+    		echo '<div class="updated"><h3><b>';
                 echo __("Don’t forget to disable CAPTCHA if you have it!", 'cleantalk');
+    		echo '</b></h3></div>';
         }
         
         if($show_ct_notice_online === 'N'){
+    		echo '<div class="error"><h3><b>';
                 echo __("Wrong <a href=\"options-general.php?page=cleantalk\"><b style=\"color: #49C73B;\">Clean</b><b style=\"color: #349ebf;\">Talk</b> access key</a>! Please check it or ask <a target=\"_blank\" href=\"https://cleantalk.org/forum/\">support</a>.", 'cleantalk');
+    		echo '</b></h3></div>';
         }
-        echo '</b></h3></div>';
     }
 
     //ct_send_feedback(); -- removed to ct_do_this_hourly()
