@@ -56,7 +56,7 @@ function ct_admin_init() {
             $data = array();
             $data['method_name'] = 'get_api_key'; 
             $data['email'] = get_option('admin_email');
-            $data['website'] = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
+            $data['website'] = parse_url(get_option('siteurl'),PHP_URL_HOST);
             $data['platform'] = 'wordpress';
 
             $ch = curl_init();
