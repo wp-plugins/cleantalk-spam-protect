@@ -75,7 +75,7 @@ function ct_admin_init() {
 
             $result = curl_exec($ch);
             curl_close($ch);
-            
+
             if ($result) {
                 $result = json_decode($result, true);
                 //$result = $result['data']; // !!!! 
@@ -85,6 +85,8 @@ function ct_admin_init() {
                 } else {
 		    setcookie($ct_notice_autokey_label, (string) base64_encode($result['error_message']), 0, '/');
 		}
+            } else {
+		setcookie($ct_notice_autokey_label, (string) base64_encode(sprintf(__('Unable to connect to %s.', 'cleantalk'),  'api.cleantalk.org')), 0, '/');
             }
     }
 
