@@ -52,7 +52,7 @@ function ct_admin_init() {
 
     if (isset($_POST['get_apikey_auto']) && function_exists('curl_init') && function_exists('json_decode')){
             $url = 'https://api.cleantalk.org';
-            $server_timeout = 2;
+            $server_timeout = 10;
             $data = array();
             $data['method_name'] = 'get_api_key'; 
             $data['email'] = get_option('admin_email');
