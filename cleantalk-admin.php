@@ -3,7 +3,7 @@
 $ct_plugin_basename = 'cleantalk-spam-protect/cleantalk.php';
 
 // Timeout to get app server
-$ct_server_timeout = 2;
+$ct_server_timeout = 10;
 
 /**
  * Admin action 'admin_enqueue_scripts' - Enqueue admin script of reloading admin page after needed AJAX events
@@ -25,7 +25,7 @@ function ct_admin_add_page() {
  * Admin action 'admin_init' - Add the admin settings and such
  */
 function ct_admin_init() {
-    global $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label, $ct_account_status_check;
+    global $ct_server_timeout, $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label, $ct_account_status_check;
 
     $ct_options = ct_get_options();
 
@@ -52,7 +52,6 @@ function ct_admin_init() {
 
     if (isset($_POST['get_apikey_auto']) && function_exists('curl_init') && function_exists('json_decode')){
             $url = 'https://api.cleantalk.org';
-            $server_timeout = 10;
             $data = array();
             $data['method_name'] = 'get_api_key'; 
             $data['email'] = get_option('admin_email');
@@ -61,7 +60,7 @@ function ct_admin_init() {
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_TIMEOUT, $server_timeout);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $ct_server_timeout);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 
@@ -95,13 +94,13 @@ function ct_admin_init() {
         $result = false;
 	    if (function_exists('curl_init') && function_exists('json_decode') && ct_valid_key($ct_options['apikey'])) {
             $url = 'https://api.cleantalk.org';
-            $server_timeout = 2;
-            $data['auth_key'] = $ct_options['apikey']; 
+            $data = array();
             $data['method_name'] = 'notice_paid_till'; 
+            $data['auth_key'] = $ct_options['apikey']; 
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_TIMEOUT, $server_timeout);
+            curl_setopt($ch, CURLOPT_TIMEOUT, $ct_server_timeout);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 
@@ -118,7 +117,9 @@ function ct_admin_init() {
             
             if ($result) {
                 $result = json_decode($result, true);
-                $result = $result['data']; // !!!! 
+                if (isset($result['data']) && is_array($result['data'])) {
+            	    $result = $result['data'];
+		}
 
                 if (isset($result['show_notice'])) {
                     if ($result['show_notice'] == 1 && isset($result['trial']) && $result['trial'] == 1) {
@@ -206,7 +207,7 @@ function ct_input_apikey() {
         echo "<a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key manually', 'cleantalk')."</a>";
         if (function_exists('curl_init') && function_exists('json_decode')) {
             echo '<br /><br /><input name="get_apikey_auto" type="submit" value="' . __('Get access key automatically', 'cleantalk') . '"  />';
-            admin_addDescriptionsFields(__('Admin e-mail will be used for registration', 'cleantalk'));
+            admin_addDescriptionsFields(sprintf(__('Admin e-mail (%s) will be used for registration', 'cleantalk'), get_option('admin_email')));
             admin_addDescriptionsFields(sprintf('<a target="__blank" style="color:#BBB;" href="https://cleantalk.org/publicoffer">%s</a>', __('License agreement', 'cleantalk')));
         }
     } else {
@@ -343,7 +344,8 @@ function admin_notice_message(){
     $show_notice = true;
 
     if ($show_notice && $show_ct_notice_autokey) {
-        echo '<div class="error"><h3>' . sprintf(__("Unable to get Access key automatically: %s", 'cleantalk'), $ct_notice_autokey_value) . '</h3></div>';
+        echo '<div class="error"><h3>' . sprintf(__("Unable to get Access key automatically: %s", 'cleantalk'), $ct_notice_autokey_value);
+        echo " <a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key manually', 'cleantalk').'</a></h3></div>';
     }
 
     if ($show_notice && ct_valid_key($ct_options['apikey']) === false) {
@@ -554,14 +556,12 @@ function ct_update_option($option_name) {
         }
 
         $url = 'https://cleantalk.org/app_notice';
-        $server_timeout = $ct_server_timeout;
-
         $data['auth_key'] = $api_key; 
         $data['param'] = 'notice_validate_key'; 
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_TIMEOUT, $server_timeout);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $ct_server_timeout);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 

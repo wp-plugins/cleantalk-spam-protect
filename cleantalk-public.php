@@ -546,7 +546,6 @@ function ct_preprocess_comment($comment) {
 
             if ($ct_result->allow == 1 && get_option('comment_moderation') !== '1') {
                 add_filter('pre_comment_approved', 'ct_set_approved', 99, 2);
-                setcookie($ct_approved_request_id_label, $ct_result->id, 0, '/');
             }
             if ($ct_result->allow == 0) {
                 if (isset($ct_result->stop_words)) {
