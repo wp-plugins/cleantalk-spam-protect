@@ -1,5 +1,5 @@
 === Anti-spam by CleanTalk - No Captcha, no comments & registrations spam ===
-Contributors: znaeff, shagimuratov, Vlad Cleantalk
+Contributors: znaeff, shagimuratov, 'Vlad Cleantalk'
 Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, fast secure contact form spam, form, Formidable spam, jetpack spam, landing pages, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam
 Requires at least: 3.0
 Tested up to: 4.1.1 
