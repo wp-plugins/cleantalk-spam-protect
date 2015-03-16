@@ -78,10 +78,11 @@ function ct_admin_init() {
 
             if ($result) {
                 $result = json_decode($result, true);
-                //$result = $result['data']; // !!!! 
-
-                if (isset($result['api_key']) && !empty($result['api_key'])) {
-		    $_POST['cleantalk_settings']['apikey'] = $result['api_key'];
+                if (isset($result['data']) && is_array($result['data'])) {
+            	    $result = $result['data'];
+		}
+                if (isset($result['auth_key']) && !empty($result['auth_key'])) {
+		    $_POST['cleantalk_settings']['apikey'] = $result['auth_key'];
                 } else {
 		    setcookie($ct_notice_autokey_label, (string) base64_encode($result['error_message']), 0, '/');
 		}
