@@ -29,6 +29,12 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     	    add_action('admin_menu', 'ct_admin_add_page');
     	    add_action('admin_notices', 'admin_notice_message');
 	}
+	
+	if (defined( 'DOING_AJAX' ) && DOING_AJAX)
+	{
+		require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
+		require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-ajax.php');
+	}
 
 	add_action('admin_enqueue_scripts', 'ct_enqueue_scripts');
     	add_action('comment_unapproved_to_approvecomment', 'ct_comment_approved'); // param - comment object
