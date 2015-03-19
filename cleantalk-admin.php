@@ -542,7 +542,16 @@ function ct_update_option($option_name) {
     if ($ct_account_status_check > 0 && time() - $ct_account_status_check < 5) {
         return;
     }
-    
+
+    $ct_base_call_result = ct_base_call(array(
+        'message' => 'CleanTalk connection test',
+        'example' => null,
+        'sender_email' => 'stop_email@example.com',
+        'sender_nickname' => 'CleanTalk',
+        'post_info' => '',
+        'checkjs' => 1
+    ));
+
     $key_valid = true;
     $app_server_error = false;
     if (function_exists('curl_init') && function_exists('json_decode')) {
