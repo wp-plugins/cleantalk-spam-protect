@@ -1,4 +1,16 @@
 var working=false;
+
+String.prototype.format = String.prototype.f = function ()
+{
+    var args = arguments;
+    return this.replace(/\{\{|\}\}|\{(\d+)\}/g, function (m, n)
+    {
+        if (m == "{{") { return "{"; }
+        if (m == "}}") { return "}"; }
+        return args[n];
+    });
+};
+
 function ct_send_comments()
 {
 	var data = {
@@ -19,13 +31,13 @@ function ct_send_comments()
 			{
 				working=false;
 				jQuery('#ct_working_message').hide();
-				alert('finish!');
+				//alert('finish!');
 				location.href='edit-comments.php?page=ct_check_spam';
 			}
 			else
 			{
 				working=false;
-				alert(msg.responceText);
+				alert(msg);
 			}
 		}
 	});
@@ -42,11 +54,8 @@ function ct_show_info()
 			type: "POST",
 			url: ajaxurl,
 			data: data,
-			dataType: 'json',
 			success: function(msg){
-				var json=jQuery.parseJSON(msg.responceText);
-				
-				jQuery('#ct_checking_status').html("Total comments " + msg.all + ". Checked " + msg.checked + ", found " + msg.spam + " spam comments.");
+				jQuery('#ct_checking_status').html(msg);
 				setTimeout(ct_show_info, 1000);
 			}
 		});

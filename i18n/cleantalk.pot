@@ -89,3 +89,18 @@ msgstr ""
 
 msgid "Anti spam test for any WordPress or themes contacts forms"
 msgstr ""
+
+msgid "Find spam comments"
+msgstr ""
+
+msgid "Total comments %s. Checked %s, found spam comments: %s."
+msgstr ""
+
+msgid "Done. All comments tested via blacklists database, please see result bellow."
+msgstr ""
+
+msgid "Delete selected"
+msgstr ""
+
+msgid "Check for spam"
+msgstr ""
