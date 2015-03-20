@@ -75,10 +75,10 @@ $ct_post_data_authnet_label = 's2member_pro_authnet_registration';
 $ct_formtime_label = 'ct_formtime'; 
 
 // Plugin's options 
-$ct_options = null; 
+$ct_options = null;
 
-// Account status check last time
-$ct_account_status_check = 0;
+// Plugin's data 
+$ct_data = null;
 
 // Post without page load
 $ct_direct_post = 0;
@@ -131,7 +131,7 @@ function ct_init_session() {
  * @return array array('ct'=> Cleantalk, 'ct_result' => CleantalkResponse)
  */
 function ct_base_call($params = array()) {
-    global $wpdb, $ct_agent_version, $ct_formtime_label, $ct_options;
+    global $wpdb, $ct_agent_version, $ct_formtime_label, $ct_options, $ct_data;
 
     require_once('cleantalk.class.php');
         
@@ -207,7 +207,7 @@ function submit_time_test() {
  * @return array 
  */
 function get_sender_info() {
-    global $ct_direct_post, $ct_options;
+    global $ct_direct_post, $ct_options, $ct_data;
 
     $php_session = session_id() != '' ? 1 : 0;
     
@@ -283,10 +283,10 @@ function ct_cookies_test ($test = false) {
  * @return string
  */
 function ct_get_checkjs_value($random_key = false) {
-    global $ct_options;
+    global $ct_options, $ct_data;
 
     if ($random_key) {
-        $keys = $ct_options['js_keys'];
+        $keys = $ct_data['js_keys'];
         $keys_checksum = md5(json_encode($keys));
         
         $key = null;
@@ -294,7 +294,7 @@ function ct_get_checkjs_value($random_key = false) {
         foreach ($keys as $k => $t) {
 
             // Removing key if it's to old
-            if (time() - $t > $ct_options['js_keys_store_days'] * 86400) {
+            if (time() - $t > $ct_data['js_keys_store_days'] * 86400) {
                 unset($keys[$k]);
                 continue;
             }
@@ -306,14 +306,14 @@ function ct_get_checkjs_value($random_key = false) {
         }
         
         // Get new key if the latest key is too old
-        if (time() - $latest_key_time > $ct_options['js_key_lifetime']) {
+        if (time() - $latest_key_time > $ct_data['js_key_lifetime']) {
             $key = rand();
             $keys[$key] = time();
         }
         
         if (md5(json_encode($keys)) != $keys_checksum) {
-            $ct_options['js_keys'] = $keys;
-            update_option('cleantalk_settings', $ct_options);
+            $ct_data['js_keys'] = $keys;
+            update_option('cleantalk_data', $ct_data);
         }
     } else {
         $key = md5($ct_options['apikey'] . '+' . get_option('admin_email'));
@@ -353,10 +353,31 @@ function ct_def_options() {
         'remove_old_spam' => '0',
         'spam_store_days' => '15', // Days before delete comments from folder Spam 
         'ssl_on' => 0, // Secure connection to servers 
+        'relevance_test' => 0, // Test comment for relevance 
+        'notice_api_errors' => 0, // Send API error notices to WP admin
+    );
+}
+
+/**
+ * Inner function - Current Cleantalk data
+ * @return 	mixed[] Array of options
+ */
+function ct_get_data() {
+    $data = get_option('cleantalk_data');
+    if (!is_array($data)){
+        $data = array();
+    }
+    return array_merge(ct_def_data(), (array) $data);
+}
+
+/**
+ * Inner function - Default Cleantalk data
+ * @return 	mixed[] Array of default options
+ */
+function ct_def_data() {
+    return array(
         'next_account_status_check' => 0, // Time label when the plugin should check account status 
         'user_token' => '', // User token 
-        'relevance_test' => 0, // Test comment for relevance 
-        'notice_api_errors' => 0, // Send API error notices to WP admin 
         'js_keys' => array(), // Keys to do JavaScript antispam test 
         'js_keys_store_days' => 8, // JavaScript keys store days - 8 days now
         'js_key_lifetime' => 86400, // JavaScript key life time in seconds - 1 day now
@@ -388,7 +409,7 @@ function ct_hash($new_hash = '') {
  * @return 	string comment_content w\o cleantalk resume
  */
 function ct_feedback($hash, $message = null, $allow) {
-    global $ct_options;
+    global $ct_options, $ct_data;
 
     require_once('cleantalk.class.php');
 
@@ -425,7 +446,7 @@ function ct_feedback($hash, $message = null, $allow) {
  * @return bool
  */
 function ct_send_feedback($feedback_request = null) {
-    global $ct_options;
+    global $ct_options, $ct_data;
 
     if (empty($feedback_request) && isset($_SESSION['feedback_request']) && preg_match("/^[a-z0-9\;\:]+$/", $_SESSION['feedback_request'])) {
 	$feedback_request = $_SESSION['feedback_request'];
@@ -467,11 +488,14 @@ function ct_send_feedback($feedback_request = null) {
  * On the scheduled action hook, run the function.
  */
 function ct_do_this_hourly() {
-    global $ct_options;
+    global $ct_options, $ct_data;
     // do something every hour
 
     if (!isset($ct_options))
 	$ct_options = ct_get_options();
+
+    if (!isset($ct_data))
+	$ct_data = ct_get_data();
 
     delete_spam_comments();
     ct_send_feedback();
@@ -482,7 +506,7 @@ function ct_do_this_hourly() {
  * @return null 
  */
 function delete_spam_comments() {
-    global $pagenow, $ct_options;
+    global $pagenow, $ct_options, $ct_data;
     
     if ($ct_options['remove_old_spam'] == 1) {
         $last_comments = get_comments(array('status' => 'spam', 'number' => 1000, 'order' => 'ASC'));

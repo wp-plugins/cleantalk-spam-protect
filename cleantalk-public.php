@@ -5,9 +5,10 @@
  * @return 	mixed[] Array of options
  */
 function ct_init() {
-    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options;
+    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data;
 
     $ct_options = ct_get_options();
+    $ct_data = ct_get_data();
 
     ct_init_session();
 
@@ -116,7 +117,7 @@ function ct_init() {
  * Adds hidden filed to comment form 
  */
 function ct_comment_form($post_id) {
-    global $ct_options;
+    global $ct_options, $ct_data;
 
     if (ct_is_user_enable() === false) {
         return false;
@@ -213,7 +214,7 @@ function ct_is_user_enable() {
 * return null;
 */
 function ct_frm_entries_footer_scripts($fields, $form) {
-    global $current_user, $ct_checkjs_frm, $ct_options;
+    global $current_user, $ct_checkjs_frm, $ct_options, $ct_data;
 
     if ($ct_options['contact_forms_test'] == 0) {
         return false;
@@ -238,7 +239,7 @@ function ct_frm_entries_footer_scripts($fields, $form) {
 * return @array with errors if spam has found
 */
 function ct_frm_validate_entry ($errors, $values) {
-    global $wpdb, $current_user, $ct_agent_version, $ct_checkjs_frm, $ct_options;
+    global $wpdb, $current_user, $ct_agent_version, $ct_checkjs_frm, $ct_options, $ct_data;
 
     if ($ct_options['contact_forms_test'] == 0) {
         return false;
@@ -285,7 +286,7 @@ function ct_frm_validate_entry ($errors, $values) {
  * @return  mixed[] $comment Comment string 
  */
 function ct_bbp_new_pre_content ($comment) {
-    global $ct_options;
+    global $ct_options, $ct_data;
 
     if (ct_is_user_enable() === false || $ct_options['comments_test'] == 0 || is_user_logged_in()) {
         return $comment;
@@ -338,7 +339,7 @@ function ct_preprocess_comment($comment) {
     // this action is called just when WP process POST request (adds new comment)
     // this action is called by wp-comments-post.php
     // after processing WP makes redirect to post page with comment's form by GET request (see above)
-    global $wpdb, $current_user, $comment_post_id, $ct_agent_version, $ct_comment_done, $ct_approved_request_id_label, $ct_jp_comments, $ct_options;
+    global $wpdb, $current_user, $comment_post_id, $ct_agent_version, $ct_comment_done, $ct_approved_request_id_label, $ct_jp_comments, $ct_options, $ct_data;
 
     if (ct_is_user_enable() === false || $ct_options['comments_test'] == 0 || $ct_comment_done) {
         return $comment;
@@ -497,7 +498,7 @@ function ct_die_extended($comment_body) {
  *
  */
 function js_test($field_name = 'ct_checkjs', $data = null, $random_key = false) {
-    global $ct_options;
+    global $ct_options, $ct_data;
 
     $checkjs = null;
     $js_post_value = null;
@@ -513,7 +514,7 @@ function js_test($field_name = 'ct_checkjs', $data = null, $random_key = false) 
         //
         if ($random_key) {
             
-            $keys = $ct_options['js_keys'];
+            $keys = $ct_data['js_keys'];
             if (isset($keys[$js_post_value])) {
                 $checkjs = 1;
             } else {
@@ -648,7 +649,7 @@ function ct_plugin_active($plugin_name){
  * @return null
  */
 function ct_register_form() {
-    global $ct_checkjs_register_form, $ct_options;
+    global $ct_checkjs_register_form, $ct_options, $ct_data;
 
     if ($ct_options['registrations_test'] == 0) {
         return false;
@@ -664,7 +665,7 @@ function ct_register_form() {
  * @return null
  */
 function ct_login_message($message) {
-    global $errors, $ct_session_register_ok_label, $ct_options;
+    global $errors, $ct_session_register_ok_label, $ct_options, $ct_data;
 
     if ($ct_options['registrations_test'] != 0) {
         if( isset($_GET['checkemail']) && 'registered' == $_GET['checkemail'] ) {
@@ -727,7 +728,7 @@ function ct_register_post($sanitized_user_login = null, $user_email = null, $err
  * @return array with errors 
  */
 function ct_registration_errors($errors, $sanitized_user_login = null, $user_email = null) {
-    global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options;
+    global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
 
     // Go out if a registrered user action
     if (ct_is_user_enable() === false) {
@@ -872,7 +873,7 @@ function ct_user_register($user_id) {
  * Test for JetPack contact form 
  */
 function ct_grunion_contact_form_field_html($r, $field_label) {
-    global $ct_checkjs_jpcf, $ct_jpcf_patched, $ct_jpcf_fields, $ct_options;
+    global $ct_checkjs_jpcf, $ct_jpcf_patched, $ct_jpcf_fields, $ct_options, $ct_data;
 
     if ($ct_options['contact_forms_test'] == 1 && $ct_jpcf_patched === false && preg_match("/[text|email]/i", $r)) {
 
@@ -895,7 +896,7 @@ function ct_grunion_contact_form_field_html($r, $field_label) {
  * Test for JetPack contact form 
  */
 function ct_contact_form_is_spam($form) {
-    global $ct_checkjs_jpcf, $ct_options;
+    global $ct_checkjs_jpcf, $ct_options, $ct_data;
 
     if ($ct_options['contact_forms_test'] == 0) {
         return null;
@@ -957,7 +958,7 @@ function ct_contact_form_is_spam($form) {
  * Inserts anti-spam hidden to CF7
  */
 function ct_wpcf7_form_elements($html) {
-    global $wpdb, $current_user, $ct_checkjs_cf7, $ct_options;
+    global $wpdb, $current_user, $ct_checkjs_cf7, $ct_options, $ct_data;
 
     if ($ct_options['contact_forms_test'] == 0) {
         return $html;
@@ -972,7 +973,7 @@ function ct_wpcf7_form_elements($html) {
  * Test CF7 message for spam
  */
 function ct_wpcf7_spam($param) {
-    global $wpdb, $current_user, $ct_agent_version, $ct_checkjs_cf7, $ct_cf7_comment, $ct_options;
+    global $wpdb, $current_user, $ct_agent_version, $ct_checkjs_cf7, $ct_cf7_comment, $ct_options, $ct_data;
 
     if (WPCF7_VERSION >= '3.0.0') {
 	if($param === true)
@@ -1074,7 +1075,7 @@ function ct_si_contact_display_after_fields($string = '', $style = '', $form_err
  * Test for Fast Secure contact form
  */
 function ct_si_contact_form_validate($form_errors = array(), $form_id_num = 0) {
-    global $ct_options;
+    global $ct_options, $ct_data;
 
     if (!empty($form_errors))
 	return $form_errors;
@@ -1150,7 +1151,7 @@ function ct_comment_text($comment_text) {
  * Checks WordPress Landing Pages raw $_POST values
 */
 function ct_check_wplp(){
-    global $ct_wplp_result_label, $ct_options;
+    global $ct_wplp_result_label, $ct_options, $ct_data;
     if (!isset($_COOKIE[$ct_wplp_result_label])) {
         // First AJAX submit of WPLP form
         if ($ct_options['contact_forms_test'] == 0)
@@ -1211,7 +1212,7 @@ function ct_check_wplp(){
  * @return array with errors 
  */
 function ct_s2member_registration_test() {
-    global $ct_agent_version, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_options;
+    global $ct_agent_version, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_options, $ct_data;
     
     if ($ct_options['registrations_test'] == 0) {
         return null;

@@ -25,9 +25,10 @@ function ct_admin_add_page() {
  * Admin action 'admin_init' - Add the admin settings and such
  */
 function ct_admin_init() {
-    global $ct_server_timeout, $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label, $ct_account_status_check;
+    global $ct_server_timeout, $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $ct_data, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label;
 
     $ct_options = ct_get_options();
+    $ct_data = ct_get_data();
 
     $show_ct_notice_trial = false;
     if (isset($_COOKIE[$ct_notice_trial_label])) {
@@ -90,7 +91,7 @@ function ct_admin_init() {
             }
     }
 
-    if (time() > $ct_options['next_account_status_check']) {
+    if (time() > $ct_data['next_account_status_check']) {
         $result = false;
 	    if (function_exists('curl_init') && function_exists('json_decode') && ct_valid_key($ct_options['apikey'])) {
             $url = 'https://api.cleantalk.org';
@@ -137,14 +138,13 @@ function ct_admin_init() {
                 }
                 
                 if (isset($result['user_token'])) {
-                    $ct_options['user_token'] = $result['user_token']; 
+                    $ct_data['user_token'] = $result['user_token']; 
                 }
             }
             
             // Save next status request time
-            $ct_options['next_account_status_check'] = strtotime("+$notice_check_timeout hours", time());
-            $ct_account_status_check = time(); 
-            update_option('cleantalk_settings', $ct_options);
+            $ct_data['next_account_status_check'] = strtotime("+$notice_check_timeout hours", time());
+            update_option('cleantalk_data', $ct_data);
         }
         
         if ($result) {
@@ -198,7 +198,7 @@ function ct_section_settings_anti_spam() {
  * Admin callback function - Displays inputs of 'apikey' plugin parameter
  */
 function ct_input_apikey() {
-    global $ct_options, $ct_notice_online_label;
+    global $ct_options, $ct_data, $ct_notice_online_label;
     
     $value = $ct_options['apikey'];
     $def_value = ''; 
@@ -221,7 +221,7 @@ function ct_input_apikey() {
  * Admin callback function - Displays inputs of 'comments_test' plugin parameter
  */
 function ct_input_comments_test() {
-    global $ct_options;
+    global $ct_options, $ct_data;
     
     $value = $ct_options['comments_test'];
     echo "<input type='radio' id='cleantalk_comments_test1' name='cleantalk_settings[comments_test]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_comments_test1'> " . __('Yes') . "</label>";
@@ -234,7 +234,7 @@ function ct_input_comments_test() {
  * Admin callback function - Displays inputs of 'comments_test' plugin parameter
  */
 function ct_input_registrations_test() {
-    global $ct_options;
+    global $ct_options, $ct_data;
     
     $value = $ct_options['registrations_test'];
     echo "<input type='radio' id='cleantalk_registrations_test1' name='cleantalk_settings[registrations_test]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_registrations_test1'> " . __('Yes') . "</label>";
@@ -247,7 +247,7 @@ function ct_input_registrations_test() {
  * Admin callback function - Displays inputs of 'contact_forms_test' plugin parameter
  */
 function ct_input_contact_forms_test() {
-    global $ct_options;
+    global $ct_options, $ct_data;
     
     $value = $ct_options['contact_forms_test'];
     echo "<input type='radio' id='cleantalk_contact_forms_test1' name='cleantalk_settings[contact_forms_test]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_contact_forms_test1'> " . __('Yes') . "</label>";
@@ -260,7 +260,7 @@ function ct_input_contact_forms_test() {
  * Admin callback function - Displays inputs of 'general_contact_forms_test' plugin parameter
  */
 function ct_input_general_contact_forms_test() {
-    global $ct_options;
+    global $ct_options, $ct_data;
     
     $value = $ct_options['general_contact_forms_test'];
     echo "<input type='radio' id='cleantalk_general_contact_forms_test1' name='cleantalk_settings[general_contact_forms_test]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_general_contact_forms_test1'> " . __('Yes') . "</label>";
@@ -276,7 +276,7 @@ function ct_input_general_contact_forms_test() {
  * @return null
  */
 function ct_input_remove_old_spam() {
-    global $ct_options;
+    global $ct_options, $ct_data;
 
     $value = $ct_options['remove_old_spam'];
     echo "<input type='radio' id='cleantalk_remove_old_spam1' name='cleantalk_settings[remove_old_spam]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_remove_old_spam1'> " . __('Yes') . "</label>";
@@ -334,11 +334,11 @@ input[type=submit] {padding: 10px; background: #3399FF; color: #fff; border:0 no
  * @return bool 
  */
 function admin_notice_message(){
-    global $show_ct_notice_trial, $show_ct_notice_renew, $show_ct_notice_online, $show_ct_notice_autokey, $ct_notice_autokey_value, $ct_plugin_name, $ct_options;
+    global $show_ct_notice_trial, $show_ct_notice_renew, $show_ct_notice_online, $show_ct_notice_autokey, $ct_notice_autokey_value, $ct_plugin_name, $ct_options, $ct_data;
 
     $user_token = '';
-    if (isset($ct_options['user_token']) && $ct_options['user_token'] != '') {
-        $user_token = '&user_token=' . $ct_options['user_token'];
+    if (isset($ct_data['user_token']) && $ct_data['user_token'] != '') {
+        $user_token = '&user_token=' . $ct_data['user_token'];
     }
 
     $show_notice = true;
@@ -396,7 +396,7 @@ function admin_addDescriptionsFields($descr = '') {
 * Test API key 
 */
 function ct_valid_key($apikey = null) {
-    global $ct_options;
+    global $ct_options, $ct_data;
     if ($apikey === null) {
         $apikey = $ct_options['apikey'];
     }
@@ -532,14 +532,17 @@ if (!function_exists ( 'ct_plugin_action_links')) {
  * @return array
 */
 function ct_update_option($option_name) {
-    global $show_ct_notice_online, $ct_notice_online_label, $ct_notice_trial_label, $trial_notice_showtime, $ct_account_status_check, $ct_options, $ct_server_timeout;
+    global $show_ct_notice_online, $ct_notice_online_label, $ct_notice_trial_label, $trial_notice_showtime, $ct_options, $ct_data, $ct_server_timeout;
 
     if($option_name !== 'cleantalk_settings') {
         return;
     }
 
-    // Skip test call if the function executet during account status check
-    if ($ct_account_status_check > 0 && time() - $ct_account_status_check < 5) {
+    $api_key = $ct_options['apikey'];
+    if (isset($_POST['cleantalk_settings']['apikey'])) {
+        $api_key = trim($_POST['cleantalk_settings']['apikey']);
+    }
+    if (!ct_valid_key($api_key)) {
         return;
     }
 
@@ -555,15 +558,6 @@ function ct_update_option($option_name) {
     $key_valid = true;
     $app_server_error = false;
     if (function_exists('curl_init') && function_exists('json_decode')) {
-        $api_key = $ct_options['apikey'];
-        if (isset($_POST['cleantalk_settings']['apikey'])) {
-            $api_key = trim($_POST['cleantalk_settings']['apikey']);
-        }
-        
-        if (!ct_valid_key($api_key)) {
-            return null;
-        }
-
         $url = 'https://cleantalk.org/app_notice';
         $data['auth_key'] = $api_key; 
         $data['param'] = 'notice_validate_key'; 
