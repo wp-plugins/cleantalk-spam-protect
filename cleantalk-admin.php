@@ -541,6 +541,7 @@ function ct_update_option($option_name) {
     $api_key = $ct_options['apikey'];
     if (isset($_POST['cleantalk_settings']['apikey'])) {
         $api_key = trim($_POST['cleantalk_settings']['apikey']);
+        $ct_options['apikey'] = $api_key;
     }
     if (!ct_valid_key($api_key)) {
         return;
