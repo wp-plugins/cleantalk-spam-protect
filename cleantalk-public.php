@@ -35,7 +35,11 @@ function ct_init() {
     $jetpack_active_modules = false;
     if(defined('JETPACK__VERSION')){
 	add_filter('grunion_contact_form_field_html', 'ct_grunion_contact_form_field_html', 10, 2);
-	if(JETPACK__VERSION=='3.4-beta2'&&JETPACK__VERSION!='3.4-beta'||JETPACK__VERSION>='3.4')
+	if(JETPACK__VERSION=='3.4-beta')
+	{
+		add_filter('contact_form_is_spam', 'ct_contact_form_is_spam');
+	}
+	else if(JETPACK__VERSION=='3.4-beta2'||JETPACK__VERSION>='3.4')
 	{
 		add_filter('jetpack_contact_form_is_spam', 'ct_contact_form_is_spam_jetpack',1,2);
 	}
