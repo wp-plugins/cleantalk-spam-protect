@@ -37,7 +37,7 @@ function ct_show_checkspam_page()
 		}
 		?>
 <?
-//		<button class="button" id="ct_insert_comments">Insert comments</button><br />
+		//print '<button class="button" id="ct_insert_comments">Insert comments</button><br />';
 ?>
 
 		<div id="ct_working_message" style="display:none">
@@ -78,7 +78,7 @@ function ct_show_checkspam_page()
 			);
 			
 			$c_spam=get_comments($args_spam);
-			if($args_spam>0)
+			if($cnt_spam>0)
 			{
 		?>
 		<table class="widefat fixed comments">
