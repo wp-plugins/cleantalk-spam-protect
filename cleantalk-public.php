@@ -35,7 +35,14 @@ function ct_init() {
     $jetpack_active_modules = false;
     if(defined('JETPACK__VERSION')){
 	add_filter('grunion_contact_form_field_html', 'ct_grunion_contact_form_field_html', 10, 2);
-	add_filter('contact_form_is_spam', 'ct_contact_form_is_spam');
+	if(JETPACK__VERSION=='3.4-beta2'&&JETPACK__VERSION!='3.4-beta'||JETPACK__VERSION>='3.4')
+	{
+		add_filter('jetpack_contact_form_is_spam', 'ct_contact_form_is_spam_jetpack',1,2);
+	}
+	else
+	{
+		add_filter('contact_form_is_spam', 'ct_contact_form_is_spam');
+	}
         $jetpack_active_modules = get_option('jetpack_active_modules');
 	if (
 	    (class_exists( 'Jetpack', false) && $jetpack_active_modules && in_array('comments', $jetpack_active_modules))
@@ -952,6 +959,65 @@ function ct_contact_form_is_spam($form) {
 
     return (bool) $ct_result->spam;
 }
+
+function ct_contact_form_is_spam_jetpack($is_spam,$form) {
+    global $ct_checkjs_jpcf, $ct_options, $ct_data;
+
+    if ($ct_options['contact_forms_test'] == 0) {
+        return null;
+    }
+
+    $js_field_name = $ct_checkjs_jpcf;
+    foreach ($_POST as $k => $v) {
+        if (preg_match("/^.+$ct_checkjs_jpcf$/", $k))
+           $js_field_name = $k; 
+    }
+    
+    $checkjs = js_test($js_field_name, $_POST, true);
+
+    $sender_info = array(
+	'sender_url' => @$form['comment_author_url']
+    );
+
+    $post_info['comment_type'] = 'feedback';
+    $post_info = json_encode($post_info);
+    if ($post_info === false)
+        $post_info = '';
+
+    $sender_email = null;
+    $sender_nickname = null;
+    $message = '';
+    if (isset($form['comment_author_email']))
+        $sender_email = $form['comment_author_email']; 
+
+    if (isset($form['comment_author']))
+        $sender_nickname = $form['comment_author']; 
+
+    if (isset($form['comment_content']))
+        $message = $form['comment_content']; 
+
+    $ct_base_call_result = ct_base_call(array(
+        'message' => $message,
+        'example' => null,
+        'sender_email' => $sender_email,
+        'sender_nickname' => $sender_nickname,
+        'post_info' => $post_info,
+	'sender_info' => $sender_info,
+        'checkjs' => $checkjs
+    ));
+    $ct = $ct_base_call_result['ct'];
+    $ct_result = $ct_base_call_result['ct_result'];
+
+    if ($ct_result->spam == 1) {
+        global $ct_comment;
+        $ct_comment = $ct_result->comment;
+        ct_die(null, null);
+        exit;
+    }
+
+    return (bool) $ct_result->spam;
+}
+
 
 
 /**
