@@ -10,7 +10,7 @@ function ct_show_checkspam_page()
 {
 	?>
 	<div class="wrap">
-		<h2><? _e("Check for spam", 'cleantalk'); ?></h2><br />
+		<h2><? _e("Anti-spam by CleanTalk", 'cleantalk'); ?></h2><br />
 		<?
 		$args_unchecked = array(
 			'meta_query' => array(
@@ -33,6 +33,7 @@ function ct_show_checkspam_page()
 		{
 		?>
 			<button class="button" id="ct_check_spam_button"><? _e("Find spam comments", 'cleantalk'); ?></button><br />
+			<div><? _e("Anti-spam by CleanTalk will check all not spam comments against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam comments' to start.", 'cleantalk'); ?></div>
 		<?
 		}
 		?>
@@ -41,9 +42,9 @@ function ct_show_checkspam_page()
 ?>
 
 		<div id="ct_working_message" style="display:none">
-			<? _e("Please wait a while. CleanTalk checking all approved and pending comments via blacklist database at cleantalk.org. You will have option to delete found spam comments after plugin finish.", 'cleantalk'); ?>
+			<? _e("Please wait for a while. CleanTalk is checking all approved and pending comments via blacklist database at cleantalk.org. You will have option to delete found spam comments after plugin finish.", 'cleantalk'); ?>
 		</div>
-		<div id="ct_done_message" style="display:none">
+		<div id="ct_done_message" <? if($cnt_unchecked>0) print 'style="display:none"'; ?>>
 			<? _e("Done. All comments tested via blacklists database, please see result bellow.", 'cleantalk'); ?>
 		</div>
 		<h3 id="ct_checking_status"></h3>
@@ -87,7 +88,7 @@ function ct_show_checkspam_page()
 					<label class="screen-reader-text" for="cb-select-all-1">Select All</label>
 					<input id="cb-select-all-1" type="checkbox"/>
 				</th>
-				<th scope="col" id="author" class="manage-column column-response sortable desc"><? print _e('Author');?></th>
+				<th scope="col" id="author" class="manage-column column-slug"><? print _e('Author');?></th>
 				<th scope="col" id="comment" class="manage-column column-comment"><? print _x( 'Comment', 'column name' );;?></th>
 				<th scope="col" id="response" class="manage-column column-response sortable desc"><? print _x( 'In Response To', 'column name' );?></th>
 			</thead>
@@ -101,15 +102,16 @@ function ct_show_checkspam_page()
 							<label class="screen-reader-text" for="cb-select-<? print $c_spam[$i]->comment_ID; ?>">Select comment</label>
 							<input id="cb-select-<? print $c_spam[$i]->comment_ID; ?>" type="checkbox" name="del_comments[]" value="<? print $c_spam[$i]->comment_ID; ?>"/>
 						</th>
-						<td class="author column-author">
+						<td class="author column-author" nowrap>
 						<strong>
 							<?php echo get_avatar( $c_spam[$i]->comment_author_email , 32); ?>
 							 <? print $c_spam[$i]->comment_author; ?>
 							</strong>
 							<br/>
-							<a href="mailto:<? print $c_spam[$i]->comment_author_email; ?>"><? print $c_spam[$i]->comment_author_email; ?></a>
+							<a href="mailto:<? print $c_spam[$i]->comment_author_email; ?>"><? print $c_spam[$i]->comment_author_email; ?></a> <a href="https://cleantalk.org/blacklists/<? print $c_spam[$i]->comment_author_email ; ?>" target="_blank"><img src="https://cleantalk.ru/images/icons/new_window.gif" border="0" style="float:none"/></a>
 							<br/>
-							<a href="edit-comments.php?s=<? print $c_spam[$i]->comment_author_IP ; ?>&mode=detail"><? print $c_spam[$i]->comment_author_IP ; ?></a>
+							<a href="edit-comments.php?s=<? print $c_spam[$i]->comment_author_IP ; ?>&mode=detail"><? print $c_spam[$i]->comment_author_IP ; ?></a> 
+							<a href="https://cleantalk.org/blacklists/<? print $c_spam[$i]->comment_author_IP ; ?>" target="_blank"><img src="https://cleantalk.ru/images/icons/new_window.gif" border="0" style="float:none"/></a>
 						</td>
 						<td class="comment column-comment">
 							<div class="submitted-on">
@@ -331,7 +333,7 @@ function ct_ajax_info_comments()
 	$cnt_checked2=get_comments($args_checked2);
 	$cnt_checked=$cnt_checked1+$cnt_checked2;
 	
-	printf (__("Total comments %s. Checked %s, found spam comments: %s.", 'cleantalk'), $cnt, $cnt_checked, $cnt_spam);
+	printf (__("Total comments %s, checked %s, found %s spam comments.", 'cleantalk'), $cnt, $cnt_checked, $cnt_spam);
 	die();
 }
 

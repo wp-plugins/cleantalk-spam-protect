@@ -93,7 +93,7 @@ msgstr ""
 msgid "Find spam comments"
 msgstr ""
 
-msgid "Total comments %s. Checked %s, found spam comments: %s."
+msgid "Total comments %s, checked %s, found %s spam comments."
 msgstr ""
 
 msgid "Done. All comments tested via blacklists database, please see result bellow."
@@ -103,4 +103,13 @@ msgid "Delete selected"
 msgstr ""
 
 msgid "Check for spam"
+msgstr ""
+
+msgid "Anti-spam by CleanTalk"
+msgstr ""
+
+msgid "Anti-spam by CleanTalk will check all not spam comments against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam comments' to start."
+msgstr ""
+
+msgid "Please wait for a while. CleanTalk is checking all approved and pending comments via blacklist database at cleantalk.org. You will have option to delete found spam comments after plugin finish."
 msgstr ""
