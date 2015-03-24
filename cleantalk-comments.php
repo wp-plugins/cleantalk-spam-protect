@@ -1,4 +1,4 @@
-<?
+<?php
 add_action('admin_menu', 'ct_add_comments_menu');
 
 function ct_add_comments_menu()
@@ -10,8 +10,8 @@ function ct_show_checkspam_page()
 {
 	?>
 	<div class="wrap">
-		<h2><? _e("Anti-spam by CleanTalk", 'cleantalk'); ?></h2><br />
-		<?
+		<h2><?php _e("Anti-spam by CleanTalk", 'cleantalk'); ?></h2><br />
+		<?php
 		$args_unchecked = array(
 			'meta_query' => array(
 				'relation' => 'AND',
@@ -32,23 +32,23 @@ function ct_show_checkspam_page()
 		if($cnt_unchecked>0)
 		{
 		?>
-			<button class="button" id="ct_check_spam_button"><? _e("Find spam comments", 'cleantalk'); ?></button><br />
-			<div><? _e("Anti-spam by CleanTalk will check all not spam comments against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam comments' to start.", 'cleantalk'); ?></div>
-		<?
+			<button class="button" id="ct_check_spam_button"><?php _e("Find spam comments", 'cleantalk'); ?></button><br />
+			<div><?php _e("Anti-spam by CleanTalk will check all not spam comments against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam comments' to start.", 'cleantalk'); ?></div>
+		<?php
 		}
 		?>
-<?
+<?php
 		//print '<button class="button" id="ct_insert_comments">Insert comments</button><br />';
 ?>
 
 		<div id="ct_working_message" style="display:none">
-			<? _e("Please wait for a while. CleanTalk is checking all approved and pending comments via blacklist database at cleantalk.org. You will have option to delete found spam comments after plugin finish.", 'cleantalk'); ?>
+			<?php _e("Please wait for a while. CleanTalk is checking all approved and pending comments via blacklist database at cleantalk.org. You will have option to delete found spam comments after plugin finish.", 'cleantalk'); ?>
 		</div>
-		<div id="ct_done_message" <? if($cnt_unchecked>0) print 'style="display:none"'; ?>>
-			<? _e("Done. All comments tested via blacklists database, please see result bellow.", 'cleantalk'); ?>
+		<div id="ct_done_message" <?php if($cnt_unchecked>0) print 'style="display:none"'; ?>>
+			<?php _e("Done. All comments tested via blacklists database, please see result bellow.", 'cleantalk'); ?>
 		</div>
 		<h3 id="ct_checking_status"></h3>
-		<?
+		<?php
 			$args_spam = array(
 				'meta_query' => array(
 					Array(
@@ -88,34 +88,34 @@ function ct_show_checkspam_page()
 					<label class="screen-reader-text" for="cb-select-all-1">Select All</label>
 					<input id="cb-select-all-1" type="checkbox"/>
 				</th>
-				<th scope="col" id="author" class="manage-column column-slug"><? print _e('Author');?></th>
-				<th scope="col" id="comment" class="manage-column column-comment"><? print _x( 'Comment', 'column name' );;?></th>
-				<th scope="col" id="response" class="manage-column column-response sortable desc"><? print _x( 'In Response To', 'column name' );?></th>
+				<th scope="col" id="author" class="manage-column column-slug"><?php print _e('Author');?></th>
+				<th scope="col" id="comment" class="manage-column column-comment"><?php print _x( 'Comment', 'column name' );;?></th>
+				<th scope="col" id="response" class="manage-column column-response sortable desc"><?php print _x( 'In Response To', 'column name' );?></th>
 			</thead>
 			<tbody id="the-comment-list" data-wp-lists="list:comment">
-				<?
+				<?php
 					for($i=0;$i<sizeof($c_spam);$i++)
 					{
 						?>
-						<tr id="comment-<? print $c_spam[$i]->comment_ID; ?>" class="comment even thread-even depth-1 approved">
+						<tr id="comment-<?php print $c_spam[$i]->comment_ID; ?>" class="comment even thread-even depth-1 approved">
 						<th scope="row" class="check-column">
-							<label class="screen-reader-text" for="cb-select-<? print $c_spam[$i]->comment_ID; ?>">Select comment</label>
-							<input id="cb-select-<? print $c_spam[$i]->comment_ID; ?>" type="checkbox" name="del_comments[]" value="<? print $c_spam[$i]->comment_ID; ?>"/>
+							<label class="screen-reader-text" for="cb-select-<?php print $c_spam[$i]->comment_ID; ?>">Select comment</label>
+							<input id="cb-select-<?php print $c_spam[$i]->comment_ID; ?>" type="checkbox" name="del_comments[]" value="<?php print $c_spam[$i]->comment_ID; ?>"/>
 						</th>
 						<td class="author column-author" nowrap>
 						<strong>
 							<?php echo get_avatar( $c_spam[$i]->comment_author_email , 32); ?>
-							 <? print $c_spam[$i]->comment_author; ?>
+							 <?php print $c_spam[$i]->comment_author; ?>
 							</strong>
 							<br/>
-							<a href="mailto:<? print $c_spam[$i]->comment_author_email; ?>"><? print $c_spam[$i]->comment_author_email; ?></a> <a href="https://cleantalk.org/blacklists/<? print $c_spam[$i]->comment_author_email ; ?>" target="_blank"><img src="https://cleantalk.ru/images/icons/new_window.gif" border="0" style="float:none"/></a>
+							<a href="mailto:<?php print $c_spam[$i]->comment_author_email; ?>"><?php print $c_spam[$i]->comment_author_email; ?></a> <a href="https://cleantalk.org/blacklists/<?php print $c_spam[$i]->comment_author_email ; ?>" target="_blank"><img src="https://cleantalk.ru/images/icons/new_window.gif" border="0" style="float:none"/></a>
 							<br/>
-							<a href="edit-comments.php?s=<? print $c_spam[$i]->comment_author_IP ; ?>&mode=detail"><? print $c_spam[$i]->comment_author_IP ; ?></a> 
-							<a href="https://cleantalk.org/blacklists/<? print $c_spam[$i]->comment_author_IP ; ?>" target="_blank"><img src="https://cleantalk.ru/images/icons/new_window.gif" border="0" style="float:none"/></a>
+							<a href="edit-comments.php?s=<?php print $c_spam[$i]->comment_author_IP ; ?>&mode=detail"><?php print $c_spam[$i]->comment_author_IP ; ?></a> 
+							<a href="https://cleantalk.org/blacklists/<?php print $c_spam[$i]->comment_author_IP ; ?>" target="_blank"><img src="https://cleantalk.ru/images/icons/new_window.gif" border="0" style="float:none"/></a>
 						</td>
 						<td class="comment column-comment">
 							<div class="submitted-on">
-								<? printf( __( 'Submitted on <a href="%1$s">%2$s at %3$s</a>' ), get_comment_link($c_spam[$i]->comment_ID),
+								<?php printf( __( 'Submitted on <a href="%1$s">%2$s at %3$s</a>' ), get_comment_link($c_spam[$i]->comment_ID),
 									/* translators: comment date format. See http://php.net/date */
 									get_comment_date( __( 'Y/m/d' ),$c_spam[$i]->comment_ID ),
 									get_comment_date( get_option( 'time_format' ),$c_spam[$i]->comment_ID )
@@ -124,26 +124,26 @@ function ct_show_checkspam_page()
 									
 							</div>
 							<p>
-							<? print $c_spam[$i]->comment_content; ?>
+							<?php print $c_spam[$i]->comment_content; ?>
 							</p>
 						</td>
 						<td class="response column-response">
 							<div class="response-links">
 								<span class="post-com-count-wrapper">
-									<a href="http://ct_wp/wp-admin/post.php?post=<? print $c_spam[$i]->comment_post_ID; ?>&action=edit"><? print get_the_title($c_spam[$i]->comment_post_ID); ?></a>
+									<a href="http://ct_wp/wp-admin/post.php?post=<?php print $c_spam[$i]->comment_post_ID; ?>&action=edit"><?php print get_the_title($c_spam[$i]->comment_post_ID); ?></a>
 									<br/>
-									<a href="http://ct_wp/wp-admin/edit-comments.php?p=<? print $c_spam[$i]->comment_post_ID; ?>" class="post-com-count">
-										<span class="comment-count"><?
+									<a href="http://ct_wp/wp-admin/edit-comments.php?p=<?php print $c_spam[$i]->comment_post_ID; ?>" class="post-com-count">
+										<span class="comment-count"><?php
 											$p_cnt=wp_count_comments();
 											print $p_cnt->total_comments;
 										?></span>
 									</a>
 								</span>
-								<a href="<? print get_permalink($c_spam[$i]->comment_post_ID); ?>"><? print _e('View Post');?></a>
+								<a href="<?php print get_permalink($c_spam[$i]->comment_post_ID); ?>"><?php print _e('View Post');?></a>
 							</div>
 						</td>
 						</tr>
-						<?
+						<?php
 					}
 					$args_spam = array(
 						'meta_query' => array(
@@ -162,7 +162,7 @@ function ct_show_checkspam_page()
 				?>
 				<tr class="comment even thread-even depth-1 approved">
 					<td colspan="4"> 
-						<?
+						<?php
 							
 							$pages=ceil(intval($cnt_spam)/30);
 							for($i=1;$i<=$pages;$i++)
@@ -179,18 +179,18 @@ function ct_show_checkspam_page()
 						?>
 					</td>
 				</tr>
-				<?
+				<?php
 					}
 				?>
 			</tbody>
 		</table>
-		<button class="button" id="ct_delete_all"><? _e('Delete all content.'); ?></button> 
-		<button class="button" id="ct_delete_checked"><? _e('Delete selected', 'cleantalk'); ?></button>
-		<?
+		<button class="button" id="ct_delete_all"><?php _e('Delete all content.'); ?></button> 
+		<button class="button" id="ct_delete_checked"><?php _e('Delete selected', 'cleantalk'); ?></button>
+		<?php
 		}
 		?>
 	</div>
-	<?
+	<?php
 }
 
 add_action('admin_print_footer_scripts','ct_add_checkspam_button');
@@ -201,18 +201,18 @@ function ct_add_checkspam_button()
     ?>
     <script>
     	var ajax_nonce='<?php echo $ajax_nonce; ?>';
-    	var spambutton_text='<? _e("Find spam comments", 'cleantalk'); ?>';
+    	var spambutton_text='<?php _e("Find spam comments", 'cleantalk'); ?>';
     </script>
-    <?
+    <?php
     if( $screen->id == 'edit-comments' ){
         ?>
-            <script src="<? print plugins_url( 'cleantalk-comments-editscreen.js', __FILE__ ); ?>"></script>
+            <script src="<?php print plugins_url( 'cleantalk-comments-editscreen.js', __FILE__ ); ?>"></script>
         <?php
     }
     if($screen->id == 'comments_page_ct_check_spam')
     {
     	?>
-            <script src="<? print plugins_url( 'cleantalk-comments-checkspam.js', __FILE__ ); ?>"></script>
+            <script src="<?php print plugins_url( 'cleantalk-comments-checkspam.js', __FILE__ ); ?>"></script>
         <?php
     }
 }
@@ -412,3 +412,4 @@ function ct_ajax_delete_all()
 	}
 	die();
 }
+?>
