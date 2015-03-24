@@ -145,22 +145,25 @@ function ct_show_checkspam_page()
 						</tr>
 						<?
 					}
+					$args_spam = array(
+						'meta_query' => array(
+							Array(
+								'key' => 'ct_marked_as_spam',
+								'value' => '1',
+								'compare' => 'NUMERIC'
+							)
+							
+						),
+						'count'=>true
+					);
+					$cnt_spam=get_comments($args_spam);
+					if($cnt_spam>30)
+					{
 				?>
 				<tr class="comment even thread-even depth-1 approved">
 					<td colspan="4"> 
 						<?
-							$args_spam = array(
-								'meta_query' => array(
-									Array(
-										'key' => 'ct_marked_as_spam',
-										'value' => '1',
-										'compare' => 'NUMERIC'
-									)
-									
-								),
-								'count'=>true
-							);
-							$cnt_spam=get_comments($args_spam);
+							
 							$pages=ceil(intval($cnt_spam)/30);
 							for($i=1;$i<=$pages;$i++)
 							{
@@ -176,6 +179,9 @@ function ct_show_checkspam_page()
 						?>
 					</td>
 				</tr>
+				<?
+					}
+				?>
 			</tbody>
 		</table>
 		<button class="button" id="ct_delete_all"><? _e('Delete all content.'); ?></button> 

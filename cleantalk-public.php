@@ -1440,7 +1440,7 @@ function ct_contact_form_validate () {
         'sender_email' => $sender_email,
         'sender_nickname' => $sender_nickname,
         'post_info' => $post_info,
-	    'sender_info' => $sender_info,
+	    'sender_info' => get_sender_info(),
         'checkjs' => $checkjs
     ));
     
