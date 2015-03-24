@@ -3,11 +3,11 @@
   Plugin Name: Anti-spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, captcha less, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms. 
-  Version: 4.21
+  Version: 5.0
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
  */
- 
+
 if(!defined('CLEANTALK_PLUGIN_DIR')){
     define('CLEANTALK_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
@@ -21,8 +21,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     // After plugin loaded - to load locale as described in manual
     add_action( 'plugins_loaded', 'ct_plugin_loaded' );
 
-    if (is_admin())
-    {
+    if (is_admin()) {
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-admin.php');
 
 	if (!(defined( 'DOING_AJAX' ) && DOING_AJAX)) {
@@ -30,8 +29,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     	    add_action('admin_menu', 'ct_admin_add_page');
     	    add_action('admin_notices', 'admin_notice_message');
 	}
-	
-		if (defined( 'DOING_AJAX' ) && DOING_AJAX)
+	if (defined( 'DOING_AJAX' ) && DOING_AJAX)
 		{
 			require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
 			require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-ajax.php');
