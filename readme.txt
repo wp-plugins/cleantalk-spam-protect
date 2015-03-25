@@ -7,6 +7,7 @@ Stable tag: 5.1
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+
 Max power, all-in-one, premium anti-spam. No comments & registrations spam, no contact spam, protects any forms. Just install and forget spam. 
 
 == Description ==
