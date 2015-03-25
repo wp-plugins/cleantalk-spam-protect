@@ -175,12 +175,12 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
-= 5.10 2015-03-24 =
+= 5.1 2015-03-24 =
   * Fixed site crash after installing 5.0 on some websites
 
-= 5.00 2015-03-24 =
-  * Added bulk comments checking via CleanTalk blacklists
-  * Added form protection for 'Ajax Login & Register'
+= 5.0 2015-03-24 =
+  * Added bulk comments checking for spam via CleanTalk blacklists
+  * Added anti-spam form protection for 'Ajax Login & Register'
   * Fixed JetPack form protection
 
 = 4.24 2015-03-20 =
@@ -534,8 +534,8 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * Fixed site crash after installing 5.0 on some websites
 
 = 5.00 2015-03-24 =
-  * Added bulk comments checking via CleanTalk blacklists
-  * Added form protection for 'Ajax Login & Register'
+  * Added bulk comments checking for spam via CleanTalk blacklists
+  * Added anti-spam form protection for 'Ajax Login & Register'
   * Fixed JetPack form protection
 
 = 4.24 2015-03-20 =
