@@ -20,6 +20,7 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 1. Stops spam orders.
 1. Stops spam bookings.
 1. Stops spam subscriptions.
+1. Check existing comments for spam
 
 = Spam protection =
 * WordPress, JetPack comments.
@@ -28,6 +29,9 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 * WooCommerce review form.
 * WordPress Landing Pages.
 * Any WordPress form (option 'Custom contact forms').
+
+= Check existing comments for spam =
+With the help of anti-spam CleanTalk you can check existing comments, to find and quickly delete spam comments. For use these function, go to WP Console->Comments->Find spam comments.
 
 = Cloud anti-spam for WordPress. CAPTCHA less, no spam comments, no spam registrations, no spam contact emails, no spam trackbacks =
 Spam is one of the most irritating factors. Spam become every year more and conventional anti-spam can no longer handle all the spam bots. CleanTalk prevents spam and automatically blocks it. You'll be surprised of effective protection against spam.
