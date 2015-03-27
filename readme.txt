@@ -25,11 +25,11 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 
 = Spam protection =
 * WordPress, JetPack comments.
-* WordPress, BuddyPress, bbPress, S2Member, WooCommerce registrations.
+* WordPress, BuddyPress, bbPress, S2Member, WooCommerce  registrations.
 * Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages, Gravity forms and any themes/custom contact form.
 * WooCommerce review form.
 * WordPress Landing Pages.
-* Any WordPress form (option 'Custom contact forms').
+* Any WordPress form (option 'Custom contact forms'). 
 
 = Check existing comments for spam =
 With the help of anti-spam CleanTalk you can check existing comments, to find and quickly delete spam comments. For use these function, go to WP Console->Comments->Find spam comments.
