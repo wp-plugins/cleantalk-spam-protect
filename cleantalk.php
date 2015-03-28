@@ -17,6 +17,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     // http://codex.wordpress.org/Function_Reference/register_activation_hook
     register_activation_hook( __FILE__, 'ct_activation' );
     register_deactivation_hook( __FILE__, 'ct_deactivation' );
+    
 
     // After plugin loaded - to load locale as described in manual
     add_action( 'plugins_loaded', 'ct_plugin_loaded' );
