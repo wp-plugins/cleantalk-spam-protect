@@ -22,8 +22,9 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     // After plugin loaded - to load locale as described in manual
     add_action( 'plugins_loaded', 'ct_plugin_loaded' );
 
-    if (is_admin()) {
-	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-admin.php');
+    if (is_admin())
+    {
+		require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-admin.php');
 
 	if (!(defined( 'DOING_AJAX' ) && DOING_AJAX)) {
     	    add_action('admin_init', 'ct_admin_init', 1);
