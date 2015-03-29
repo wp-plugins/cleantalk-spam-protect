@@ -17,13 +17,15 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     // http://codex.wordpress.org/Function_Reference/register_activation_hook
     register_activation_hook( __FILE__, 'ct_activation' );
     register_deactivation_hook( __FILE__, 'ct_deactivation' );
+    add_action('admin_init', 'ct_plugin_redirect');
     
 
     // After plugin loaded - to load locale as described in manual
     add_action( 'plugins_loaded', 'ct_plugin_loaded' );
 
-    if (is_admin()) {
-	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-admin.php');
+    if (is_admin())
+    {
+		require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-admin.php');
 
 	if (!(defined( 'DOING_AJAX' ) && DOING_AJAX)) {
     	    add_action('admin_init', 'ct_admin_init', 1);
@@ -81,6 +83,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 if (!function_exists ( 'ct_activation')) {
     function ct_activation() {
 	wp_schedule_event(time(), 'hourly', 'ct_hourly_event_hook' );
+	add_option('ct_plugin_do_activation_redirect', true);
     }
 }
 /**
@@ -91,6 +94,22 @@ if (!function_exists ( 'ct_deactivation')) {
 	wp_clear_scheduled_hook( 'ct_hourly_event_hook' );
     }
 }
+
+/**
+ * Uses for redirection after activation
+ */
+function ct_plugin_redirect()
+{
+	if (get_option('ct_plugin_do_activation_redirect', false))
+	{
+		delete_option('ct_plugin_do_activation_redirect');
+		if(!isset($_GET['activate-multi']))
+		{
+			wp_redirect("options-general.php?page=cleantalk");
+		}
+	}
+}
+
 
 require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-comments.php');
 

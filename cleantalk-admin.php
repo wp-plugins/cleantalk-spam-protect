@@ -214,6 +214,7 @@ function ct_input_apikey() {
         if (isset($_COOKIE[$ct_notice_online_label]) && $_COOKIE[$ct_notice_online_label] > 0) {
             echo '&nbsp;&nbsp;<span style="text-decoration: underline;">The key accepted!</span>&nbsp;<img src="' . plugin_dir_url(__FILE__) . 'inc/images/yes.png" alt=""  height="" />'; 
         }
+         echo "<br /><a target='__blank' href='https://cleantalk.org/my?user_token=".@$ct_options['user_token']."'>".__('Click here to get anti-spam statistics', 'cleantalk')."</a>";
     }
 }
 
