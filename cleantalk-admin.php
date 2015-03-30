@@ -81,6 +81,12 @@ function ct_admin_init() {
                 if (isset($result['data']) && is_array($result['data'])) {
             	    $result = $result['data'];
 		}
+				if(isset($result['user_token']))
+				{
+				
+					$ct_data['user_token'] = $result['user_token'];
+					update_option('cleantalk_data', $ct_data);
+				}
                 if (isset($result['auth_key']) && !empty($result['auth_key'])) {
 		    $_POST['cleantalk_settings']['apikey'] = $result['auth_key'];
                 } else {
@@ -214,6 +220,7 @@ function ct_input_apikey() {
         if (isset($_COOKIE[$ct_notice_online_label]) && $_COOKIE[$ct_notice_online_label] > 0) {
             echo '&nbsp;&nbsp;<span style="text-decoration: underline;">The key accepted!</span>&nbsp;<img src="' . plugin_dir_url(__FILE__) . 'inc/images/yes.png" alt=""  height="" />'; 
         }
+         echo "<br /><a target='__blank' href='https://cleantalk.org/my?user_token=".@$ct_data['user_token']."'>".__('Click here to get anti-spam statistics', 'cleantalk')."</a>";
     }
 }
 
