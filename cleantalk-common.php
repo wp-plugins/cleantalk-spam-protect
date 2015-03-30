@@ -355,6 +355,7 @@ function ct_def_options() {
         'ssl_on' => 0, // Secure connection to servers 
         'relevance_test' => 0, // Test comment for relevance 
         'notice_api_errors' => 0, // Send API error notices to WP admin
+        'user_token'=>'' //user token for auto login into spam statistics
     );
 }
 
