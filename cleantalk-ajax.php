@@ -15,6 +15,13 @@ add_action( 'user_register', 'ct_user_register_ajaxlogin',1 );
 add_action( 'wp_ajax_nopriv_wpuf_submit_register', 'ct_wpuf_submit_register',1 );
 add_action( 'wp_ajax_wpuf_submit_register', 'ct_wpuf_submit_register',1 );
 
+/*hooks for MyMail */
+add_action( 'wp_ajax_nopriv_mymail_form_submit', 'ct_mymail_form_submit',1 );
+add_action( 'wp_ajax_mymail_form_submit', 'ct_mymail_form_submit',1 );
+
+/*hooks for MailPoet */
+add_action( 'wp_ajax_nopriv_wysija_ajax', 'ct_wysija_ajax',1 );
+add_action( 'wp_ajax_wysija_ajax', 'ct_wysija_ajax',1 );
 
 function ct_validate_email_ajaxlogin($email=null, $is_ajax=true)
 {
@@ -232,6 +239,125 @@ function ct_wpuf_submit_register()
 			@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
 			print json_encode($result);
 			die();
+		}
+	}
+}
+
+function ct_mymail_form_submit()
+{
+	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
+	global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
+	
+	$ct_data=ct_get_data();
+	
+	$ct_options=ct_get_options();
+	
+	$sender_email = null;
+    $message = '';
+    
+    ct_get_fields($sender_email,$message,$_POST);
+    
+	if($sender_email!=null)
+	{
+		$checkjs = js_test('ct_checkjs', $_COOKIE, true);
+		$submit_time = submit_time_test();
+	    $sender_info = get_sender_info();
+	    $sender_info['post_checkjs_passed']=$checkjs;
+	    
+		$sender_info = json_encode($sender_info);
+		if ($sender_info === false)
+		{
+			$sender_info= '';
+		}
+		
+		$ct_base_call_result = ct_base_call(array(
+			'message' => $message,
+			'example' => null,
+			'sender_email' => $sender_email,
+			'sender_nickname' => null,
+			'sender_info' => $sender_info,
+			'post_info'=>null,
+			'checkjs' => $checkjs));
+		
+		$ct = $ct_base_call_result['ct'];
+		$ct_result = $ct_base_call_result['ct_result'];
+		if ($ct_result->allow == 0)
+		{
+			$result=Array('success'=>false,'html'=>$ct_result->comment);
+			@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+			print json_encode($result);
+			die();
+		}
+	}
+}
+
+function ct_wysija_ajax()
+{
+	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
+	global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
+	
+	$ct_data=ct_get_data();
+	
+	$ct_options=ct_get_options();
+	
+	$sender_email = null;
+    $message = '';
+    
+    ct_get_fields($sender_email,$message,$_POST);
+    
+    
+	if($sender_email!=null&&isset($_GET['callback']))
+	{
+		$checkjs = js_test('ct_checkjs', $_COOKIE, true);
+		$submit_time = submit_time_test();
+	    $sender_info = get_sender_info();
+	    $sender_info['post_checkjs_passed']=$checkjs;
+	    
+		$sender_info = json_encode($sender_info);
+		if ($sender_info === false)
+		{
+			$sender_info= '';
+		}
+		
+		$ct_base_call_result = ct_base_call(array(
+			'message' => $message,
+			'example' => null,
+			'sender_email' => $sender_email,
+			'sender_nickname' => null,
+			'sender_info' => $sender_info,
+			'post_info'=>null,
+			'checkjs' => $checkjs));
+		
+		$ct = $ct_base_call_result['ct'];
+		$ct_result = $ct_base_call_result['ct_result'];
+		if ($ct_result->allow == 0)
+		{
+			$result=Array('result'=>false,'msgs'=>Array('updated'=>Array($ct_result->comment)));
+			//@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+			print $_GET['callback'].'('.json_encode($result).');';
+			die();
+		}
+	}
+}
+
+function ct_get_fields(&$email,&$message,$arr)
+{
+	foreach($arr as $key=>$value)
+	{
+		if(!is_array($value))
+		{
+			if ($email === null && preg_match("/^\S+@\S+\.\S+$/", $value))
+	    	{
+	            $email = $value;
+	        }
+	        else
+	        {
+	        	$message.="$value\n";
+	        }
+		}
+		else
+		{
+			ct_get_fields($email,$message,$value);
 		}
 	}
 }
