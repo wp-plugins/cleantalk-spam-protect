@@ -491,7 +491,15 @@ function ct_die($comment_id, $comment_status) {
     global $ct_comment;
     $err_text = '<center><b style="color: #49C73B;">Clean</b><b style="color: #349ebf;">Talk.</b> ' . __('Spam protection', 'cleantalk') . "</center><br><br>\n" . $ct_comment;
         $err_text .= '<script>setTimeout("history.back()", 5000);</script>';
-        wp_die($err_text, 'Blacklisted', array('back_link' => true));
+        if(isset($_POST['et_pb_contact_email']))
+        {
+        	$mes='<div id="et_pb_contact_form_1" class="et_pb_contact_form_container clearfix"><h1 class="et_pb_contact_main_title">Blacklisted</h1><div class="et-pb-contact-message"><p>'.$ct_comment.'</p></div></div>';
+        	wp_die($mes, 'Blacklisted', array('back_link' => true,'response'=>200));
+        }
+        else
+        {
+        	wp_die($err_text, 'Blacklisted', array('back_link' => true));
+        }
 }
 
 /**
