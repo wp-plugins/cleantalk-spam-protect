@@ -22,6 +22,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 
     // After plugin loaded - to load locale as described in manual
     add_action( 'plugins_loaded', 'ct_plugin_loaded' );
+    
 
     if (is_admin())
     {
