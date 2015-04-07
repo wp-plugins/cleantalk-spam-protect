@@ -5,6 +5,30 @@ $ct_plugin_basename = 'cleantalk-spam-protect/cleantalk.php';
 // Timeout to get app server
 $ct_server_timeout = 10;
 
+
+/**
+ * Admin action 'admin_print_footer_scripts' - Enqueue admin script for checking if timezone offset is saved in settings
+ */
+
+
+/**
+ * Admin action 'wp_ajax_ajax_get_timezone' - Ajax method for getting timezone offset
+ */
+ 
+function ct_ajax_get_timezone()
+{
+	check_ajax_referer( 'ct_secret_nonce', 'security' );
+	$ct_data = ct_get_data();
+	if(isset($_POST['offset']))
+	{
+		$ct_data['timezone'] = intval($_POST['offset']);
+		update_option('cleantalk_data', $ct_data);
+	}
+}
+ 
+add_action( 'wp_ajax_ajax_get_timezone', 'ct_ajax_get_timezone' );
+
+
 /**
  * Admin action 'admin_enqueue_scripts' - Enqueue admin script of reloading admin page after needed AJAX events
  * @param 	string $hook URL of hooked page
@@ -58,6 +82,8 @@ function ct_admin_init() {
             $data['email'] = get_option('admin_email');
             $data['website'] = parse_url(get_option('siteurl'),PHP_URL_HOST);
             $data['platform'] = 'wordpress';
+            $data['timezone'] = $ct_data['timezone'];
+            $data['locale'] = get_locale();
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -210,6 +236,7 @@ function ct_input_apikey() {
     $def_value = ''; 
     echo "<input id='cleantalk_apikey' name='cleantalk_settings[apikey]' size='20' type='text' value='$value' style=\"font-size: 14pt;\"/>";
     if (ct_valid_key($value) === false) {
+    	echo "<script src='".plugins_url( 'cleantalk-admin.js', __FILE__ )."'></script>\n";
         echo "<a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key manually', 'cleantalk')."</a>";
         if (function_exists('curl_init') && function_exists('json_decode')) {
             echo '<br /><br /><input name="get_apikey_auto" type="submit" value="' . __('Get access key automatically', 'cleantalk') . '"  />';
