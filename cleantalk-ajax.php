@@ -379,20 +379,40 @@ function ct_cs_registration_validation()
 		$sender_info = json_encode($sender_info);
 		if ($sender_info === false)
 		{
-			$sender_info= '';
+			$sender_info = '';
 		}
+		if(isset($_POST['user_login']))
+		{
+			$nickname=$_POST['user_login'];
+		}
+		else
+		{
+			$nickname='';
+		}
+		require_once('cleantalk.class.php');
 		
-		$ct_base_call_result = ct_base_call(array(
-			'message' => $message,
-			'example' => null,
-			'sender_email' => $sender_email,
-			'sender_nickname' => null,
-			'sender_info' => $sender_info,
-			'post_info'=>null,
-			'checkjs' => $checkjs));
+		$config = get_option('cleantalk_server');
+		$ct = new Cleantalk();
+		$ct->work_url = $config['ct_work_url'];
+		$ct->server_url = $ct_options['server'];
 		
-		$ct = $ct_base_call_result['ct'];
-		$ct_result = $ct_base_call_result['ct_result'];
+		$ct->server_ttl = $config['ct_server_ttl'];
+		$ct->server_changed = $config['ct_server_changed'];
+		$ct->ssl_on = $ct_options['ssl_on'];
+		
+		
+		$ct_request = new CleantalkRequest();
+		$ct_request->auth_key = $ct_options['apikey'];
+		$ct_request->sender_email = $sender_email; 
+		$ct_request->sender_ip = $_SERVER['REMOTE_ADDR'];
+		$ct_request->sender_nickname = $nickname; 
+		$ct_request->agent = $ct_agent_version; 
+		$ct_request->sender_info = $sender_info;
+		$ct_request->js_on = $checkjs;
+		$ct_request->submit_time = $submit_time; 
+		
+		$ct_result = $ct->isAllowUser($ct_request);
+		
 		if ($ct_result->allow == 0)
 		{
 			$result=Array("type"=>"error","message"=>$ct_result->comment);
@@ -414,7 +434,18 @@ function ct_sm_ra()
 	$sender_email = null;
     $message = '';
     
+    if(isset($_POST['target']))
+    {
+    	$tmp=$_POST['target'];
+    	$_POST['tagret']=1;
+    }
+    
     ct_get_fields($sender_email,$message,$_POST);
+    
+    if(isset($_POST['target']))
+    {
+    	$_POST['target']=$tmp;
+    }
     
     
 	if($sender_email!=null)
