@@ -437,7 +437,7 @@ function ct_sm_ra()
     if(isset($_POST['target']))
     {
     	$tmp=$_POST['target'];
-    	$_POST['tagret']=1;
+    	$_POST['target']=1;
     }
     
     ct_get_fields($sender_email,$message,$_POST);
