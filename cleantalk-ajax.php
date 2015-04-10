@@ -37,6 +37,11 @@ add_action( 'wp_ajax_send_message', 'ct_sm_ra',1 );
 add_action( 'wp_ajax_nopriv_request_appointment', 'ct_sm_ra',1 );
 add_action( 'wp_ajax_request_appointment', 'ct_sm_ra',1 );
 
+/*hooks for zn_do_login */
+add_action( 'wp_ajax_nopriv_zn_do_login', 'ct_zn_do_login',1 );
+add_action( 'wp_ajax_zn_do_login', 'ct_zn_do_login',1 );
+
+
 function ct_validate_email_ajaxlogin($email=null, $is_ajax=true)
 {
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
@@ -475,6 +480,53 @@ function ct_sm_ra()
 		if ($ct_result->allow == 0)
 		{
 			print $ct_result->comment;
+			die();
+		}
+	}
+}
+
+function ct_zn_do_login()
+{
+	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
+	global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
+	
+	$ct_data=ct_get_data();
+	
+	$ct_options=ct_get_options();
+	
+	$sender_email = null;
+    $message = '';
+
+    ct_get_fields($sender_email,$message,$_POST);
+    
+    
+	if($sender_email!=null&&$_POST['zn_form_action']=='register')
+	{
+		$checkjs = js_test('ct_checkjs', $_COOKIE, true);
+		$submit_time = submit_time_test();
+	    $sender_info = get_sender_info();
+	    $sender_info['post_checkjs_passed']=$checkjs;
+	    
+		$sender_info = json_encode($sender_info);
+		if ($sender_info === false)
+		{
+			$sender_info= '';
+		}
+		
+		$ct_base_call_result = ct_base_call(array(
+			'message' => $message,
+			'example' => null,
+			'sender_email' => $sender_email,
+			'sender_nickname' => null,
+			'sender_info' => $sender_info,
+			'post_info'=>null,
+			'checkjs' => $checkjs));
+		
+		$ct = $ct_base_call_result['ct'];
+		$ct_result = $ct_base_call_result['ct_result'];
+		if ($ct_result->allow == 0)
+		{
+			print '<div id="login_error">'.$ct_result->comment.'</div>';
 			die();
 		}
 	}
