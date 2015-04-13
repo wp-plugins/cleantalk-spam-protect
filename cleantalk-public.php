@@ -1376,7 +1376,8 @@ function ct_contact_form_validate () {
 	global $pagenow;
 
     if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
-        (isset($_POST['log']) && isset($_POST['pwd']) && isset($pagenow) && $pagenow == 'wp-login.php') // WordPress log in form
+        (isset($_POST['log']) && isset($_POST['pwd']) && isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
+        (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword')
         ) {
         return null;
     }
