@@ -2,6 +2,8 @@
 
 $ct_plugin_basename = 'cleantalk-spam-protect/cleantalk.php';
 
+require_once('cleantalk.class.php');
+
 // Timeout to get app server
 $ct_server_timeout = 10;
 
@@ -74,36 +76,16 @@ function ct_admin_init() {
     	    setcookie($ct_notice_autokey_label, '', 1, '/');
         }
     }
-
-    if (isset($_POST['get_apikey_auto']) && function_exists('curl_init') && function_exists('json_decode')){
-            $url = 'https://api.cleantalk.org';
-            $data = array();
-            $data['method_name'] = 'get_api_key'; 
-            $data['email'] = get_option('admin_email');
-            $data['website'] = parse_url(get_option('siteurl'),PHP_URL_HOST);
-            $data['platform'] = 'wordpress';
-            $data['timezone'] = $ct_data['timezone'];
-            $data['locale'] = get_locale();
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_TIMEOUT, $ct_server_timeout);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-
-            // receive server response ...
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            // resolve 'Expect: 100-continue' issue
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
-
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-
-            $result = curl_exec($ch);
-            curl_close($ch);
+    
+    if (isset($_POST['get_apikey_auto'])){
+		    $email = get_option('admin_email');
+		    $website = parse_url(get_option('siteurl'),PHP_URL_HOST);
+		    $platform = 'wordpress';
+		    
+		    $result = getAutoKey($email, $website, $platform);
 
             if ($result) {
-                $result = json_decode($result, true);
+            	$result = json_decode($result, true);
                 if (isset($result['data']) && is_array($result['data'])) {
             	    $result = $result['data'];
 		}
@@ -126,27 +108,7 @@ function ct_admin_init() {
     if (time() > $ct_data['next_account_status_check']) {
         $result = false;
 	    if (function_exists('curl_init') && function_exists('json_decode') && ct_valid_key($ct_options['apikey'])) {
-            $url = 'https://api.cleantalk.org';
-            $data = array();
-            $data['method_name'] = 'notice_paid_till'; 
-            $data['auth_key'] = $ct_options['apikey']; 
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_TIMEOUT, $ct_server_timeout);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-
-            // receive server response ...
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            // resolve 'Expect: 100-continue' issue
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
-
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-
-            $result = curl_exec($ch);
-            curl_close($ch);
+            $result=noticePaidTill($ct_options['apikey']);            
             
             if ($result) {
                 $result = json_decode($result, true);
