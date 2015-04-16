@@ -1083,14 +1083,14 @@ function ct_wpcf7_spam($param) {
         if ($sender_email === null && preg_match("/^\S+@\S+\.\S+$/", $v)) {
             $sender_email = $v;
         }
-        if ($message === '' && preg_match("/(\-message|\w*message\w*|contact|comment)$/", $k)) {
-            $message = $v;
-        }
-        if ($sender_nickname === null && preg_match("/-name$/", $k)) {
+        else if ($sender_nickname === null && preg_match("/-name$/", $k)) {
             $sender_nickname = $v;
         }
-        if ($subject === '' && ct_get_data_from_submit($k, 'subject')) {
+        else if ($subject === '' && ct_get_data_from_submit($k, 'subject')) {
             $subject = $v;
+        }
+        else {
+            $message .= $v."\n";
         }
 
     }
@@ -1377,7 +1377,8 @@ function ct_contact_form_validate () {
 
     if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
         (isset($_POST['log']) && isset($_POST['pwd']) && isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
-        (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword')
+        (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword') ||
+        defined('JETPACK__VERSION')
         ) {
         return null;
     }

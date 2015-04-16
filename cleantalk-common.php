@@ -182,6 +182,11 @@ function ct_base_call($params = array()) {
     // Restart submit form counter for failed requests
     if ($ct_result->allow == 0) {
         $_SESSION[$ct_formtime_label] = time();
+        ct_add_event('no');
+    }
+    else
+    {
+    	ct_add_event('yes');
     }
 
     return array('ct' => $ct, 'ct_result' => $ct_result);

@@ -111,6 +111,22 @@ function ct_plugin_redirect()
 	}
 }
 
+function ct_add_event($event_type)
+{
+	global $ct_data;
+	$t=time();
+	if($event_type=='yes')
+	{
+		$ct_data['stat_accepted']++;
+	}
+	if($event_type=='no')
+	{
+		$ct_data['stat_blocked']++;
+	}
+	$ct_data['stat_all']++;
+	update_option('cleantalk_data', $ct_data);
+}
+
 
 require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-comments.php');
 

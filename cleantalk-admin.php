@@ -12,6 +12,15 @@ $ct_server_timeout = 10;
  * Admin action 'admin_print_footer_scripts' - Enqueue admin script for checking if timezone offset is saved in settings
  */
 
+add_action( 'admin_print_footer_scripts', 'ct_add_stats_js' );
+
+function ct_add_stats_js()
+{
+	echo "<script src='".plugins_url( 'cleantalk-stats.js', __FILE__ )."'></script>\n";
+}
+
+
+
 
 /**
  * Admin action 'wp_ajax_ajax_get_timezone' - Ajax method for getting timezone offset
@@ -164,9 +173,11 @@ function ct_admin_init() {
     
     register_setting('cleantalk_settings', 'cleantalk_settings', 'ct_settings_validate');
     add_settings_section('cleantalk_settings_main', __($ct_plugin_name, 'cleantalk'), 'ct_section_settings_main', 'cleantalk');
+    add_settings_section('cleantalk_settings_state', __('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
+    add_settings_section('cleantalk_settings_autodel', '', 'ct_section_settings_autodel', 'cleantalk');
     add_settings_section('cleantalk_settings_anti_spam', __('Anti-spam settings', 'cleantalk'), 'ct_section_settings_anti_spam', 'cleantalk');
     add_settings_field('cleantalk_apikey', __('Access key', 'cleantalk'), 'ct_input_apikey', 'cleantalk', 'cleantalk_settings_main');
-    add_settings_field('cleantalk_remove_old_spam', __('Automatically delete spam comments', 'cleantalk'), 'ct_input_remove_old_spam', 'cleantalk', 'cleantalk_settings_main');
+    add_settings_field('cleantalk_remove_old_spam', __('Automatically delete spam comments', 'cleantalk'), 'ct_input_remove_old_spam', 'cleantalk', 'cleantalk_settings_autodel');
     
     add_settings_field('cleantalk_registrations_test', __('Registration forms', 'cleantalk'), 'ct_input_registrations_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_comments_test', __('Comments form', 'cleantalk'), 'ct_input_comments_test', 'cleantalk', 'cleantalk_settings_anti_spam');
@@ -188,17 +199,123 @@ function ct_section_settings_anti_spam() {
     return true;
 }
 
+add_action( 'admin_bar_menu', 'ct_add_admin_menu', 999 );
+
+function ct_add_admin_menu( $wp_admin_bar ) {
+// add a parent item
+	$args = array(
+		'id'    => 'ct_parent_node',
+		'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small.png" alt=""  height="" /><a href="#" class="ab-item alignright"><span class="ab-label" id="ct_stats"></span></a>'
+	);
+	$wp_admin_bar->add_node( $args );
+
+	// add a child item to our parent item
+	$args = array(
+		'id'     => 'ct_dashboard_link',
+		'title'  => '<a href="https://cleantalk.org/my/" target="_blank">CleanTalk dashboard</a>',
+		'parent' => 'ct_parent_node'
+	);
+	$wp_admin_bar->add_node( $args );
+
+	// add another child item to our parent item (not to our first group)
+	$args = array(
+		'id'     => 'ct_settings_link',
+		'title'  => '<a href="options-general.php?page=cleantalk">Settings</a>',
+		'parent' => 'ct_parent_node'
+	);
+	$wp_admin_bar->add_node( $args );
+}
+
+/**
+ * Admin callback function - Displays description of 'state' plugin parameters section
+ */
+function ct_section_settings_state() {
+	global $ct_options, $ct_data;
+	
+	//print_r($ct_options);
+
+	$img="yes.png";
+	$img_no="no.png";
+	$color="black";
+	$test_failed=false;
+	//if(isset($ct_data['testing_failed'])&&$ct_data['testing_failed']==1)
+	if(trim($ct_options['apikey'])=='')
+	{
+		$img="yes_gray.png";
+		$img_no="no_gray.png";
+		$color="gray";
+	}
+	if(isset($ct_data['testing_failed'])&&$ct_data['testing_failed']==1)
+	{
+		$img="no.png";
+		$img_no="no.png";
+		$color="black";
+		$test_failed=true;
+	}
+	print "<div style='color:$color'>";
+	if($ct_options['registrations_test']==1)
+	{
+		print '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/'.$img.'" alt=""  height="" /> '.__('Registration forms', 'cleantalk');
+	}
+	else
+	{
+		print '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/'.$img_no.'" alt=""  height="" /> '.__('Registration forms', 'cleantalk');
+	}
+	
+	if($ct_options['comments_test']==1)
+	{
+		print ' &nbsp; <img src="' . plugin_dir_url(__FILE__) . 'inc/images/'.$img.'" alt=""  height="" /> '.__('Comments form', 'cleantalk');
+	}
+	else
+	{
+		print ' &nbsp; <img src="' . plugin_dir_url(__FILE__) . 'inc/images/'.$img_no.'" alt=""  height="" /> '.__('Comments form', 'cleantalk');
+	}
+	
+	if($ct_options['contact_forms_test']==1)
+	{
+		print ' &nbsp; <img src="' . plugin_dir_url(__FILE__) . 'inc/images/'.$img.'" alt=""  height="" /> '.__('Contact forms', 'cleantalk');
+	}
+	else
+	{
+		print ' &nbsp; <img src="' . plugin_dir_url(__FILE__) . 'inc/images/'.$img_no.'" alt=""  height="" /> '.__('Contact forms', 'cleantalk');
+	}
+	
+	if($ct_options['general_contact_forms_test']==1)
+	{
+		print ' &nbsp; <img src="' . plugin_dir_url(__FILE__) . 'inc/images/'.$img.'" alt=""  height="" /> '.__('Custom contact forms', 'cleantalk');
+	}
+	else
+	{
+		print ' &nbsp; <img src="' . plugin_dir_url(__FILE__) . 'inc/images/'.$img_no.'" alt=""  height="" /> '.__('Custom contact forms', 'cleantalk');
+	}
+	print "</div>";
+	if($test_failed)
+	{
+		print "Testing is failed, check settings. Tech support <a target=_blank href='mailto:support@cleantalk.org'>support@cleantalk.org</a>";
+	}
+    return true;
+}
+
+/**
+ * Admin callback function - Displays description of 'autodel' plugin parameters section
+ */
+function ct_section_settings_autodel() {
+    return true;
+}
+
 /**
  * Admin callback function - Displays inputs of 'apikey' plugin parameter
  */
 function ct_input_apikey() {
     global $ct_options, $ct_data, $ct_notice_online_label;
     
+    echo "<script src='".plugins_url( 'cleantalk-admin.js', __FILE__ )."'></script>\n";
+    
     $value = $ct_options['apikey'];
     $def_value = ''; 
     echo "<input id='cleantalk_apikey' name='cleantalk_settings[apikey]' size='20' type='text' value='$value' style=\"font-size: 14pt;\"/>";
     if (ct_valid_key($value) === false) {
-    	echo "<script src='".plugins_url( 'cleantalk-admin.js', __FILE__ )."'></script>\n";
+    	
         echo "<a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key manually', 'cleantalk')."</a>";
         if (function_exists('curl_init') && function_exists('json_decode')) {
             echo '<br /><br /><input name="get_apikey_auto" type="submit" value="' . __('Get access key automatically', 'cleantalk') . '"  />';
@@ -320,7 +437,8 @@ input[type=submit] {padding: 10px; background: #3399FF; color: #fff; border:0 no
     <br />
     <br />
     <div>
-    <?php echo __('Plugin Homepage at', 'cleantalk'); ?> <a href="http://cleantalk.org" target="_blank">cleantalk.org</a>.
+    <?php echo __('Plugin Homepage at', 'cleantalk'); ?> <a href="http://cleantalk.org" target="_blank">cleantalk.org</a>.<br />
+    <?php echo __('Tech support CleanTalk:', 'cleantalk'); ?> <a href="https://cleantalk.org/forum/viewforum.php?f=25" target="_blank"><?php echo __('CleanTalk tech forum', 'cleantalk'); ?></a>.<br />
     </div>
     <?php
 }
@@ -554,6 +672,7 @@ function ct_update_option($option_name) {
 
     $key_valid = true;
     $app_server_error = false;
+    $ct_data['testing_failed']=0;
     if (function_exists('curl_init') && function_exists('json_decode')) {
         $url = 'https://cleantalk.org/app_notice';
         $data['auth_key'] = $api_key; 
@@ -579,12 +698,16 @@ function ct_update_option($option_name) {
             $result = json_decode($result, true);
             if (isset($result['valid']) && $result['valid'] == 0) {
                 $key_valid = false;
+                $ct_data['testing_failed']=1;
             }
         }
         if (!$result || !isset($result['valid'])) {
             $app_server_error = true;
+            $ct_data['testing_failed']=1;
         }
     }
+    
+    update_option('cleantalk_data', $ct_data);
     
     if ($key_valid) {
         // Removes cookie for server errors

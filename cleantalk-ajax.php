@@ -42,6 +42,41 @@ add_action( 'wp_ajax_nopriv_zn_do_login', 'ct_zn_do_login',1 );
 add_action( 'wp_ajax_zn_do_login', 'ct_zn_do_login',1 );
 
 
+/*hooks for stats */
+add_action( 'wp_ajax_nopriv_ajax_get_stats', 'ct_get_stats',1 );
+add_action( 'wp_ajax_ajax_get_stats', 'ct_get_stats',1 );
+
+function ct_get_stats()
+{
+	check_ajax_referer( 'ct_secret_nonce', 'security' );
+	global $ct_data;
+	$ct_data=ct_get_data();
+	$t=time();
+	
+	if(!isset($ct_data['stat_accepted']))
+	{
+		$ct_data['stat_accepted']=0;
+		$ct_data['stat_blocked']=0;
+		$ct_data['stat_all']=0;
+		$ct_data['last_time']=$t;
+		update_option('cleantalk_data', $ct_data);
+	}
+	
+	$last_time=intval($ct_data['last_time']);
+	if($last_time-$t>3600)
+	{
+		$ct_data['stat_accepted']=0;
+		$ct_data['stat_blocked']=0;
+		$ct_data['stat_all']=0;
+		$ct_data['last_time']=$t;
+		update_option('cleantalk_data', $ct_data);
+	}
+	
+	$ret=Array('stat_accepted'=>$ct_data['stat_accepted'],'stat_blocked'=>$ct_data['stat_blocked'],'stat_all'=>$ct_data['stat_all']);
+	print json_encode($ret);
+	die();
+}
+
 function ct_validate_email_ajaxlogin($email=null, $is_ajax=true)
 {
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
