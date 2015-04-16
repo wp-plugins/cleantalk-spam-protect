@@ -32,7 +32,7 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 * Any WordPress form (option 'Custom contact forms'). 
 
 = Check existing comments for spam =
-With the help of anti-spam CleanTalk you can check existing comments, to find and quickly delete spam comments. For use these function, go to WP Console->Comments->Find spam comments.
+With the help of anti-spam CleanTalk you can check existing comments, to find and quickly delete spam comments. For use this function, go to WP Console->Comments->Find spam comments.
 
 = Cloud anti-spam for WordPress. CAPTCHA less, no spam comments, no spam registrations, no spam contact emails, no spam trackbacks =
 Spam is one of the most irritating factors.  Spam become every year more and conventional anti-spam can no longer handle all the spam bots. CleanTalk prevents spam and automatically blocks it. You'll be surprised of effective protection against spam.
