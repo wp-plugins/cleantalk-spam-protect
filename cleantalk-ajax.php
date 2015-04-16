@@ -41,6 +41,9 @@ add_action( 'wp_ajax_request_appointment', 'ct_sm_ra',1 );
 add_action( 'wp_ajax_nopriv_zn_do_login', 'ct_zn_do_login',1 );
 add_action( 'wp_ajax_zn_do_login', 'ct_zn_do_login',1 );
 
+/*hooks for zn_do_login */
+add_action( 'wp_ajax_nopriv_cscf-submitform', 'ct_cscf_submitform',1 );
+add_action( 'wp_ajax_cscf-submitform', 'ct_cscf_submitform',1 );
 
 /*hooks for stats */
 add_action( 'wp_ajax_nopriv_ajax_get_stats', 'ct_get_stats',1 );
@@ -567,7 +570,64 @@ function ct_zn_do_login()
 	}
 }
 
+function ct_cscf_submitform()
+{
+	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
+	global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
+	
+	$ct_data=ct_get_data();
+	
+	$ct_options=ct_get_options();
+	
+	$sender_email = null;
+    $message = '';
 
+    if(isset($_POST['cscf']['confirm-email']))
+    {
+    	$tmp=$_POST['cscf']['confirm-email'];
+    	$_POST['cscf']['confirm-email']=1;
+    }
+    
+    ct_get_fields($sender_email,$message,$_POST);
+    
+    if(isset($_POST['cscf']['confirm-email']))
+    {
+    	$_POST['cscf']['confirm-email']=$tmp;
+    }
+    
+    
+	if($sender_email!=null)
+	{
+		$checkjs = js_test('ct_checkjs', $_COOKIE, true);
+		$submit_time = submit_time_test();
+	    $sender_info = get_sender_info();
+	    $sender_info['post_checkjs_passed']=$checkjs;
+	    
+		$sender_info = json_encode($sender_info);
+		if ($sender_info === false)
+		{
+			$sender_info= '';
+		}
+		
+		$ct_base_call_result = ct_base_call(array(
+			'message' => $message,
+			'example' => null,
+			'sender_email' => $sender_email,
+			'sender_nickname' => null,
+			'sender_info' => $sender_info,
+			'post_info'=>null,
+			'checkjs' => $checkjs));
+		
+		$ct = $ct_base_call_result['ct'];
+		$ct_result = $ct_base_call_result['ct_result'];
+		if ($ct_result->allow == 0)
+		{
+			$result=Array('sent'=>true,'valid'=>false,'errorlist'=>Array('name'=>$ct_result->comment));
+			print json_encode($result);
+			die();
+		}
+	}
+}
 function ct_get_fields(&$email,&$message,$arr)
 {
 	foreach($arr as $key=>$value)
