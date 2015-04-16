@@ -240,10 +240,11 @@ function ct_ajax_check_comments()
 				'compare' => 'NOT EXISTS'
 			)
 		),
-		'number'=>999
+		'number'=>500
 	);
 	
 	$u=get_comments($args_unchecked);
+	$u=array_slice($u,0,500);
 	if(sizeof($u)>0)
 	{
 		//print_r($unchecked);
