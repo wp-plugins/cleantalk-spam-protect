@@ -174,10 +174,10 @@ function ct_admin_init() {
     register_setting('cleantalk_settings', 'cleantalk_settings', 'ct_settings_validate');
     add_settings_section('cleantalk_settings_main', __($ct_plugin_name, 'cleantalk'), 'ct_section_settings_main', 'cleantalk');
     add_settings_section('cleantalk_settings_state', "<hr>".__('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
-    add_settings_section('cleantalk_settings_autodel', "<hr>", 'ct_section_settings_autodel', 'cleantalk');
+    //add_settings_section('cleantalk_settings_autodel', "<hr>", 'ct_section_settings_autodel', 'cleantalk');
     add_settings_section('cleantalk_settings_anti_spam', "<hr>".__('Advanced settings', 'cleantalk'), 'ct_section_settings_anti_spam', 'cleantalk');
     add_settings_field('cleantalk_apikey', __('Access key', 'cleantalk'), 'ct_input_apikey', 'cleantalk', 'cleantalk_settings_main');
-    add_settings_field('cleantalk_remove_old_spam', __('Automatically delete spam comments', 'cleantalk'), 'ct_input_remove_old_spam', 'cleantalk', 'cleantalk_settings_autodel');
+    add_settings_field('cleantalk_remove_old_spam', __('Automatically delete spam comments', 'cleantalk'), 'ct_input_remove_old_spam', 'cleantalk', 'cleantalk_settings_anti_spam');
     
     add_settings_field('cleantalk_registrations_test', __('Registration forms', 'cleantalk'), 'ct_input_registrations_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_comments_test', __('Comments form', 'cleantalk'), 'ct_input_comments_test', 'cleantalk', 'cleantalk_settings_anti_spam');
@@ -206,7 +206,7 @@ function ct_add_admin_menu( $wp_admin_bar ) {
 	$ct_data=ct_get_data();
 	$args = array(
 		'id'    => 'ct_parent_node',
-		'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small.png" alt=""  height="" style="margin-top:6px;" /><a href="#" class="ab-item alignright" title="allowed / blocked" alt="allowed / blocked"><span class="ab-label" id="ct_stats"></span></a>'
+		'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small1.png" alt=""  height="" style="margin-top:6px;" /><a href="#" class="ab-item alignright" title="allowed / blocked" alt="allowed / blocked"><span class="ab-label" id="ct_stats"></span></a>'
 	);
 	$wp_admin_bar->add_node( $args );
 
