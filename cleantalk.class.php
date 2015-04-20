@@ -43,7 +43,7 @@ class CleantalkResponse {
      * @var int
      */
     public $stop_words = null;
-
+    
     /**
      * Cleantalk comment
      * @var string
@@ -184,6 +184,12 @@ class CleantalkResponse {
  * Request class
  */
 class CleantalkRequest {
+
+     /**
+     *  All http request headers
+     * @var string
+     */
+     public $all_headers = null;
 
     /**
      * User message
@@ -664,6 +670,7 @@ class Cleantalk {
      */
     private function httpRequest($msg) {
         $result = false;
+        $msg->all_headers=json_encode(apache_request_headers());
         if (((isset($this->work_url) && $this->work_url !== '') && ($this->server_changed + $this->server_ttl > time()))
 				|| $this->stay_on_server == true) {
 	        
@@ -960,6 +967,15 @@ class Cleantalk {
     }
 }
 
+/**
+ * Function gets access key automatically
+ *
+ * @param string website admin email
+ * @param string website host
+ * @param string website platform
+ * @return type
+ */
+
 function getAutoKey($email, $host, $platform)
 {
 	$request=Array();
@@ -972,6 +988,13 @@ function getAutoKey($email, $host, $platform)
 	return $result;
 }
 
+/**
+ * Function gets information about renew notice
+ *
+ * @param string api_key
+ * @return type
+ */
+
 function noticePaidTill($api_key)
 {
 	$request=Array();
@@ -981,6 +1004,16 @@ function noticePaidTill($api_key)
 	$result=sendRawRequest($url,$request);
 	return $result;
 }
+
+/**
+ * Function sends raw request to API server
+ *
+ * @param string url of API server
+ * @param array data to send
+ * @param boolean is data have to be JSON encoded or not
+ * @param integer connect timeout
+ * @return type
+ */
 
 function sendRawRequest($url,$data,$isJSON=false,$timeout=3)
 {

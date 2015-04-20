@@ -10,7 +10,7 @@ function ct_update_stats()
 		data: data,
 		dataType: 'json',
 		success: function(msg){
-			jQuery('#ct_stats').html('<span style="color:green">' + msg.stat_accepted + '</span> / <span style="color:red">' + msg.stat_blocked + '</span> / <span style="color:white">' + msg.stat_all + '</span>');
+			jQuery('#ct_stats').html('<span>' + msg.stat_accepted + '</span> / <span>' + msg.stat_blocked + '</span>');
 			setTimeout(ct_update_stats,5000);
 		}
 	});

@@ -173,9 +173,9 @@ function ct_admin_init() {
     
     register_setting('cleantalk_settings', 'cleantalk_settings', 'ct_settings_validate');
     add_settings_section('cleantalk_settings_main', __($ct_plugin_name, 'cleantalk'), 'ct_section_settings_main', 'cleantalk');
-    add_settings_section('cleantalk_settings_state', __('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
-    add_settings_section('cleantalk_settings_autodel', '', 'ct_section_settings_autodel', 'cleantalk');
-    add_settings_section('cleantalk_settings_anti_spam', __('Anti-spam settings', 'cleantalk'), 'ct_section_settings_anti_spam', 'cleantalk');
+    add_settings_section('cleantalk_settings_state', "<hr>".__('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
+    add_settings_section('cleantalk_settings_autodel', "<hr>", 'ct_section_settings_autodel', 'cleantalk');
+    add_settings_section('cleantalk_settings_anti_spam', "<hr>".__('Advanced settings', 'cleantalk'), 'ct_section_settings_anti_spam', 'cleantalk');
     add_settings_field('cleantalk_apikey', __('Access key', 'cleantalk'), 'ct_input_apikey', 'cleantalk', 'cleantalk_settings_main');
     add_settings_field('cleantalk_remove_old_spam', __('Automatically delete spam comments', 'cleantalk'), 'ct_input_remove_old_spam', 'cleantalk', 'cleantalk_settings_autodel');
     
@@ -205,14 +205,14 @@ function ct_add_admin_menu( $wp_admin_bar ) {
 // add a parent item
 	$args = array(
 		'id'    => 'ct_parent_node',
-		'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small.png" alt=""  height="" /><a href="#" class="ab-item alignright"><span class="ab-label" id="ct_stats"></span></a>'
+		'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small.png" alt=""  height="" style="margin-top:6px;" /><a href="#" class="ab-item alignright" title="allowed / blocked" alt="allowed / blocked"><span class="ab-label" id="ct_stats"></span></a>'
 	);
 	$wp_admin_bar->add_node( $args );
 
 	// add a child item to our parent item
 	$args = array(
 		'id'     => 'ct_dashboard_link',
-		'title'  => '<a href="https://cleantalk.org/my/" target="_blank">CleanTalk dashboard</a>',
+		'title'  => '<a href="https://cleantalk.org/my/?user_token='.@$ct_data['user_token'].'" target="_blank">CleanTalk dashboard</a>',
 		'parent' => 'ct_parent_node'
 	);
 	$wp_admin_bar->add_node( $args );
