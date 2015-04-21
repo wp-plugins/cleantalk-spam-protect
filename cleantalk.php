@@ -55,7 +55,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
 
 	// Init action.
-	add_action('init', 'ct_init', 1);
+	add_action('init', 'cleantalk_init', 1);
 
 	// Hourly run hook
 	add_action('ct_hourly_event_hook', 'ct_do_this_hourly');

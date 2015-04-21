@@ -4,7 +4,7 @@
  * Init functions 
  * @return 	mixed[] Array of options
  */
-function ct_init() {
+function cleantalk_init() {
     global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data;
 
     $ct_options = ct_get_options();
