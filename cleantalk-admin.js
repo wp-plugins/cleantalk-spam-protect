@@ -22,7 +22,8 @@ jQuery(document).ready(function(){
 	ct_adv_settings_title=ct_adv_settings.prev();
 	ct_adv_settings.wrap("<div id='ct_advsettings_hide'>");
 	ct_adv_settings_title.append(" <span id='ct_adv_showhide' style='cursor:pointer'><b>+</b></span>");
-	jQuery('#ct_adv_showhide').click(function(){
+	ct_adv_settings_title.css('cursor','pointer');
+	ct_adv_settings_title.click(function(){
 		if(ct_adv_settings_show)
 		{
 			ct_adv_settings.hide();
