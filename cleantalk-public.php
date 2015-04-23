@@ -8,7 +8,6 @@ function ct_init() {
     global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data;
 
     $ct_options = ct_get_options();
-    $ct_data = ct_get_data();
 
     ct_init_session();
 

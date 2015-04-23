@@ -7,6 +7,7 @@
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
  */
+$cleantalk_plugin_version='5.3';
 
 if(!defined('CLEANTALK_PLUGIN_DIR')){
     define('CLEANTALK_PLUGIN_DIR', plugin_dir_path(__FILE__));
@@ -103,7 +104,6 @@ function ct_plugin_redirect()
 {
 	if (get_option('ct_plugin_do_activation_redirect', false))
 	{
-		delete_option('ct_plugin_do_activation_redirect');
 		if(!isset($_GET['activate-multi']))
 		{
 			wp_redirect("options-general.php?page=cleantalk");

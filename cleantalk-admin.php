@@ -60,10 +60,25 @@ function ct_admin_add_page() {
  * Admin action 'admin_init' - Add the admin settings and such
  */
 function ct_admin_init() {
-    global $ct_server_timeout, $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $ct_data, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label;
+    global $ct_server_timeout, $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $ct_data, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label, $cleantalk_plugin_version;
 
     $ct_options = ct_get_options();
     $ct_data = ct_get_data();
+    
+    $current_version=@trim($ct_data['current_version']);
+    if($current_version!=$cleantalk_plugin_version)
+    {
+    	$ct_data['current_version']=$cleantalk_plugin_version;
+    	update_option('cleantalk_data', $ct_data);
+    	$ct_base_call_result = ct_base_call(array(
+	        'message' => 'CleanTalk connection test',
+	        'example' => null,
+	        'sender_email' => 'stop_email@example.com',
+	        'sender_nickname' => 'CleanTalk',
+	        'post_info' => '',
+	        'checkjs' => 1
+	    ));
+    }
 
     $show_ct_notice_trial = false;
     if (isset($_COOKIE[$ct_notice_trial_label])) {
