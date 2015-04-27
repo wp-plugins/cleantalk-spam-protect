@@ -104,6 +104,7 @@ function ct_plugin_redirect()
 {
 	if (get_option('ct_plugin_do_activation_redirect', false))
 	{
+		delete_option('ct_plugin_do_activation_redirect');
 		if(!isset($_GET['activate-multi']))
 		{
 			wp_redirect("options-general.php?page=cleantalk");
@@ -114,14 +115,15 @@ function ct_plugin_redirect()
 function ct_add_event($event_type)
 {
 	global $ct_data;
+	$ct_data = ct_get_data();
 	$t=time();
 	if($event_type=='yes')
 	{
-		$ct_data['stat_accepted']++;
+		@$ct_data['stat_accepted']++;
 	}
 	if($event_type=='no')
 	{
-		$ct_data['stat_blocked']++;
+		@$ct_data['stat_blocked']++;
 	}
 	$ct_data['stat_all']++;
 	update_option('cleantalk_data', $ct_data);
