@@ -66,7 +66,7 @@ function ct_get_stats()
 	}
 	
 	$last_time=intval($ct_data['last_time']);
-	if($t-$last_time>3600)
+	if($t-$last_time>86400)
 	{
 		$ct_data['stat_accepted']=0;
 		$ct_data['stat_blocked']=0;

@@ -1,6 +1,6 @@
 <?php
 
-$ct_agent_version = 'wordpress-53';
+$ct_agent_version = 'wordpress-54';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
@@ -289,6 +289,7 @@ function ct_cookies_test ($test = false) {
  */
 function ct_get_checkjs_value($random_key = false) {
     global $ct_options, $ct_data;
+    $ct_data=ct_get_data();
 
     if ($random_key) {
         $keys = $ct_data['js_keys'];
