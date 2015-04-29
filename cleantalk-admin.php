@@ -218,28 +218,31 @@ add_action( 'admin_bar_menu', 'ct_add_admin_menu', 999 );
 
 function ct_add_admin_menu( $wp_admin_bar ) {
 // add a parent item
-	$ct_data=ct_get_data();
-	$args = array(
-		'id'    => 'ct_parent_node',
-		'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small1.png" alt=""  height="" style="margin-top:6px;" /><a href="#" class="ab-item alignright" title="allowed / blocked" alt="allowed / blocked"><span class="ab-label" id="ct_stats"></span></a>'
-	);
-	$wp_admin_bar->add_node( $args );
-
-	// add a child item to our parent item
-	$args = array(
-		'id'     => 'ct_dashboard_link',
-		'title'  => '<a href="https://cleantalk.org/my/?user_token='.@$ct_data['user_token'].'" target="_blank">CleanTalk dashboard</a>',
-		'parent' => 'ct_parent_node'
-	);
-	$wp_admin_bar->add_node( $args );
-
-	// add another child item to our parent item (not to our first group)
-	$args = array(
-		'id'     => 'ct_settings_link',
-		'title'  => '<a href="options-general.php?page=cleantalk">Settings</a>',
-		'parent' => 'ct_parent_node'
-	);
-	$wp_admin_bar->add_node( $args );
+	if ( current_user_can('activate_plugins') )
+	{
+		$ct_data=ct_get_data();
+		$args = array(
+			'id'    => 'ct_parent_node',
+			'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small1.png" alt=""  height="" style="margin-top:9px;" /><a href="#" class="ab-item alignright" title="allowed / blocked" alt="allowed / blocked"><span class="ab-label" id="ct_stats"></span></a>'
+		);
+		$wp_admin_bar->add_node( $args );
+	
+		// add a child item to our parent item
+		$args = array(
+			'id'     => 'ct_dashboard_link',
+			'title'  => '<a href="https://cleantalk.org/my/?user_token='.@$ct_data['user_token'].'" target="_blank">CleanTalk dashboard</a>',
+			'parent' => 'ct_parent_node'
+		);
+		$wp_admin_bar->add_node( $args );
+	
+		// add another child item to our parent item (not to our first group)
+		$args = array(
+			'id'     => 'ct_settings_link',
+			'title'  => '<a href="options-general.php?page=cleantalk">Settings</a>',
+			'parent' => 'ct_parent_node'
+		);
+		$wp_admin_bar->add_node( $args );
+	}
 }
 
 /**
