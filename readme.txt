@@ -181,7 +181,7 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
-= 5.5 2015-04-29
+= 5.5 2015-04-29 =
   * Fixed security issue
   
 = 5.4 2015-04-27 =
