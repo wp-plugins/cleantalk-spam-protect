@@ -183,6 +183,7 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 == Changelog ==
 = 5.5 2015-04-29 =
   * Fixed security issue
+  * Some interface fixes
   
 = 5.4 2015-04-27 =
   * Some interface and functionality changes in plugin settings page
