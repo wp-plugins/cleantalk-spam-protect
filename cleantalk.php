@@ -8,6 +8,7 @@
   Author URI: http://cleantalk.org
  */
 $cleantalk_plugin_version='5.5';
+$cleantalk_executed=false;
 
 if(!defined('CLEANTALK_PLUGIN_DIR')){
     define('CLEANTALK_PLUGIN_DIR', plugin_dir_path(__FILE__));
@@ -114,7 +115,7 @@ function ct_plugin_redirect()
 
 function ct_add_event($event_type)
 {
-	global $ct_data;
+	global $ct_data,$cleantalk_executed;
 	$ct_data = ct_get_data();
 	$t=time();
 	if($event_type=='yes')
@@ -127,6 +128,7 @@ function ct_add_event($event_type)
 	}
 	$ct_data['stat_all']++;
 	update_option('cleantalk_data', $ct_data);
+	$cleantalk_executed=true;
 }
 
 
