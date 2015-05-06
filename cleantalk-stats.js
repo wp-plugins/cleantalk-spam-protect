@@ -11,7 +11,7 @@ function ct_update_stats()
 		dataType: 'json',
 		success: function(msg){
 			jQuery('#ct_stats').html('<span>' + msg.stat_accepted + '</span> / <span>' + msg.stat_blocked + '</span>');
-			setTimeout(ct_update_stats,5000);
+			setTimeout(ct_update_stats,60000);
 		}
 	});
 }

@@ -1372,7 +1372,15 @@ function ct_s2member_registration_test() {
  * General test for any contact form
  */
 function ct_contact_form_validate () {
-	global $pagenow;
+	global $pagenow,$cleantalk_executed;
+	if($cleantalk_executed)
+	{
+		return null;
+	}
+	if ((defined( 'DOING_AJAX' ) && DOING_AJAX))
+	{
+		return null;
+	}
 
     if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
         (isset($_POST['log']) && isset($_POST['pwd']) && isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
@@ -1390,56 +1398,16 @@ function ct_contact_form_validate () {
         $post_info = '';
     }
 
-    $sender_email = null;
-    $sender_nickname = null;
+    $sender_email = '';
+    $sender_nickname = '';
     $subject = '';
     $message = '';
-    $contact_form = true;
-
-    $skip_params = array(
-	    'ipn_track_id', // PayPal IPN #
-	    'txn_type', // PayPal transaction type
-	    'payment_status', // PayPal payment status
-    );
-    if (is_array($_POST)) {
-        foreach ($_POST as $k => $v) {
-            if (in_array($k, $skip_params) || preg_match("/^ct_checkjs/", $k)) {
-                $contact_form = false;
-                break;
-            }
-
-            if ($sender_email === null && isset($v)) {
-                if (is_string($v) && preg_match("/^\S+@\S+\.\S+$/", $v)) {
-                    $sender_email = $v;
-                }
-
-                // Looing email address in arrays
-                if (is_array($v)) {
-                    foreach ($v as $v2) {
-                        if ($sender_email) {
-                            continue;
-                        }
-                        
-                        if (is_string($v2) && preg_match("/^\S+@\S+\.\S+$/", $v2)) {
-                            $sender_email = $v2;
-                        }
-                    }
-                }
-            }
-            if ($sender_nickname === null && ct_get_data_from_submit($k, 'name')) {
-                $sender_nickname = $v;
-            }
-            if ($message === '' && ct_get_data_from_submit($k, 'message')) {
-                $message = $v;
-            }
-            if ($subject === '' && ct_get_data_from_submit($k, 'subject')) {
-                $subject = $v;
-            }
-        }
-    }
+    
+    ct_get_fields_any($sender_email,$message,$sender_nickname,$subject,$_POST);
+    
 
     // Skip submission if no data found
-    if (!$sender_email || !$contact_form) {
+    if ($sender_email==='') {
         return false;
     }
 

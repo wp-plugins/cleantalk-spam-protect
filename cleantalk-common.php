@@ -167,6 +167,12 @@ function ct_base_call($params = array()) {
     $ct_request->js_on = $params['checkjs'];
     $ct_request->submit_time = $submit_time;
     $ct_request->post_info = $params['post_info'];
+    if(isset($ct_data['last_error_no']))
+    {
+    	$ct_request->last_error_no=$ct_data['last_error_no'];
+    	$ct_request->last_error_time=$ct_data['last_error_time'];
+    	$ct_request->last_error_text=$ct_data['last_error_text'];
+    }    
 
     $ct_result = $ct->isAllowMessage($ct_request);
     if ($ct->server_change) {
@@ -186,6 +192,16 @@ function ct_base_call($params = array()) {
     }
     else
     {
+    	if(isset($ct_result->errno))
+    	{
+    		if($ct_result->errno==1||$ct_result->errno==0)
+    		{
+    			$ct_data['last_error_no']=$ct_result->errno;
+    			$ct_data['last_error_time']=time();
+    			$ct_data['last_error_text']=$ct_result->errstr;
+    			update_option('cleantalk_data', $ct_data);
+    		}
+    	}
     	ct_add_event('yes');
     }
 
@@ -526,6 +542,36 @@ function delete_spam_comments() {
     }
 
     return null; 
+}
+
+function ct_get_fields_any(&$email,&$message,&$nickname,&$subject,$arr)
+{
+	foreach($arr as $key=>$value)
+	{
+		if(!is_array($value))
+		{
+			if ($email === '' && preg_match("/^\S+@\S+\.\S+$/", $value))
+	    	{
+	            $email = $value;
+	        }
+	        else if ($nickname === '' && ct_get_data_from_submit($value, 'name'))
+	    	{
+	            $nickname = $value;
+	        }
+	        else if ($subject === '' && ct_get_data_from_submit($value, 'subject'))
+	    	{
+	            $subject = $value;
+	        }
+	        else
+	        {
+	        	$message.="$value\n";
+	        }
+		}
+		else
+		{
+			ct_get_fields_any($email,$message,$nickname,$subject,$value);
+		}
+	}
 }
 
 ?>

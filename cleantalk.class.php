@@ -190,6 +190,24 @@ class CleantalkRequest {
      * @var string
      */
      public $all_headers = null;
+     
+     /**
+     *  Last error number
+     * @var integer
+     */
+     public $last_error_no = null;
+     
+     /**
+     *  Last error time
+     * @var integer
+     */
+     public $last_error_time = null;
+     
+     /**
+     *  Last error text
+     * @var string
+     */
+     public $last_error_text = null;
 
     /**
      * User message
