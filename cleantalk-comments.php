@@ -388,7 +388,7 @@ function ct_ajax_delete_checked()
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
 	foreach($_POST['ids'] as $key=>$value)
 	{
-		wp_delete_comment($value, true);
+		wp_delete_comment($value, false);
 	}
 	die();
 }
@@ -409,7 +409,7 @@ function ct_ajax_delete_all()
 	$c_spam=get_comments($args_spam);
 	for($i=0;$i<sizeof($c_spam);$i++)
 	{
-		wp_delete_comment($c_spam[$i]->comment_ID, true);
+		wp_delete_comment($c_spam[$i]->comment_ID, false);
 	}
 	die();
 }

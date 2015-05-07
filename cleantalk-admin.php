@@ -198,6 +198,7 @@ function ct_admin_init() {
     add_settings_field('cleantalk_comments_test', __('Comments form', 'cleantalk'), 'ct_input_comments_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_contact_forms_test', __('Contact forms', 'cleantalk'), 'ct_input_contact_forms_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_general_contact_forms_test', __('Custom contact forms', 'cleantalk'), 'ct_input_general_contact_forms_test', 'cleantalk', 'cleantalk_settings_anti_spam');
+    add_settings_field('cleantalk_show_adminbar', __('Show statistics in admin bar', 'cleantalk'), 'ct_input_show_adminbar', 'cleantalk', 'cleantalk_settings_anti_spam');
 }
 
 /**
@@ -218,7 +219,18 @@ add_action( 'admin_bar_menu', 'ct_add_admin_menu', 999 );
 
 function ct_add_admin_menu( $wp_admin_bar ) {
 // add a parent item
-	if ( current_user_can('activate_plugins') )
+    global $ct_options, $ct_data;
+
+    if(isset($ct_options['show_adminbar']))
+    {
+    	$value = @intval($ct_options['show_adminbar']);
+    }
+    else
+    {
+    	$value=1;
+    }
+    
+	if ( current_user_can('activate_plugins')&&$value==1 )
 	{
 		$ct_data=ct_get_data();
 		$args = array(
@@ -230,7 +242,7 @@ function ct_add_admin_menu( $wp_admin_bar ) {
 		// add a child item to our parent item
 		$args = array(
 			'id'     => 'ct_dashboard_link',
-			'title'  => '<a href="https://cleantalk.org/my/?user_token='.@$ct_data['user_token'].'" target="_blank">CleanTalk dashboard</a>',
+			'title'  => '<a href="https://cleantalk.org/my/?user_token='.@$ct_data['user_token'].'&utm_source=wp-backend&utm_medium=admin-bar" target="_blank">CleanTalk dashboard</a>',
 			'parent' => 'ct_parent_node'
 		);
 		$wp_admin_bar->add_node( $args );
@@ -310,7 +322,8 @@ function ct_section_settings_state() {
 	print "</div>";
 	if($test_failed)
 	{
-		print "Testing is failed, check settings. Tech support <a target=_blank href='mailto:support@cleantalk.org'>support@cleantalk.org</a>";
+		//print "Testing is failed, check settings. Tech support <a target=_blank href='mailto:support@cleantalk.org'>support@cleantalk.org</a>";
+		print __("Testing is failed, check settings. Tech support <a target=_blank href='mailto:support@cleantalk.org'>support@cleantalk.org</a>", 'cleantalk');
 	}
     return true;
 }
@@ -418,6 +431,21 @@ function ct_input_remove_old_spam() {
 }
 
 /**
+ * Admin callback function - Displays inputs of 'Show statistics in adminbar' plugin parameter
+ *
+ * @return null
+ */
+function ct_input_show_adminbar() {
+    global $ct_options, $ct_data;
+
+    $value = @intval($ct_options['show_adminbar']);
+    echo "<input type='radio' id='cleantalk_show_adminbar1' name='cleantalk_settings[show_adminbar]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar1'> " . __('Yes') . "</label>";
+    echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    echo "<input type='radio' id='cleantalk_show_adminbar0' name='cleantalk_settings[show_adminbar]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar0'> " . __('No') . "</label>";
+    admin_addDescriptionsFields(sprintf(__('Show statistics in admin bar.', 'cleantalk'),  $ct_options['spam_store_days']));
+}
+
+/**
  * Admin callback function - Plugin parameters validator
  */
 function ct_settings_validate($input) {
@@ -475,8 +503,17 @@ function admin_notice_message(){
     }
 
     $show_notice = true;
+    
+    if(current_user_can('activate_plugins'))
+    {
+    	$value = 1;
+    }
+    else
+    {
+    	$value = 0;
+    }
 
-    if ($show_notice && $show_ct_notice_autokey) {
+    if ($show_notice && $show_ct_notice_autokey && $value==1) {
         echo '<div class="error"><h3>' . sprintf(__("Unable to get Access key automatically: %s", 'cleantalk'), $ct_notice_autokey_value);
         echo " <a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key manually', 'cleantalk').'</a></h3></div>';
     }
@@ -486,25 +523,25 @@ function admin_notice_message(){
         $show_notice = false;
     }
 
-    if ($show_notice && $show_ct_notice_trial) {
+    if ($show_notice && $show_ct_notice_trial && $value==1) {
         echo '<div class="error"><h3>' . sprintf(__("%s trial period ends, please upgrade to %s!", 'cleantalk'), "<a href=\"options-general.php?page=cleantalk\">$ct_plugin_name</a>", "<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20trial$user_token\" target=\"_blank\"><b>premium version</b></a>") . '</h3></div>';
         $show_notice = false;
     }
 
-    if ($show_notice && $show_ct_notice_renew) {
+    if ($show_notice && $show_ct_notice_renew && $value==1) {
 	$button_html = "<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20renew$user_token\" target=\"_blank\">" . '<input type="button" class="button button-primary" value="' . __('RENEW ANTI-SPAM', 'cleantalk') . '"  />' . "</a>";
         echo '<div class="updated"><h3>' . sprintf(__("Please renew your anti-spam license for %s.", 'cleantalk'), "<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20renew$user_token\" target=\"_blank\"><b>" . __('next year', 'cleantalk') ."</b></a>") . '<br /><br />' . $button_html . '</h3></div>';
         $show_notice = false;
     }
 
-    if ($show_notice && $show_ct_notice_online != '') {
+    if ($show_notice && $show_ct_notice_online != '' && $value==1) {
         if($show_ct_notice_online === 'Y'){
     		echo '<div class="updated"><h3><b>';
                 echo __("Don’t forget to disable CAPTCHA if you have it!", 'cleantalk');
     		echo '</b></h3></div>';
         }
         
-        if($show_ct_notice_online === 'N'){
+        if($show_ct_notice_online === 'N' && $value==1){
     		echo '<div class="error"><h3><b>';
                 echo __("Wrong <a href=\"options-general.php?page=cleantalk\"><b style=\"color: #49C73B;\">Clean</b><b style=\"color: #349ebf;\">Talk</b> access key</a>! Please check it or ask <a target=\"_blank\" href=\"https://cleantalk.org/forum/\">support</a>.", 'cleantalk');
     		echo '</b></h3></div>';
