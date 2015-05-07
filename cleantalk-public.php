@@ -1377,15 +1377,14 @@ function ct_contact_form_validate () {
 	{
 		return null;
 	}
-	if ((defined( 'DOING_AJAX' ) && DOING_AJAX))
+	/*if ((defined( 'DOING_AJAX' ) && DOING_AJAX))
 	{
 		return null;
-	}
+	}*/
 
     if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
         (isset($_POST['log']) && isset($_POST['pwd']) && isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
-        (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword') ||
-        defined('JETPACK__VERSION')
+        (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword')
         ) {
         return null;
     }
