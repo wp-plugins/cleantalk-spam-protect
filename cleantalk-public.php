@@ -1401,12 +1401,13 @@ function ct_contact_form_validate () {
     $sender_nickname = '';
     $subject = '';
     $message = '';
+    $contact_form = true;
     
-    ct_get_fields_any($sender_email,$message,$sender_nickname,$subject,$_POST);
+    ct_get_fields_any($sender_email, $message, $sender_nickname, $subject, $contact_form, $_POST);
     
 
     // Skip submission if no data found
-    if ($sender_email==='') {
+    if ($sender_email===''|| !$contact_form) {
         return false;
     }
 

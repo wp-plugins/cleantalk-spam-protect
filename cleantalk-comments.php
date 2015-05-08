@@ -1,9 +1,13 @@
 <?php
+
 add_action('admin_menu', 'ct_add_comments_menu');
 
 function ct_add_comments_menu()
 {
-	add_comments_page( __("Check for spam", 'cleantalk'), __("Check for spam", 'cleantalk'), 'read', 'ct_check_spam', 'ct_show_checkspam_page');
+	if(current_user_can('activate_plugins'))
+	{
+		add_comments_page( __("Check for spam", 'cleantalk'), __("Check for spam", 'cleantalk'), 'read', 'ct_check_spam', 'ct_show_checkspam_page');
+	}
 }
 
 function ct_show_checkspam_page()
