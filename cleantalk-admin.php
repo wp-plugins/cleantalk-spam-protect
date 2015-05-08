@@ -438,7 +438,14 @@ function ct_input_remove_old_spam() {
 function ct_input_show_adminbar() {
     global $ct_options, $ct_data;
 
-    $value = @intval($ct_options['show_adminbar']);
+    if(isset($ct_options['show_adminbar']))
+    {
+    	$value = @intval($ct_options['show_adminbar']);
+    }
+    else
+    {
+    	$value=1;
+    }
     echo "<input type='radio' id='cleantalk_show_adminbar1' name='cleantalk_settings[show_adminbar]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar1'> " . __('Yes') . "</label>";
     echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     echo "<input type='radio' id='cleantalk_show_adminbar0' name='cleantalk_settings[show_adminbar]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar0'> " . __('No') . "</label>";
