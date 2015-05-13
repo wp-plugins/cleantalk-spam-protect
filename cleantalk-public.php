@@ -18,6 +18,8 @@ function ct_init() {
     } else {
         $_SESSION[$ct_formtime_label] = time();
     }
+    
+	//add_action('wp_footer','ct_ajaxurl');
 
     // Fast Secure contact form
     if(defined('FSCF_VERSION')){
@@ -57,9 +59,12 @@ function ct_init() {
     // Contact Form7 
     if(defined('WPCF7_VERSION')){
 	add_filter('wpcf7_form_elements', 'ct_wpcf7_form_elements');
-	if(WPCF7_VERSION >= '3.0.0'){
+	if(WPCF7_VERSION >= '3.0.0')
+	{
 	    add_filter('wpcf7_spam', 'ct_wpcf7_spam');
-	}else{
+	}
+	else
+	{
 	    add_filter('wpcf7_acceptance', 'ct_wpcf7_spam');
 	}
     }
@@ -123,6 +128,15 @@ function ct_init() {
     }
 }
 
+function ct_ajaxurl() {
+	?>
+	<script type="text/javascript">
+	var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+	</script>
+	<?php
+	wp_enqueue_script('ct_nocache_js',plugins_url( '/cleantalk_nocache.js' , __FILE__ ));
+}
+
 /**
  * Adds hidden filed to comment form 
  */
@@ -175,6 +189,9 @@ ctSetCookie("%s", "%s", "%s");
 </script>
 ';      
 		$html = sprintf($html, $field_name, $ct_checkjs_key, $ct_checkjs_def);
+		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
+		$html='!!';
+		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
     } else {
         $ct_input_challenge = sprintf("'%s'", $ct_checkjs_key);
 
@@ -186,6 +203,10 @@ setTimeout(function(){var ct_input_name = \'%s\';var ct_input_value = document.g
 </script>
 ';
 		$html = sprintf($html, $field_id, $field_name, $ct_checkjs_def, $field_id, $ct_input_challenge);
+		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
+		$html='<input type="hidden" id="%s" name="%s" value="%s" />';
+		$html = sprintf($html, $field_id, $field_name, $ct_checkjs_def);
+		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
     };
 
     // Simplify JS code
@@ -1082,14 +1103,14 @@ function ct_wpcf7_spam($param) {
         if ($sender_email === null && preg_match("/^\S+@\S+\.\S+$/", $v)) {
             $sender_email = $v;
         }
-        else if ($sender_nickname === null && preg_match("/-name$/", $k)) {
+        if ($message === '' && preg_match("/(\-message|\w*message\w*|contact|comment)$/", $k)) {
+            $message = $v;
+        }
+        if ($sender_nickname === null && preg_match("/-name$/", $k)) {
             $sender_nickname = $v;
         }
-        else if ($subject === '' && ct_get_data_from_submit($k, 'subject')) {
+        if ($subject === '' && ct_get_data_from_submit($k, 'subject')) {
             $subject = $v;
-        }
-        else {
-            $message .= $v."\n";
         }
 
     }
@@ -1401,12 +1422,13 @@ function ct_contact_form_validate () {
     $sender_nickname = '';
     $subject = '';
     $message = '';
+    $contact_form = true;
     
-    ct_get_fields_any($sender_email,$message,$sender_nickname,$subject,$_POST);
+    ct_get_fields_any($sender_email, $message, $sender_nickname, $subject, $contact_form, $_POST);
     
 
     // Skip submission if no data found
-    if ($sender_email==='') {
+    if ($sender_email===''|| !$contact_form) {
         return false;
     }
 

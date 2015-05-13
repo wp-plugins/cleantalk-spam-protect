@@ -438,7 +438,14 @@ function ct_input_remove_old_spam() {
 function ct_input_show_adminbar() {
     global $ct_options, $ct_data;
 
-    $value = @intval($ct_options['show_adminbar']);
+    if(isset($ct_options['show_adminbar']))
+    {
+    	$value = @intval($ct_options['show_adminbar']);
+    }
+    else
+    {
+    	$value=1;
+    }
     echo "<input type='radio' id='cleantalk_show_adminbar1' name='cleantalk_settings[show_adminbar]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar1'> " . __('Yes') . "</label>";
     echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     echo "<input type='radio' id='cleantalk_show_adminbar0' name='cleantalk_settings[show_adminbar]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar0'> " . __('No') . "</label>";
@@ -518,7 +525,7 @@ function admin_notice_message(){
         echo " <a target='__blank' style='margin-left: 10px' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(get_option('admin_email'))."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'>".__('Click here to get access key manually', 'cleantalk').'</a></h3></div>';
     }
 
-    if ($show_notice && ct_valid_key($ct_options['apikey']) === false) {
+    if ($show_notice && ct_valid_key($ct_options['apikey']) === false && $value==1) {
         echo '<div class="error"><h3>' . sprintf(__("Please enter Access Key in %s settings to enable anti spam protection!", 'cleantalk'), "<a href=\"options-general.php?page=cleantalk\">CleanTalk plugin</a>") . '</h3></div>';
         $show_notice = false;
     }

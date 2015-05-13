@@ -1,6 +1,6 @@
 <?php
 
-$ct_agent_version = 'wordpress-55';
+$ct_agent_version = 'wordpress-57';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
@@ -544,12 +544,20 @@ function delete_spam_comments() {
     return null; 
 }
 
-function ct_get_fields_any(&$email,&$message,&$nickname,&$subject,$arr)
+function ct_get_fields_any(&$email,&$message,&$nickname,&$subject, &$contact,$arr)
 {
+	$skip_params = array(
+	    'ipn_track_id', // PayPal IPN #
+	    'txn_type', // PayPal transaction type
+	    'payment_status', // PayPal payment status
+    );
 	foreach($arr as $key=>$value)
 	{
 		if(!is_array($value))
 		{
+			if (in_array($key, $skip_params) || preg_match("/^ct_checkjs/", $key)) {
+                $contact = false;
+            }
 			if ($email === '' && preg_match("/^\S+@\S+\.\S+$/", $value))
 	    	{
 	            $email = $value;
@@ -569,7 +577,7 @@ function ct_get_fields_any(&$email,&$message,&$nickname,&$subject,$arr)
 		}
 		else
 		{
-			ct_get_fields_any($email,$message,$nickname,$subject,$value);
+			ct_get_fields_any($email, $message, $nickname, $subject, $contact, $value);
 		}
 	}
 }
