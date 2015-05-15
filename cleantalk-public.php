@@ -1103,14 +1103,15 @@ function ct_wpcf7_spam($param) {
         if ($sender_email === null && preg_match("/^\S+@\S+\.\S+$/", $v)) {
             $sender_email = $v;
         }
-        if ($message === '' && preg_match("/(\-message|\w*message\w*|contact|comment)$/", $k)) {
-            $message = $v;
-        }
-        if ($sender_nickname === null && preg_match("/-name$/", $k)) {
+        else if ($sender_nickname === null && preg_match("/-name$/", $k)) {
             $sender_nickname = $v;
         }
-        if ($subject === '' && ct_get_data_from_submit($k, 'subject')) {
+        else if ($subject === '' && ct_get_data_from_submit($k, 'subject')) {
             $subject = $v;
+        }
+        else if (preg_match("/(\-message|\w*message\w*|.*contact.*|comment|)$/", $k))
+        {
+            $message.= $v;
         }
 
     }

@@ -3,7 +3,6 @@ function sendRequest(url,callback,postData) {
     if (!req) return;
     var method = (postData) ? "POST" : "GET";
     req.open(method,url,true);
-    req.setRequestHeader('User-Agent','XMLHTTP/1.0');
     if (postData)
         req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     req.onreadystatechange = function () {
@@ -43,7 +42,10 @@ function ct_callback(req)
 {
 	ct_cookie=req.responseText;
 	//alert('Key value: ' + ct_cookie);
-	document.cookie = "ct_checkjs = " + ct_cookie + "; path=/";
+	document.cookie = "ct_checkjs =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /";
+	document.cookie = "ct_checkjs =; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+	setTimeout(function() { document.cookie = "ct_checkjs=" + ct_cookie }, 200)
+
 	//alert('Set cookie: \n' + document.cookie);
 	for(i=0;i<document.forms.length;i++)
 	{
