@@ -1109,9 +1109,9 @@ function ct_wpcf7_spam($param) {
         else if ($subject === '' && ct_get_data_from_submit($k, 'subject')) {
             $subject = $v;
         }
-        else if (preg_match("/(\-message|\w*message\w*|.*contact.*|comment|)$/", $k))
+        else if (preg_match("/(\-message|\w*message\w*|contact|comment|contact\-)$/", $k))
         {
-            $message.= $v;
+            $message.= $v."\n";
         }
 
     }
