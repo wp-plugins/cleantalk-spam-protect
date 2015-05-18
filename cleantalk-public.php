@@ -190,7 +190,7 @@ ctSetCookie("%s", "%s", "%s");
 ';      
 		$html = sprintf($html, $field_name, $ct_checkjs_key, $ct_checkjs_def);
 		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
-		$html='!!';
+		$html='';
 		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
     } else {
         $ct_input_challenge = sprintf("'%s'", $ct_checkjs_key);
