@@ -165,7 +165,7 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 
 = Translations =
 * Danish (da_DK)
-* French (fr_FR)
+* French (fr_FR) - thanks to Gilles Santacreu <a href="http://net-ik.net">http://net-ik.net</a>
 * German (de_DE)
 * Italian (it_IT)
 * Polish (pl_PL)
