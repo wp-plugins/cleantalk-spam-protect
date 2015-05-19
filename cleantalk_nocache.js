@@ -42,9 +42,28 @@ function ct_callback(req)
 {
 	ct_cookie=req.responseText;
 	//alert('Key value: ' + ct_cookie);
+	
+	var domain=location.hostname;
+	tmp=domain.split('.');
+	if(tmp[0].toLowerCase()=='www')
+	{
+		tmp[0]='';
+	}
+	else
+	{
+		tmp[0]='.'+tmp[0];
+	}
+	domain=tmp.join('.');
+	
 	document.cookie = "ct_checkjs =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /";
 	document.cookie = "ct_checkjs =; expires=Thu, 01 Jan 1970 00:00:01 GMT";
-	setTimeout(function() { document.cookie = "ct_checkjs=" + ct_cookie }, 200)
+	document.cookie = "ct_checkjs =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /; domain = " +  domain;
+	
+	
+	
+	var date = new Date;
+	date.setDate(date.getDate() + 1);
+	setTimeout(function() { document.cookie = "ct_checkjs=" + ct_cookie + "; expires=" + date.toUTCString() + "; path = /; domain = " + domain}, 200)
 
 	//alert('Set cookie: \n' + document.cookie);
 	for(i=0;i<document.forms.length;i++)
