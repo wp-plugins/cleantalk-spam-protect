@@ -538,6 +538,8 @@ function ct_die_extended($comment_body) {
  */
 function js_test($field_name = 'ct_checkjs', $data = null, $random_key = false) {
     global $ct_options, $ct_data;
+    
+    $ct_data=ct_get_data();
 
     $checkjs = null;
     $js_post_value = null;
