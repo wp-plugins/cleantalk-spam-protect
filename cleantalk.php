@@ -159,8 +159,8 @@ function ct_inject_nocache_script($html)
 {
 	$ct_replace="\n<script type='text/javascript'>var ajaxurl = '".admin_url('admin-ajax.php')."';</script>\n";
 	$ct_replace.="<script type='text/javascript' src='".plugins_url( '/cleantalk_nocache.js' , __FILE__ )."?random=".rand()."'></script>\n";
-	//$html=str_ireplace("</body",$ct_replace."</body",$html);
-	$html=substr_replace($html,$ct_replace."</body",strripos($html,"</body"),6);
+	$html=str_ireplace("</body",$ct_replace."</body",$html);
+	//$html=substr_replace($html,$ct_replace."</body",strripos($html,"</body"),6);
 	return $html;
 }
 
