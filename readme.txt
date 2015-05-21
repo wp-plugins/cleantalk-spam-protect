@@ -2,8 +2,8 @@
 Contributors: znaeff, shagimuratov, vlad-cleantalk
 Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget antispam, registration, spam pingbacks
 Requires at least: 3.0
-Tested up to: 4.2 
-Stable tag: 5.6
+Tested up to: 4.2.2
+Stable tag: 5.9
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -165,7 +165,7 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 
 = Translations =
 * Danish (da_DK)
-* French (fr_FR)
+* French (fr_FR) - thanks to Gilles Santacreu <a href="http://net-ik.net">http://net-ik.net</a>
 * German (de_DE)
 * Italian (it_IT)
 * Polish (pl_PL)
@@ -181,6 +181,17 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
+= 5.9 2015-05-21 =
+  * Fixed Javascript error on CF7 and JetPack
+  * Some backend and frontent fixes
+  
+= 5.8 2015-05-18 =
+  * Minor fixes
+  
+= 5.7 2015-05-18 =
+  * Fixed French translation
+  * Fixed protection algorithm
+
 = 5.6 2015-05-11 =
   * Fixed translation
   * Fixed bulk comments anti-spam checking
@@ -560,6 +571,17 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * First version
 
 == Upgrade Notice ==
+= 5.9 2015-05-21 =
+  * Fixed Javascript error on CF7 and JetPack
+  * Some backend and frontent fixes
+  
+= 5.8 2015-05-18 =
+  * Minor fixes
+  
+= 5.7 2015-05-18 =
+  * Fixed French translation
+  * Fixed protection algorithm
+  
 = 5.6 2015-05-11 =
   * Fixed translation
   * Fixed bulk comments anti-spam checking
