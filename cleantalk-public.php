@@ -122,7 +122,7 @@ function ct_init() {
     if (ct_is_user_enable()) {
         ct_cookies_test();
 
-        if (isset($ct_options['general_contact_forms_test']) && $ct_options['general_contact_forms_test'] == 1) {
+        if (isset($ct_options['general_contact_forms_test']) && $ct_options['general_contact_forms_test'] == 1 && !isset($_POST['comment_post_ID']) && !isset($_GET['for'])) {
             ct_contact_form_validate();
         }
     }
@@ -538,6 +538,8 @@ function ct_die_extended($comment_body) {
  */
 function js_test($field_name = 'ct_checkjs', $data = null, $random_key = false) {
     global $ct_options, $ct_data;
+    
+    $ct_data=ct_get_data();
 
     $checkjs = null;
     $js_post_value = null;
