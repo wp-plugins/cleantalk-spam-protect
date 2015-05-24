@@ -105,6 +105,9 @@ function ct_init() {
         ct_s2member_registration_test(); 
     }
     
+    //hook for Anonymous Post
+    add_action('template_redirect','ct_contact_form_validate',1);
+    
     //
     // New user approve hack
     // https://wordpress.org/plugins/new-user-approve/
@@ -1401,6 +1404,7 @@ function ct_contact_form_validate () {
 	{
 		return null;
 	}
+	$cleantalk_executed=true;
 	/*if ((defined( 'DOING_AJAX' ) && DOING_AJAX))
 	{
 		return null;
