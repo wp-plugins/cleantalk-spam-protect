@@ -278,8 +278,11 @@ function ct_frm_validate_entry ($errors, $values) {
     if ($ct_options['contact_forms_test'] == 0) {
         return false;
     }
-
-    $checkjs = js_test($ct_checkjs_frm, $_POST);
+    
+    $checkjs = js_test('ct_checkjs', $_COOKIE, true);
+    if($checkjs != 1){
+        $checkjs = js_test($ct_checkjs_frm, $_POST, true);
+    }
 
     $post_info['comment_type'] = 'feedback';
     $post_info = json_encode($post_info);
