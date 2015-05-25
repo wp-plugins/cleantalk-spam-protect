@@ -80,4 +80,8 @@ function ct_callback(req)
 		}
 	}
 }
-sendRequest(ct_ajaxurl+'?'+Math.random(),ct_callback,'action=ct_get_cookie');
+if(ct_nocache_executed==undefined)
+{
+	sendRequest(ct_ajaxurl+'?'+Math.random(),ct_callback,'action=ct_get_cookie');
+}
+var ct_nocache_executed=true;
