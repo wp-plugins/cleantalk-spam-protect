@@ -82,6 +82,6 @@ function ct_callback(req)
 }
 if(ct_nocache_executed==undefined)
 {
+	var ct_nocache_executed=true;
 	sendRequest(ct_ajaxurl+'?'+Math.random(),ct_callback,'action=ct_get_cookie');
 }
-var ct_nocache_executed=true;
