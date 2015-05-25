@@ -40,7 +40,7 @@ function createXMLHTTPObject() {
 
 function ct_callback(req)
 {
-	ct_cookie=req.responseText;
+	ct_cookie=req.responseText.trim();
 	//alert('Key value: ' + ct_cookie);
 	
 	var domain=location.hostname;
@@ -72,7 +72,7 @@ function ct_callback(req)
 		for(j=0;j<f.elements.length;j++)
 		{
 			e=f.elements[j];
-			if(e.name.indexOf('ct_checkjs')!=-1)
+			if(e.name!==undefined&&e.name.indexOf('ct_checkjs')!=-1)
 			{
 				e.value=ct_cookie;
 				//alert('Form #' + i + ', field ' + e.name + ' = ' + ct_cookie);
@@ -80,4 +80,8 @@ function ct_callback(req)
 		}
 	}
 }
-sendRequest(ajaxurl+'?'+Math.random(),ct_callback,'action=ct_get_cookie');
+if(ct_nocache_executed==undefined)
+{
+	var ct_nocache_executed=true;
+	sendRequest(ct_ajaxurl+'?'+Math.random(),ct_callback,'action=ct_get_cookie');
+}
