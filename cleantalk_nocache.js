@@ -80,4 +80,4 @@ function ct_callback(req)
 		}
 	}
 }
-sendRequest(ajaxurl+'?'+Math.random(),ct_callback,'action=ct_get_cookie');
+sendRequest(ct_ajaxurl+'?'+Math.random(),ct_callback,'action=ct_get_cookie');
