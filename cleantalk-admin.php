@@ -473,7 +473,7 @@ function ct_input_general_postdata_test() {
     echo "<input type='radio' id='cleantalk_general_postdata_test1' name='cleantalk_settings[general_postdata_test]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_general_postdata_test1'> " . __('Yes') . "</label>";
     echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     echo "<input type='radio' id='cleantalk_general_postdata_test0' name='cleantalk_settings[general_postdata_test]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_general_postdata_test0'> " . __('No') . "</label>";
-    @admin_addDescriptionsFields(sprintf(__('Check all post data description', 'cleantalk'),  $ct_options['general_postdata_test']));
+    @admin_addDescriptionsFields(sprintf(__('Check all post data', 'cleantalk'),  $ct_options['general_postdata_test']));
 }
 
 /**
