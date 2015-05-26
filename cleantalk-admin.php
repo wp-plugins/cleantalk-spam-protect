@@ -198,6 +198,7 @@ function ct_admin_init() {
     add_settings_field('cleantalk_comments_test', __('Comments form', 'cleantalk'), 'ct_input_comments_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_contact_forms_test', __('Contact forms', 'cleantalk'), 'ct_input_contact_forms_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_general_contact_forms_test', __('Custom contact forms', 'cleantalk'), 'ct_input_general_contact_forms_test', 'cleantalk', 'cleantalk_settings_anti_spam');
+    add_settings_field('cleantalk_general_postdata_test', __('Check all post data', 'cleantalk'), 'ct_input_general_postdata_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_show_adminbar', __('Show statistics in admin bar', 'cleantalk'), 'ct_input_show_adminbar', 'cleantalk', 'cleantalk_settings_anti_spam');
 }
 
@@ -319,6 +320,7 @@ function ct_section_settings_state() {
 	{
 		print ' &nbsp; <img src="' . plugin_dir_url(__FILE__) . 'inc/images/'.$img_no.'" alt=""  height="" /> '.__('Custom contact forms', 'cleantalk');
 	}
+	
 	print "</div>";
 	if($test_failed)
 	{
@@ -449,7 +451,29 @@ function ct_input_show_adminbar() {
     echo "<input type='radio' id='cleantalk_show_adminbar1' name='cleantalk_settings[show_adminbar]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar1'> " . __('Yes') . "</label>";
     echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     echo "<input type='radio' id='cleantalk_show_adminbar0' name='cleantalk_settings[show_adminbar]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar0'> " . __('No') . "</label>";
-    admin_addDescriptionsFields(sprintf(__('Show statistics in admin bar.', 'cleantalk'),  $ct_options['spam_store_days']));
+    admin_addDescriptionsFields(sprintf(__('Show statistics in admin bar', 'cleantalk'),  $ct_options['show_adminbar']));
+}
+
+/**
+ * Admin callback function - Displays inputs of 'Show statistics in adminbar' plugin parameter
+ *
+ * @return null
+ */
+function ct_input_general_postdata_test() {
+    global $ct_options, $ct_data;
+
+    if(isset($ct_options['general_postdata_test']))
+    {
+    	$value = @intval($ct_options['general_postdata_test']);
+    }
+    else
+    {
+    	$value=0;
+    }
+    echo "<input type='radio' id='cleantalk_general_postdata_test1' name='cleantalk_settings[general_postdata_test]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_general_postdata_test1'> " . __('Yes') . "</label>";
+    echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    echo "<input type='radio' id='cleantalk_general_postdata_test0' name='cleantalk_settings[general_postdata_test]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_general_postdata_test0'> " . __('No') . "</label>";
+    @admin_addDescriptionsFields(sprintf(__('Check all post data description', 'cleantalk'),  $ct_options['general_postdata_test']));
 }
 
 /**

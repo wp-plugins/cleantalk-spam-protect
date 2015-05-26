@@ -5,7 +5,7 @@
  * @return 	mixed[] Array of options
  */
 function ct_init() {
-    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data;
+    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data, $ct_check_post_result;
 
     $ct_options = ct_get_options();
 
@@ -17,6 +17,15 @@ function ct_init() {
         }
     } else {
         $_SESSION[$ct_formtime_label] = time();
+    }
+    
+    if(isset($ct_options['general_postdata_test']))
+    {
+    	$ct_general_postdata_test = @intval($ct_options['general_postdata_test']);
+    }
+    else
+    {
+    	$ct_general_postdata_test=0;
     }
     
 	//add_action('wp_footer','ct_ajaxurl');
@@ -128,6 +137,11 @@ function ct_init() {
         if (isset($ct_options['general_contact_forms_test']) && $ct_options['general_contact_forms_test'] == 1 && !isset($_POST['comment_post_ID']) && !isset($_GET['for'])) {
             ct_contact_form_validate();
         }
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && $ct_general_postdata_test==1 && !is_admin())
+	    {
+	    	$ct_check_post_result=false;
+	    	ct_contact_form_validate_postdata();
+	    }
     }
 }
 
@@ -1407,7 +1421,6 @@ function ct_contact_form_validate () {
 	{
 		return null;
 	}
-	$cleantalk_executed=true;
 	/*if ((defined( 'DOING_AJAX' ) && DOING_AJAX))
 	{
 		return null;
@@ -1451,6 +1464,73 @@ function ct_contact_form_validate () {
 	    'sender_info' => get_sender_info(),
         'checkjs' => $checkjs
     ));
+    
+    $cleantalk_executed=true;
+    
+    $ct = $ct_base_call_result['ct'];
+    $ct_result = $ct_base_call_result['ct_result'];
+       
+    if ($ct_result->allow == 0) {
+        
+        if (!(defined( 'DOING_AJAX' ) && DOING_AJAX)) {
+            global $ct_comment;
+            $ct_comment = $ct_result->comment;
+            ct_die(null, null);
+        } else {
+            echo $ct_result->comment; 
+        }
+        exit;
+    }
+
+    return null;
+}
+
+/**
+ * General test for any post data
+ */
+function ct_contact_form_validate_postdata () {
+	global $pagenow,$cleantalk_executed;
+	if($cleantalk_executed)
+	{
+		return null;
+	}
+	if ((defined( 'DOING_AJAX' ) && DOING_AJAX))
+	{
+		return null;
+	}
+	
+	
+    if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
+        (isset($_POST['log']) && isset($_POST['pwd']) && isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
+        (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword')||
+        ct_check_array_keys($_POST)
+        ) {
+        return null;
+    }
+
+    $checkjs = js_test('ct_checkjs', $_COOKIE, true);
+  
+    $post_info['comment_type'] = 'feedback_general_postdata';
+    $post_info = json_encode($post_info);
+    if ($post_info === false) {
+        $post_info = '';
+    }
+
+    $message = '';
+    
+    ct_get_fields_any_postdata($message, $_POST);
+    
+    $ct_base_call_result = ct_base_call(array(
+        'message' => $message,
+        'example' => null,
+        'sender_email' => '',
+        'sender_nickname' => '',
+        'post_info' => $post_info,
+	    'sender_info' => get_sender_info(),
+        'checkjs' => $checkjs
+    ));
+    
+    $cleantalk_executed=true;
     
     $ct = $ct_base_call_result['ct'];
     $ct_result = $ct_base_call_result['ct_result'];

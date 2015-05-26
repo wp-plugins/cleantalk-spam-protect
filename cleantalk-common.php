@@ -544,6 +544,10 @@ function delete_spam_comments() {
     return null; 
 }
 
+/*
+* Get data from submit recursively
+*/
+
 function ct_get_fields_any(&$email,&$message,&$nickname,&$subject, &$contact,$arr)
 {
 	$skip_params = array(
@@ -580,6 +584,68 @@ function ct_get_fields_any(&$email,&$message,&$nickname,&$subject, &$contact,$ar
 			ct_get_fields_any($email, $message, $nickname, $subject, $contact, $value);
 		}
 	}
+}
+
+function ct_get_fields_any_postdata(&$message,$arr)
+{
+	$skip_params = array(
+	    'ipn_track_id', // PayPal IPN #
+	    'txn_type', // PayPal transaction type
+	    'payment_status', // PayPal payment status
+    );
+	foreach($arr as $key=>$value)
+	{
+		if(!is_array($value))
+		{
+			if (in_array($key, $skip_params) || preg_match("/^ct_checkjs/", $key)) {
+                //$contact = false;
+            }
+            else
+	        {
+	        	$message.="$value\n";
+	        }
+		}
+		else
+		{
+			ct_get_fields_any_postdata($message, $value);
+		}
+	}
+}
+
+/*
+* Check if Array has keys with restricted names
+*/
+
+$ct_check_post_result=false;
+
+function ct_check_array_keys_loop($key)
+{
+	global $ct_check_post_result;
+	$strict=Array('pass','login','pwd');
+	for($i=0;$i<sizeof($strict);$i++)
+	{
+		if(stripos($key,$strict[$i])!==false)
+		{
+			$ct_check_post_result=true;
+		}
+	}
+}
+
+function ct_check_array_keys($arr)
+{
+	global $ct_check_post_result;
+	foreach($arr as $key=>$value)
+	{
+		if(!is_array($value))
+		{
+			ct_check_array_keys_loop($key);
+		}
+		else
+		{
+			ct_check_array_keys($value);
+		}
+	}
+	return $ct_check_post_result;
 }
 
 ?>
