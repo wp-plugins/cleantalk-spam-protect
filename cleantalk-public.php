@@ -1503,7 +1503,8 @@ function ct_contact_form_validate_postdata () {
     if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
         (isset($_POST['log']) && isset($_POST['pwd']) && isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
         (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword')||
-        ct_check_array_keys($_POST)
+        ct_check_array_keys($_POST) ||
+        (isset($pagenow) && $pagenow == 'wp-cron.php')
         ) {
         return null;
     }
