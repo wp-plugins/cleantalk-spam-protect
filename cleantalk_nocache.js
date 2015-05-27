@@ -38,11 +38,15 @@ function createXMLHTTPObject() {
     return xmlhttp;
 }
 
-function ct_callback(req)
+function ct_getCookie(name) {
+  var matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function ct_setCookie(name, value)
 {
-	ct_cookie=req.responseText.trim();
-	//alert('Key value: ' + ct_cookie);
-	
 	var domain=location.hostname;
 	tmp=domain.split('.');
 	if(tmp[0].toLowerCase()=='www')
@@ -55,15 +59,21 @@ function ct_callback(req)
 	}
 	domain=tmp.join('.');
 	
-	document.cookie = "ct_checkjs =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /";
-	document.cookie = "ct_checkjs =; expires=Thu, 01 Jan 1970 00:00:01 GMT";
-	document.cookie = "ct_checkjs =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /; domain = " +  domain;
-	
-	
+	document.cookie = name+" =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /";
+	document.cookie = name+" =; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+	document.cookie = name+" =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /; domain = " +  domain;
 	
 	var date = new Date;
 	date.setDate(date.getDate() + 1);
-	setTimeout(function() { document.cookie = "ct_checkjs=" + ct_cookie + "; expires=" + date.toUTCString() + "; path = /; domain = " + domain}, 200)
+	setTimeout(function() { document.cookie = name+"=" + value + "; expires=" + date.toUTCString() + "; path = /; domain = " + domain}, 200)
+}
+
+function ct_callback(req)
+{
+	ct_cookie=req.responseText.trim();
+	//alert('Key value: ' + ct_cookie);
+	
+	ct_setCookie('ct_checkjs', ct_cookie);
 
 	//alert('Set cookie: \n' + document.cookie);
 	for(i=0;i<document.forms.length;i++)
@@ -80,8 +90,22 @@ function ct_callback(req)
 		}
 	}
 }
+
+if (!Date.now) {
+	Date.now = function() { return new Date().getTime(); }
+}
+
 if(ct_nocache_executed==undefined)
 {
 	var ct_nocache_executed=true;
-	sendRequest(ct_ajaxurl+'?'+Math.random(),ct_callback,'action=ct_get_cookie');
+	var new_timestamp=Math.floor(Date.now() / 1000);
+	
+	var old_timestamp=ct_getCookie('ct_timestamp');
+	
+	if(old_timestamp==undefined||new_timestamp-old_timestamp>82800) //82800 is 23 hours
+	{
+		ct_setCookie('ct_timestamp', new_timestamp);
+		//alert('set!');
+		sendRequest(ct_ajaxurl+'?'+Math.random(),ct_callback,'action=ct_get_cookie');
+	}
 }

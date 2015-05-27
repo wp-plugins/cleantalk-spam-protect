@@ -1521,6 +1521,11 @@ function ct_contact_form_validate_postdata () {
     
     ct_get_fields_any_postdata($message, $_POST);
     
+    if(strlen(trim($message))<10)
+    {
+    	return null;
+    }
+    
     $ct_base_call_result = ct_base_call(array(
         'message' => $message,
         'example' => null,
