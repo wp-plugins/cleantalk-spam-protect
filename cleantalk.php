@@ -3,11 +3,11 @@
   Plugin Name: Anti-spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, captcha less, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms. 
-  Version: 5.11
+  Version: 5.12
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
  */
-$cleantalk_plugin_version='5.11';
+$cleantalk_plugin_version='5.12';
 $cleantalk_executed=false;
 
 if(!defined('CLEANTALK_PLUGIN_DIR')){
@@ -26,9 +26,23 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     // After plugin loaded - to load locale as described in manual
     add_action( 'plugins_loaded', 'ct_plugin_loaded' );
     
-    add_action('wp_loaded', 'ct_add_nocache_script', 1);
-    add_action('wp_footer', 'ct_add_nocache_script_footer', 1);
-    add_action('wp_head', 'ct_add_nocache_script_header', 1);
+    $ct_options=ct_get_options();
+    if(isset($ct_options['use_ajax']))
+    {
+    	$use_ajax = @intval($ct_options['use_ajax']);
+    }
+    else
+    {
+    	$use_ajax=1;
+    }
+    
+    if($use_ajax==1)
+    {
+		add_action('wp_loaded', 'ct_add_nocache_script', 1);
+		add_action('wp_footer', 'ct_add_nocache_script_footer', 1);
+		add_action('wp_head', 'ct_add_nocache_script_header', 1);
+	}
+    
     add_action( 'wp_ajax_nopriv_ct_get_cookie', 'ct_get_cookie',1 );
 	add_action( 'wp_ajax_ct_get_cookie', 'ct_get_cookie',1 );
     

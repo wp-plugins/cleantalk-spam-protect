@@ -200,6 +200,7 @@ function ct_admin_init() {
     add_settings_field('cleantalk_general_contact_forms_test', __('Custom contact forms', 'cleantalk'), 'ct_input_general_contact_forms_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_general_postdata_test', __('Check all post data', 'cleantalk'), 'ct_input_general_postdata_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_show_adminbar', __('Show statistics in admin bar', 'cleantalk'), 'ct_input_show_adminbar', 'cleantalk', 'cleantalk_settings_anti_spam');
+    add_settings_field('cleantalk_use_ajax', __('Use AJAX for JavaScript check', 'cleantalk'), 'ct_input_use_ajax', 'cleantalk', 'cleantalk_settings_anti_spam');
 }
 
 /**
@@ -474,6 +475,23 @@ function ct_input_general_postdata_test() {
     echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     echo "<input type='radio' id='cleantalk_general_postdata_test0' name='cleantalk_settings[general_postdata_test]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_general_postdata_test0'> " . __('No') . "</label>";
     @admin_addDescriptionsFields(sprintf(__('Check all post data', 'cleantalk'),  $ct_options['general_postdata_test']));
+}
+
+function ct_input_use_ajax() {
+    global $ct_options, $ct_data;
+
+    if(isset($ct_options['use_ajax']))
+    {
+    	$value = @intval($ct_options['use_ajax']);
+    }
+    else
+    {
+    	$value=1;
+    }
+    echo "<input type='radio' id='cleantalk_use_ajax1' name='cleantalk_settings[use_ajax]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_use_ajax1'> " . __('Yes') . "</label>";
+    echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    echo "<input type='radio' id='cleantalk_use_ajax0' name='cleantalk_settings[use_ajax]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_use_ajax0'> " . __('No') . "</label>";
+    @admin_addDescriptionsFields(sprintf(__('Use AJAX for JavaScript check', 'cleantalk'),  $ct_options['use_ajax']));
 }
 
 /**

@@ -191,7 +191,16 @@ function ct_footer_add_cookie() {
  * @param 	bool $random_key switch on generation random key for every page load 
  */
 function ct_add_hidden_fields($random_key = false, $field_name = 'ct_checkjs', $return_string = false, $cookie_check = false) {
-    global $ct_checkjs_def, $ct_plugin_name;
+    global $ct_checkjs_def, $ct_plugin_name, $ct_options;
+    $ct_options=ct_get_options();
+    if(isset($ct_options['use_ajax']))
+    {
+    	$use_ajax = @intval($ct_options['use_ajax']);
+    }
+    else
+    {
+    	$use_ajax=1;
+    }
 
     $ct_checkjs_key = ct_get_checkjs_value($random_key); 
     $field_id_hash = md5(rand(0, 1000));
@@ -207,7 +216,10 @@ ctSetCookie("%s", "%s", "%s");
 ';      
 		$html = sprintf($html, $field_name, $ct_checkjs_key, $ct_checkjs_def);
 		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
-		$html='';
+		if($use_ajax==1)
+		{
+			$html='';
+		}
 		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
     } else {
         $ct_input_challenge = sprintf("'%s'", $ct_checkjs_key);
@@ -221,8 +233,11 @@ setTimeout(function(){var ct_input_name = \'%s\';var ct_input_value = document.g
 ';
 		$html = sprintf($html, $field_id, $field_name, $ct_checkjs_def, $field_id, $ct_input_challenge);
 		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
-		$html='<input type="hidden" id="%s" name="%s" value="%s" />';
-		$html = sprintf($html, $field_id, $field_name, $ct_checkjs_def);
+		if($use_ajax==1)
+		{
+			$html='<input type="hidden" id="%s" name="%s" value="%s" />';
+			$html = sprintf($html, $field_id, $field_name, $ct_checkjs_def);
+		}
 		/*!!! IT'S A TEMPORARILY CODE FOR DEBUGGING CF7 !!!*/
     };
 
