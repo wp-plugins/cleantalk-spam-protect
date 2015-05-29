@@ -452,7 +452,7 @@ function ct_input_show_adminbar() {
     echo "<input type='radio' id='cleantalk_show_adminbar1' name='cleantalk_settings[show_adminbar]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar1'> " . __('Yes') . "</label>";
     echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     echo "<input type='radio' id='cleantalk_show_adminbar0' name='cleantalk_settings[show_adminbar]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_show_adminbar0'> " . __('No') . "</label>";
-    admin_addDescriptionsFields(sprintf(__('Show statistics in admin bar', 'cleantalk'),  $ct_options['show_adminbar']));
+    admin_addDescriptionsFields(sprintf(__('Show/hide CleanTalk icon in top level menu in WordPress backend.', 'cleantalk'),  $ct_options['show_adminbar']));
 }
 
 /**
@@ -474,7 +474,7 @@ function ct_input_general_postdata_test() {
     echo "<input type='radio' id='cleantalk_general_postdata_test1' name='cleantalk_settings[general_postdata_test]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_general_postdata_test1'> " . __('Yes') . "</label>";
     echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     echo "<input type='radio' id='cleantalk_general_postdata_test0' name='cleantalk_settings[general_postdata_test]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_general_postdata_test0'> " . __('No') . "</label>";
-    @admin_addDescriptionsFields(sprintf(__('Check all post data', 'cleantalk'),  $ct_options['general_postdata_test']));
+    @admin_addDescriptionsFields(sprintf(__('Check all POST submissions from website visitors. Enable this option if you have spam misses on website or you don`t have records about missed spam in <a href="https://cleantalk.org/my/?user_token='.@$ct_data['user_token'].'&utm_source=wp-backend&utm_medium=admin-bar" target="_blank">CleanTalk dashboard</a>.', 'cleantalk'),  $ct_options['general_postdata_test']));
 }
 
 function ct_input_use_ajax() {
@@ -491,7 +491,7 @@ function ct_input_use_ajax() {
     echo "<input type='radio' id='cleantalk_use_ajax1' name='cleantalk_settings[use_ajax]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_use_ajax1'> " . __('Yes') . "</label>";
     echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     echo "<input type='radio' id='cleantalk_use_ajax0' name='cleantalk_settings[use_ajax]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_use_ajax0'> " . __('No') . "</label>";
-    @admin_addDescriptionsFields(sprintf(__('Use AJAX for JavaScript check', 'cleantalk'),  $ct_options['use_ajax']));
+    @admin_addDescriptionsFields(sprintf(__('', 'cleantalk'),  $ct_options['use_ajax']));
 }
 
 /**
