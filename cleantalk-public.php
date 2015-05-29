@@ -849,6 +849,8 @@ function ct_registration_errors($errors, $sanitized_user_login = null, $user_ema
     $submit_time = submit_time_test();
     
     $sender_info = get_sender_info();
+    
+    $checkjs=0;
 
     $checkjs = js_test($ct_checkjs_register_form, $_POST, true);
     $sender_info['post_checkjs_passed'] = $checkjs;
@@ -856,7 +858,7 @@ function ct_registration_errors($errors, $sanitized_user_login = null, $user_ema
     //
     // This hack can be helpfull when plugin uses with untested themes&signups plugins.
     //
-    if ($checkjs === null) {
+    if ($checkjs == 0) {
         $checkjs = js_test('ct_checkjs', $_COOKIE, true);
         $sender_info['cookie_checkjs_passed'] = $checkjs;
     }
