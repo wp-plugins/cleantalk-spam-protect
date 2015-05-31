@@ -46,7 +46,7 @@ We have developed antispam for WordPress that would provide **maximum protection
 
 The anti-spam method offered by CleanTalk allows to switch from the methods that trouble the communication (CAPTCHA, question-answer etc.) to a more convenient one.
 
-The CleanTalk is premium anti-spam for WordPress, please look at the <a href="http://cleantalk.org/price">pricing</a>. The plugin works with cloud anti spam service CleanTalk. <b>CleanTalk has free trial for 14 days.</b> We try to provide anti-spam service at the highest level and we can not afford to offer a free version of our service, as this will immediately affect the quality of providing anti-spam protection. Paying for a year of anti-spam service, you save a lot more and get: 
+CleanTalk is premium anti-spam for WordPress, please look at the <a href="http://cleantalk.org/price">pricing</a>. The plugin works with cloud anti spam service CleanTalk. <b>CleanTalk has free trial for 14 days.</b> We try to provide anti-spam service at the highest level and we can not afford to offer a free version of our service, as this will immediately affect the quality of providing anti-spam protection. Paying for a year of anti-spam service, you save a lot more and get: 
  
  * Up to 100% protection against spam bots.
  * Time and resources saving.
