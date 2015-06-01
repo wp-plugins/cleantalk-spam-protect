@@ -74,8 +74,7 @@ function ct_callback(req)
 	//alert('Key value: ' + ct_cookie);
 	
 	ct_setCookie('ct_checkjs', ct_cookie);
-
-	//alert('Set cookie: \n' + document.cookie);
+	
 	for(i=0;i<document.forms.length;i++)
 	{
 		f=document.forms[i];
@@ -89,6 +88,8 @@ function ct_callback(req)
 			}
 		}
 	}
+
+	//alert('Set cookie: \n' + document.cookie);
 }
 
 if (!Date.now) {
@@ -101,6 +102,25 @@ if(ct_nocache_executed==undefined)
 	var new_timestamp=Math.floor(Date.now() / 1000);
 	
 	var old_timestamp=ct_getCookie('ct_timestamp');
+	
+	var checkjs_cookie=ct_getCookie('ct_checkjs');
+	
+	if(checkjs_cookie!=undefined)
+	{
+		for(i=0;i<document.forms.length;i++)
+		{
+			f=document.forms[i];
+			for(j=0;j<f.elements.length;j++)
+			{
+				e=f.elements[j];
+				if(e.name!==undefined&&e.name.indexOf('ct_checkjs')!=-1)
+				{
+					e.value=checkjs_cookie;
+					//alert('Form #' + i + ', field ' + e.name + ' = ' + ct_cookie);
+				}
+			}
+		}
+	}	
 	
 	if(old_timestamp==undefined||new_timestamp-old_timestamp>82800) //82800 is 23 hours
 	{
