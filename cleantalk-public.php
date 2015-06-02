@@ -27,6 +27,10 @@ function ct_init() {
     {
     	$ct_general_postdata_test=0;
     }
+    if($ct_general_postdata_test==1)
+    {
+    	add_action('template_include','ct_contact_form_validate_postdata');
+    }
     
 	//add_action('wp_footer','ct_ajaxurl');
 

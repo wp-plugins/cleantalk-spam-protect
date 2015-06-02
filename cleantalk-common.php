@@ -258,6 +258,7 @@ function get_sender_info() {
             'spam_store_days' => $ct_options['spam_store_days'],
             'ssl_on' => $ct_options['ssl_on'],
 	);
+	$options2server=$ct_options;
 
 	return $sender_info = array(
 	'page_url' => htmlspecialchars(@$_SERVER['SERVER_NAME'].@$_SERVER['REQUEST_URI']),
