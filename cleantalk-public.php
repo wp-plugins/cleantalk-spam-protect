@@ -28,14 +28,14 @@ function ct_init() {
     	$ct_general_postdata_test=0;
     }
     
-    
-    if (isset($ct_options['general_contact_forms_test']) && $ct_options['general_contact_forms_test'] == 1) {
-            add_action('template_include','ct_contact_form_validate',1);
-        }
-    
+    if (isset($ct_options['general_contact_forms_test']) && $ct_options['general_contact_forms_test'] == 1)
+    {
+		add_action('CMA_custom_post_type_nav','ct_contact_form_validate_postdata',1);
+	}
+
     if($ct_general_postdata_test==1)
     {
-    	add_action('template_include','ct_contact_form_validate_postdata',1);
+    	add_action('CMA_custom_post_type_nav','ct_contact_form_validate_postdata',1);
     }
     
 	//add_action('wp_footer','ct_ajaxurl');
