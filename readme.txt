@@ -46,7 +46,7 @@ We have developed antispam for WordPress that would provide **maximum protection
 
 The anti-spam method offered by CleanTalk allows to switch from the methods that trouble the communication (CAPTCHA, question-answer etc.) to a more convenient one.
 
-CleanTalk is premium anti-spam for WordPress, please look at the <a href="http://cleantalk.org/price">pricing</a>. The plugin works with cloud anti spam service CleanTalk. <b>CleanTalk has free trial for 14 days.</b> We try to provide anti-spam service at the highest level and we can not afford to offer a free version of our service, as this will immediately affect the quality of providing anti-spam protection. Paying for a year of anti-spam service, you save a lot more and get: 
+CleanTalk is premium anti-spam service for WordPress, please look at the <a href="http://cleantalk.org/price">pricing</a>. The plugin works with cloud anti spam service CleanTalk. <b>CleanTalk has free trial for 14 days.</b> We try to provide anti-spam service at the highest level and we can not afford to offer a free version of our service, as this will immediately affect the quality of providing anti-spam protection. Paying for a year of anti-spam service, you save a lot more and get: 
  
  * Up to 100% protection against spam bots.
  * Time and resources saving.
@@ -111,7 +111,7 @@ Please use email **stop_email@example.com** for comments, contacts or signups to
 Plugin Anti-spam by CleanTalk stops up to 100% of spam comments, spam signups (registrations), spam contact emails, spam subscriptions, spam bookings or spam orders.
 
 = What about pingback, trackback spam? = 
-Plugin by default pass pingbacks without any checks. All trackbacks will be blocked if the sender have spam activity.
+Plugin by default pass pingbacks without any checks. All trackbacks will be blocked if the sender had spam activity.
 
 = Can I use CleanTalk with Akismet? =
 Sure, you can use CleanTalk with Akismet. In this case probably you will have bigger false/positive rate (when legitimate comments/signups denies), but you will have stronger antispam protection at website.
