@@ -21,7 +21,7 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 1. Stops spam bookings.
 1. Stops spam subscriptions.
 1. Stops spam in widgets.
-1. Check existing comments for spam
+1. Check existing comments for spam.
 
 = Spam protection =
 * WordPress, JetPack comments.
