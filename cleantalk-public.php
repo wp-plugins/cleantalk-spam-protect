@@ -1455,7 +1455,9 @@ function ct_contact_form_validate () {
 
     if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
         (isset($_POST['log']) && isset($_POST['pwd']) && isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
-        (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword')
+        (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword'||
+        strpos($_SERVER['REQUEST_URI'],'/checkout/')!==false
+        )
         ) {
         return null;
     }
