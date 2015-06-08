@@ -11,6 +11,23 @@ String.prototype.format = String.prototype.f = function ()
     });
 };
 
+function ct_clear_comments()
+{
+	var data = {
+		'action': 'ajax_clear_comments',
+		'security': ajax_nonce
+	};
+	
+	jQuery.ajax({
+		type: "POST",
+		url: ajaxurl,
+		data: data,
+		success: function(msg){
+			ct_send_comments();
+		}
+	});
+}
+
 function ct_send_comments()
 {
 	var data = {
@@ -126,7 +143,7 @@ function ct_delete_checked()
 jQuery("#ct_check_spam_button").click(function(){
 	jQuery('#ct_working_message').show();
 	working=true;
-	ct_send_comments();
+	ct_clear_comments();
 });
 jQuery("#ct_check_spam_button").click(function(){
 	jQuery('#ct_checking_status').html('');
