@@ -1,6 +1,6 @@
 === Anti-spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget antispam, registration, plugin, antispam plugin, spam plugin, anti-spam plugin, ninja
+Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget spam, registration, plugin, antispam plugin, spam plugin, anti-spam plugin, ninja, cache spam
 Requires at least: 3.0
 Tested up to: 4.2.2
 Stable tag: 5.12
@@ -30,6 +30,9 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 * WooCommerce review form.
 * WordPress Landing Pages.
 * Any WordPress form (option 'Custom contact forms'). 
+
+== Compatible with WordPress cache plugins ==
+* W3 Total Cache, Quick Cache, WP Fastest Cache, Hyper Cache, WP Super cache
 
 = Check existing comments for spam =
 With the help of anti-spam CleanTalk you can check existing comments, to find and quickly delete spam comments. For use this function, go to WP Console->Comments->Find spam comments.
