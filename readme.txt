@@ -31,7 +31,7 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 * WordPress Landing Pages.
 * Any WordPress form (option 'Custom contact forms'). 
 
-== Compatible with WordPress cache plugins ==
+= Compatible with WordPress cache plugins =
 * W3 Total Cache, Quick Cache, WP Fastest Cache, Hyper Cache, WP Super cache
 
 = Check existing comments for spam =
