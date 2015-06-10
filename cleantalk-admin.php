@@ -588,10 +588,13 @@ function admin_notice_message(){
         $show_notice = false;
     }
     
-    $next_notice_show=time()+86500;
     if(isset($ct_data['next_notice_show']))
     {
     	$next_notice_show=$ct_data['next_notice_show'];
+    }
+    else
+    {
+    	$next_notice_show=0;
     }
 
     if ($show_notice && $show_ct_notice_renew && $value==1 && time()>$next_notice_show) {
