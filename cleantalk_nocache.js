@@ -47,7 +47,7 @@ function ct_getCookie(name) {
 
 function ct_setCookie(name, value)
 {
-	var domain=location.hostname;
+	/*var domain=location.hostname;
 	tmp=domain.split('.');
 	if(tmp[0].toLowerCase()=='www')
 	{
@@ -57,15 +57,16 @@ function ct_setCookie(name, value)
 	{
 		tmp[0]='.'+tmp[0];
 	}
-	domain=tmp.join('.');
+	domain=tmp.join('.');*/
 	
 	document.cookie = name+" =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /";
 	document.cookie = name+" =; expires=Thu, 01 Jan 1970 00:00:01 GMT";
-	document.cookie = name+" =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /; domain = " +  domain;
+	//document.cookie = name+" =; expires=Thu, 01 Jan 1970 00:00:01 GMT; path = /; domain = " +  domain;
 	
 	var date = new Date;
 	date.setDate(date.getDate() + 1);
-	setTimeout(function() { document.cookie = name+"=" + value + "; expires=" + date.toUTCString() + "; path = /; domain = " + domain}, 200)
+	//setTimeout(function() { document.cookie = name+"=" + value + "; expires=" + date.toUTCString() + "; path = /; domain = " + domain}, 200)
+	setTimeout(function() { document.cookie = name+"=" + value + "; expires=" + date.toUTCString() + "; path = /;"}, 200)
 }
 
 function ct_callback(req)
