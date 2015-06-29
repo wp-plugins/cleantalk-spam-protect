@@ -558,7 +558,7 @@ function ct_get_fields_any(&$email,&$message,&$nickname,&$subject, &$contact,$ar
     );
 	foreach($arr as $key=>$value)
 	{
-		if(!is_array($value))
+		if(!is_array($value)&&!is_object($value))
 		{
 			if (in_array($key, $skip_params) || preg_match("/^ct_checkjs/", $key)) {
                 $contact = false;
