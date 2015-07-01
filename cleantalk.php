@@ -19,7 +19,10 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     // http://codex.wordpress.org/Function_Reference/register_activation_hook
     register_activation_hook( __FILE__, 'ct_activation' );
     register_deactivation_hook( __FILE__, 'ct_deactivation' );
-    add_action('admin_init', 'ct_plugin_redirect');
+    if(!defined('WP_ALLOW_MULTISITE')||defined('WP_ALLOW_MULTISITE')&&WP_ALLOW_MULTISITE==false)
+    {
+    	add_action('admin_init', 'ct_plugin_redirect');
+    }
     
     
 
