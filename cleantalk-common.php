@@ -1,6 +1,6 @@
 <?php
 
-$ct_agent_version = 'wordpress-513';
+$ct_agent_version = 'wordpress-514';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
@@ -558,12 +558,12 @@ function ct_get_fields_any(&$email,&$message,&$nickname,&$subject, &$contact,$ar
     );
 	foreach($arr as $key=>$value)
 	{
-		if(!is_array($value)&&!is_object($value))
+		if(!is_array($value)&&!is_object($value)&&@get_class($value)!='WP_User')
 		{
 			if (in_array($key, $skip_params) || preg_match("/^ct_checkjs/", $key)) {
                 $contact = false;
             }
-			if ($email === '' && preg_match("/^\S+@\S+\.\S+$/", $value))
+			if ($email === '' && @preg_match("/^\S+@\S+\.\S+$/", $value))
 	    	{
 	            $email = $value;
 	        }
@@ -577,10 +577,10 @@ function ct_get_fields_any(&$email,&$message,&$nickname,&$subject, &$contact,$ar
 	        }
 	        else
 	        {
-	        	$message.="$value\n";
+	        	@$message.="$value\n";
 	        }
 		}
-		else
+		else if(!is_object($value)&&@get_class($value)!='WP_User')
 		{
 			ct_get_fields_any($email, $message, $nickname, $subject, $contact, $value);
 		}
