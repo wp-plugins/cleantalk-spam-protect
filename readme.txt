@@ -189,7 +189,7 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * Some backend fixes
 
 = 5.13 2015-06-12 =
-  * Closing notificatiion for anti-spam renew
+  * Closing notification for anti-spam renew
   * Fixed bulk antispam comment checking  
 
 = 5.12 2015-06-01 =
@@ -595,7 +595,7 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * Some backend fixes
   
 = 5.13 2015-06-12 =
-  * Closing notifocatiion for anti-spam renew
+  * Closing notification for anti-spam renew
   * Fixed bulk antispam comment checking  
   
 = 5.12 2015-06-01 =
