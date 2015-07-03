@@ -2,8 +2,8 @@
 Contributors: znaeff, shagimuratov, vlad-cleantalk
 Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget spam, registration, plugin, antispam plugin, anti-spam plugin, ninja, cache
 Requires at least: 3.0
-Tested up to: 4.2.2
-Stable tag: 5.13
+Tested up to: 4.3
+Stable tag: 5.14
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,7 +35,7 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 * W3 Total Cache, Quick Cache, WP Fastest Cache, Hyper Cache, WP Super cache
 
 = Check existing comments for spam =
-With the help of anti-spam CleanTalk you can check existing comments, to find and quickly delete spam comments. For use this function, go to WP Console->Comments->Find spam comments.
+With the help of anti-spam CleanTalk you can check existing comments, to find and quickly delete spam comments. For use this function, go to WP Console->Comments->Find spam comments.
 
 = Cloud anti-spam for WordPress. CAPTCHA less, no spam comments, no spam registrations, no spam contact emails, no spam trackbacks =
 Spam is one of the most irritating factors.  Spam become every year more and conventional anti-spam can no longer handle all the spam bots. CleanTalk prevents spam and automatically blocks it. You'll be surprised of effective protection against spam.
@@ -184,8 +184,12 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
+= 5.14 2015-07-03 =
+  * Added anti-spam protection for some themes and plugins
+  * Some backend fixes
+
 = 5.13 2015-06-12 =
-  * Closing notifocatiion for anti-spam renew
+  * Closing notification for anti-spam renew
   * Fixed bulk antispam comment checking  
 
 = 5.12 2015-06-01 =
@@ -586,8 +590,12 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * First version
 
 == Upgrade Notice ==
+= 5.14 2015-07-03 =
+  * Added anti-spam protection for some themes and plugins
+  * Some backend fixes
+  
 = 5.13 2015-06-12 =
-  * Closing notifocatiion for anti-spam renew
+  * Closing notification for anti-spam renew
   * Fixed bulk antispam comment checking  
   
 = 5.12 2015-06-01 =

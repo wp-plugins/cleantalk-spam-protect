@@ -49,6 +49,10 @@ add_action( 'wp_ajax_cscf-submitform', 'ct_cscf_submitform',1 );
 add_action( 'wp_ajax_nopriv_ajax_get_stats', 'ct_get_stats',1 );
 add_action( 'wp_ajax_ajax_get_stats', 'ct_get_stats',1 );
 
+/*hooks for visual form builder */
+add_action( 'wp_ajax_nopriv_vfb_submit', 'ct_vfb_submit',1 );
+add_action( 'wp_ajax_vfb_submit', 'ct_vfb_submit',1 );
+
 function ct_get_stats()
 {
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
@@ -565,6 +569,64 @@ function ct_zn_do_login()
 		if ($ct_result->allow == 0)
 		{
 			print '<div id="login_error">'.$ct_result->comment.'</div>';
+			die();
+		}
+	}
+}
+
+function ct_vfb_submit()
+{
+	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
+	global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
+	
+	$ct_data=ct_get_data();
+	
+	$ct_options=ct_get_options();
+	
+	$sender_email = null;
+    $message = '';
+    
+    foreach ($_POST as $key => $value)
+    {
+    	if ($sender_email === null && preg_match("/^\S+@\S+\.\S+$/", $value))
+    	{
+            $sender_email = $value;
+        }
+        else
+        {
+        	$message.="$value\n";
+        }
+    }
+    
+	if($sender_email!=null)
+	{
+		$checkjs = js_test('ct_checkjs', $_COOKIE, true);
+		$submit_time = submit_time_test();
+	    $sender_info = get_sender_info();
+	    $sender_info['post_checkjs_passed']=$checkjs;
+	    
+		$sender_info = json_encode($sender_info);
+		if ($sender_info === false)
+		{
+			$sender_info= '';
+		}
+		
+		$ct_base_call_result = ct_base_call(array(
+			'message' => $message,
+			'example' => null,
+			'sender_email' => $sender_email,
+			'sender_nickname' => null,
+			'sender_info' => $sender_info,
+			'post_info'=>null,
+			'checkjs' => $checkjs));
+		
+		$ct = $ct_base_call_result['ct'];
+		$ct_result = $ct_base_call_result['ct_result'];
+		if ($ct_result->allow == 0)
+		{
+			$result=Array('result'=>false,'message'=>$ct_result->comment);
+			@header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+			print json_encode($result);
 			die();
 		}
 	}
