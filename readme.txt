@@ -83,7 +83,7 @@ Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedw
 == Installation ==
 1. Download, install and activate Anti-spam by CleanTalk. 
 1. Get Access key <a href="https://cleantalk.org/register?platform=wordpress" target="_blank">https://cleantalk.org/register</a>
-1. Enter Access key at the plugin settings. 
+1. Enter Access key on the plugin settings. 
 1. Do dummy spam comment (registration or contact message) with email **stop_email@example.com**.
 
 You should see notice,
