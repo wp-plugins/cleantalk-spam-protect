@@ -12,8 +12,12 @@ $cleantalk_executed=false;
 
 if(!defined('CLEANTALK_PLUGIN_DIR')){
     define('CLEANTALK_PLUGIN_DIR', plugin_dir_path(__FILE__));
+    global $ct_options, $ct_data;
+    
 
     require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-common.php');
+    $ct_options=ct_get_options();
+    $ct_data=ct_get_data();
 
     // Activation/deactivation functions must be in main plugin file.
     // http://codex.wordpress.org/Function_Reference/register_activation_hook
@@ -29,7 +33,6 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     // After plugin loaded - to load locale as described in manual
     add_action( 'plugins_loaded', 'ct_plugin_loaded' );
     
-    $ct_options=ct_get_options();
     if(isset($ct_options['use_ajax']))
     {
     	$use_ajax = @intval($ct_options['use_ajax']);
@@ -44,10 +47,9 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 		add_action('wp_loaded', 'ct_add_nocache_script', 1);
 		add_action('wp_footer', 'ct_add_nocache_script_footer', 1);
 		add_action('wp_head', 'ct_add_nocache_script_header', 1);
+		add_action( 'wp_ajax_nopriv_ct_get_cookie', 'ct_get_cookie',1 );
+		add_action( 'wp_ajax_ct_get_cookie', 'ct_get_cookie',1 );
 	}
-    
-    add_action( 'wp_ajax_nopriv_ct_get_cookie', 'ct_get_cookie',1 );
-	add_action( 'wp_ajax_ct_get_cookie', 'ct_get_cookie',1 );
     
 
     if (is_admin())

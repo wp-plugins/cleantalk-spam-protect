@@ -228,8 +228,8 @@ add_action( 'wp_ajax_ajax_check_comments', 'ct_ajax_check_comments' );
 function ct_ajax_check_comments()
 {
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
-	
-	$ct_options = ct_get_options();
+	global $ct_options;
+	//$ct_options = ct_get_options();
 	
 	$args_unchecked = array(
 		'meta_query' => array(

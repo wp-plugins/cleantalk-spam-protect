@@ -7,7 +7,7 @@
 function ct_init() {
     global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data, $ct_check_post_result;
 
-    $ct_options = ct_get_options();
+    //$ct_options = ct_get_options();
 
     ct_init_session();
 
@@ -202,7 +202,7 @@ function ct_footer_add_cookie() {
  */
 function ct_add_hidden_fields($random_key = false, $field_name = 'ct_checkjs', $return_string = false, $cookie_check = false) {
     global $ct_checkjs_def, $ct_plugin_name, $ct_options;
-    $ct_options=ct_get_options();
+    //$ct_options=ct_get_options();
     if(isset($ct_options['use_ajax']))
     {
     	$use_ajax = @intval($ct_options['use_ajax']);
@@ -584,7 +584,7 @@ function ct_die_extended($comment_body) {
 function js_test($field_name = 'ct_checkjs', $data = null, $random_key = false) {
     global $ct_options, $ct_data;
     
-    $ct_data=ct_get_data();
+    //$ct_data=ct_get_data();
 
     $checkjs = null;
     $js_post_value = null;

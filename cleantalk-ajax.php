@@ -75,7 +75,7 @@ function ct_get_stats()
 {
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
 	global $ct_data;
-	$ct_data=ct_get_data();
+	//$ct_data=ct_get_data();
 	$t=time();
 	
 	if(!isset($ct_data['stat_accepted']))
@@ -107,8 +107,8 @@ function ct_validate_email_ajaxlogin($email=null, $is_ajax=true)
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
 	global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
 	
-	$ct_options=ct_get_options();
-	$ct_data=ct_get_data();
+	//$ct_options=ct_get_options();
+	//$ct_data=ct_get_data();
 	
 	$email = is_null( $email ) ? $email : $_POST['email'];
 	$email=sanitize_email($email);
@@ -121,7 +121,7 @@ function ct_validate_email_ajaxlogin($email=null, $is_ajax=true)
 	if(class_exists('AjaxLogin')&&isset($_POST['action'])&&$_POST['action']=='validate_email')
 	{
 		
-		$ct_options=ct_get_options();
+		//$ct_options=ct_get_options();
 		$checkjs = js_test('ct_checkjs', $_COOKIE, true);
 		$submit_time = submit_time_test();
 	    $sender_info = get_sender_info();
@@ -202,8 +202,8 @@ function ct_user_register_ajaxlogin($user_id)
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
 	global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
 	
-	$ct_options=ct_get_options();
-	$ct_data=ct_get_data();
+	//$ct_options=ct_get_options();
+	//$ct_data=ct_get_data();
 
 	if(class_exists('AjaxLogin')&&isset($_POST['action'])&&$_POST['action']=='register_submit')
 	{
@@ -291,8 +291,8 @@ function ct_ajax_hook()
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
 	global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
 	
-	$ct_data=ct_get_data();
-	$ct_options=ct_get_options();
+	//$ct_data=ct_get_data();
+	//$ct_options=ct_get_options();
 	
 	$sender_email = null;
     $message = '';

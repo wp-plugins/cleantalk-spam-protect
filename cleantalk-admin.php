@@ -5,7 +5,7 @@ $ct_plugin_basename = 'cleantalk-spam-protect/cleantalk.php';
 if(isset($_GET['close_notice']))
 {
 	global $ct_data, $pagenow;
-	$ct_data=ct_get_data();
+	//$ct_data=ct_get_data();
 	$ct_data['next_notice_show']=time()+86400;
 	update_option('cleantalk_data', $ct_data);
 	$_SERVER["QUERY_STRING"]=str_replace("close_notice=1","",$_SERVER["QUERY_STRING"]);
@@ -38,8 +38,9 @@ function ct_add_stats_js()
  
 function ct_ajax_get_timezone()
 {
+	global $ct_data;
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
-	$ct_data = ct_get_data();
+	//$ct_data = ct_get_data();
 	if(isset($_POST['offset']))
 	{
 		$ct_data['timezone'] = intval($_POST['offset']);
@@ -72,8 +73,8 @@ function ct_admin_add_page() {
 function ct_admin_init() {
     global $ct_server_timeout, $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $ct_data, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label, $cleantalk_plugin_version;
 
-    $ct_options = ct_get_options();
-    $ct_data = ct_get_data();
+    //$ct_options = ct_get_options();
+    //$ct_data = ct_get_data();
     
     $current_version=@trim($ct_data['current_version']);
     if($current_version!=$cleantalk_plugin_version)
@@ -244,7 +245,7 @@ function ct_add_admin_menu( $wp_admin_bar ) {
     
 	if ( current_user_can('activate_plugins')&&$value==1 )
 	{
-		$ct_data=ct_get_data();
+		//$ct_data=ct_get_data();
 		$args = array(
 			'id'    => 'ct_parent_node',
 			'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small1.png" alt=""  height="" style="margin-top:9px;" /><a href="#" class="ab-item alignright" title="allowed / blocked" alt="allowed / blocked"><span class="ab-label" id="ct_stats"></span></a>'
@@ -556,7 +557,7 @@ input[type=submit] {padding: 10px; background: #3399FF; color: #fff; border:0 no
 function admin_notice_message(){
     global $show_ct_notice_trial, $show_ct_notice_renew, $show_ct_notice_online, $show_ct_notice_autokey, $ct_notice_autokey_value, $ct_plugin_name, $ct_options, $ct_data;
     
-    $ct_data=ct_get_data();
+    //$ct_data=ct_get_data();
 
     $user_token = '';
     if (isset($ct_data['user_token']) && $ct_data['user_token'] != '') {
