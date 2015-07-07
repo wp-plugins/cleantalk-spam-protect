@@ -200,7 +200,9 @@ function ct_inject_nocache_script($html)
 	}
 	return $html;
 }
-
-require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-comments.php');
+if(is_admin())
+{
+	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-comments.php');
+}
 
 ?>
