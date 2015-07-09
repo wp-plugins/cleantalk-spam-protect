@@ -915,6 +915,10 @@ function ct_registration_errors($errors, $sanitized_user_login = null, $user_ema
         ct_send_error_notice($ct_result->comment);
         return $errors;
     }
+    if ($ct_result->errno != 0 && $checkjs==0)
+    {
+    	$ct_result->allow=0;
+    }
     
     if ($ct_result->inactive != 0) {
         ct_send_error_notice($ct_result->comment);
