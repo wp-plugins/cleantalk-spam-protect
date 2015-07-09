@@ -1458,7 +1458,8 @@ function ct_contact_form_validate () {
         (isset($pagenow) && $pagenow == 'wp-login.php' && isset($_GET['action']) && $_GET['action']=='lostpassword'||
         strpos($_SERVER['REQUEST_URI'],'/checkout/')!==false ||
         strpos($_SERVER['REQUEST_URI'],'/wp-admin/')!==false ||
-        strpos($_SERVER['REQUEST_URI'],'wp-login.php')!==false
+        strpos($_SERVER['REQUEST_URI'],'wp-login.php')!==false||
+        strpos($_SERVER['REQUEST_URI'],'wp-comments-post.php')!==false
         )
         ) {
         return null;
@@ -1538,7 +1539,8 @@ function ct_contact_form_validate_postdata () {
         (isset($pagenow) && $pagenow == 'wp-cron.php' ||
         strpos($_SERVER['REQUEST_URI'],'/checkout/')!==false) ||
         strpos($_SERVER['REQUEST_URI'],'/wp-admin/')!==false ||
-        strpos($_SERVER['REQUEST_URI'],'wp-login.php')!==false
+        strpos($_SERVER['REQUEST_URI'],'wp-login.php')!==false ||
+        strpos($_SERVER['REQUEST_URI'],'wp-comments-post.php')!==false
         ) {
         return null;
     }
