@@ -1654,11 +1654,11 @@ function ct_print_form($arr,$k)
 		{
 			if($k=='')
 			{
-				print "<input type='text' name='$key' value='$value' />";
+				print '<textarea name="'.$key.'">'.htmlspecialchars($value).'</textarea>';
 			}
 			else
 			{
-				print '<input type="text" name="'.$k.'['.$key.']" value="'.$value.'" />';
+				print '<textarea name="'.$k.'['.$key.']">'.htmlspecialchars($value).'</textarea>';
 			}
 		}
 		else
