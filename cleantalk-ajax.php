@@ -71,6 +71,10 @@ add_action( 'wp_ajax_vfb_submit', 'ct_ajax_hook',1 );
 add_action( 'wp_ajax_nopriv_woocommerce_checkout', 'ct_ajax_hook',1 );
 add_action( 'wp_ajax_woocommerce_checkout', 'ct_ajax_hook',1 );
 
+/*hooks for frm_action*/
+add_action( 'wp_ajax_nopriv_frm_entries_create', 'ct_ajax_hook',1 );
+add_action( 'wp_ajax_frm_entries_create', 'ct_ajax_hook',1 );
+
 function ct_get_stats()
 {
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
@@ -411,6 +415,12 @@ function ct_ajax_hook()
 			else if($_POST['action']=='woocommerce_checkout')
 			{
 				print $ct_result->comment;
+				die();
+			}
+			else if($_POST['action']=='frm_entries_create')
+			{
+				$result=Array('112'=>$ct_result->comment);
+				print json_encode($result);
 				die();
 			}
 		}
