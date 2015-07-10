@@ -271,6 +271,7 @@ function get_sender_info() {
         'checkjs_data_post' => $checkjs_data_post, 
         'checkjs_data_cookies' => $checkjs_data_cookies, 
         'ct_options' => json_encode($options2server),
+        'fields_number' => sizeof($_POST),
     );
 }
 

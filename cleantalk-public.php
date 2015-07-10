@@ -5,11 +5,12 @@
  * @return 	mixed[] Array of options
  */
 function ct_init() {
-    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data, $ct_check_post_result;
+    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data, $ct_check_post_result, $test_external_forms;;
 
     //$ct_options = ct_get_options();
 
     ct_init_session();
+    
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (is_array($_SESSION) && !array_key_exists($ct_formtime_label, $_SESSION) && session_id() != '') {
@@ -17,6 +18,20 @@ function ct_init() {
         }
     } else {
         $_SESSION[$ct_formtime_label] = time();
+    }
+    
+    if($test_external_forms && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cleantalk_hidden_method']) && isset($_POST['cleantalk_hidden_action']))
+    {
+    	$action=$_POST['cleantalk_hidden_action'];
+    	$method=$_POST['cleantalk_hidden_method'];
+    	unset($_POST['cleantalk_hidden_action']);
+    	unset($_POST['cleantalk_hidden_method']);
+    	ct_contact_form_validate();
+    	print "<html><body><form method='$method' action='$action'>";
+    	ct_print_form($_POST,'');
+    	print "</form></body></html>";
+    	print "<script>document.forms[0].submit();</script>";
+    	die();
     }
     
     if(isset($ct_options['general_postdata_test']))
@@ -1629,6 +1644,35 @@ function ct_send_error_notice ($comment = '') {
     }
 
     return null;
+}
+
+function ct_print_form($arr,$k)
+{
+	foreach($arr as $key=>$value)
+	{
+		if(!is_array($value))
+		{
+			if($k=='')
+			{
+				print "<input type='text' name='$key' value='$value' />";
+			}
+			else
+			{
+				print '<input type="text" name="'.$k.'['.$key.']" value="'.$value.'" />';
+			}
+		}
+		else
+		{
+			if($k=='')
+			{
+				ct_print_form($value,$key);
+			}
+			else
+			{
+				ct_print_form($value,$k.'['.$key.']');
+			}
+		}
+	}
 }
 
 ?>
