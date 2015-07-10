@@ -9,7 +9,7 @@
  */
 $cleantalk_plugin_version='5.14';
 $cleantalk_executed=false;
-$test_external_forms=true;
+$test_external_forms=false;
 
 if(!defined('CLEANTALK_PLUGIN_DIR')){
     define('CLEANTALK_PLUGIN_DIR', plugin_dir_path(__FILE__));
