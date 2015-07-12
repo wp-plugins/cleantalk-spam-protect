@@ -247,7 +247,7 @@ function get_sender_info() {
 		}
 	}
 	
-	$options2server = array(	// Options for sending to server for support information
+	/*$options2server = array(	// Options for sending to server for support information
             'apikey' => $ct_options['apikey'],
             'registrations_test' => $ct_options['registrations_test'],
             'comments_test' => $ct_options['comments_test'],
@@ -257,7 +257,7 @@ function get_sender_info() {
             'autoPubRevelantMess' => $ct_options['autoPubRevelantMess'],
             'spam_store_days' => $ct_options['spam_store_days'],
             'ssl_on' => $ct_options['ssl_on'],
-	);
+	);*/
 	$options2server=$ct_options;
 
 	return $sender_info = array(
