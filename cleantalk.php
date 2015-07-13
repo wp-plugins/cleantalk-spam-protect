@@ -7,7 +7,7 @@
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
  */
-$cleantalk_plugin_version='5.14';
+$cleantalk_plugin_version='5.15';
 $cleantalk_executed=false;
 
 if(!defined('CLEANTALK_PLUGIN_DIR')){

@@ -184,6 +184,9 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
+= 5.15 2015-07-13 =
+  * New feature: anti-spam protection for forms, that uses external services
+  
 = 5.14 2015-07-03 =
   * Added anti-spam protection for some themes and plugins
   * Some backend fixes
@@ -590,6 +593,9 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * First version
 
 == Upgrade Notice ==
+= 5.15 2015-07-13 =
+  * New feature: anti-spam protection for forms, that uses external services
+  
 = 5.14 2015-07-03 =
   * Added anti-spam protection for some themes and plugins
   * Some backend fixes
