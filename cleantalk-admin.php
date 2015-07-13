@@ -212,6 +212,7 @@ function ct_admin_init() {
     add_settings_field('cleantalk_general_postdata_test', __('Check all post data', 'cleantalk'), 'ct_input_general_postdata_test', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_show_adminbar', __('Show statistics in admin bar', 'cleantalk'), 'ct_input_show_adminbar', 'cleantalk', 'cleantalk_settings_anti_spam');
     add_settings_field('cleantalk_use_ajax', __('Use AJAX for JavaScript check', 'cleantalk'), 'ct_input_use_ajax', 'cleantalk', 'cleantalk_settings_anti_spam');
+    add_settings_field('cleantalk_check_external', __('Protect external forms', 'cleantalk'), 'ct_input_check_external', 'cleantalk', 'cleantalk_settings_anti_spam');
 }
 
 /**
@@ -504,6 +505,24 @@ function ct_input_use_ajax() {
     echo "<input type='radio' id='cleantalk_use_ajax0' name='cleantalk_settings[use_ajax]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_use_ajax0'> " . __('No') . "</label>";
     @admin_addDescriptionsFields(sprintf(__('', 'cleantalk'),  $ct_options['use_ajax']));
 }
+
+function ct_input_check_external() {
+    global $ct_options, $ct_data;
+
+    if(isset($ct_options['check_external']))
+    {
+    	$value = @intval($ct_options['check_external']);
+    }
+    else
+    {
+    	$value=0;
+    }
+    echo "<input type='radio' id='cleantalk_check_external1' name='cleantalk_settings[check_external]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='cleantalk_check_external1'> " . __('Yes') . "</label>";
+    echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    echo "<input type='radio' id='cleantalk_check_external0' name='cleantalk_settings[check_external]' value='0' " . ($value == '0' ? 'checked' : '') . " /><label for='cleantalk_check_external0'> " . __('No') . "</label>";
+    @admin_addDescriptionsFields(sprintf(__('', 'cleantalk'),  $ct_options['check_external']));
+}
+
 
 /**
  * Admin callback function - Plugin parameters validator

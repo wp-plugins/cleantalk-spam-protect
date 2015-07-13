@@ -46,13 +46,13 @@ function ct_init() {
     if (isset($ct_options['general_contact_forms_test']) && $ct_options['general_contact_forms_test'] == 1)
     {
 		add_action('CMA_custom_post_type_nav','ct_contact_form_validate_postdata',1);
-		if(isset($_GET['ait-action'])&&$_GET['ait-action']=='register')
+		/*if(isset($_GET['ait-action'])&&$_GET['ait-action']=='register')
 		{
 			$tmp=$_POST['redirect_to'];
 			unset($_POST['redirect_to']);
 			ct_contact_form_validate();
 			$_POST['redirect_to']=$tmp;
-		}
+		}*/
 	}
 
     if($ct_general_postdata_test==1)

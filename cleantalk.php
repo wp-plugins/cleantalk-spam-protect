@@ -9,7 +9,6 @@
  */
 $cleantalk_plugin_version='5.14';
 $cleantalk_executed=false;
-$test_external_forms=false;
 
 if(!defined('CLEANTALK_PLUGIN_DIR')){
     define('CLEANTALK_PLUGIN_DIR', plugin_dir_path(__FILE__));
@@ -19,6 +18,22 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-common.php');
     $ct_options=ct_get_options();
     $ct_data=ct_get_data();
+    
+    if(isset($ct_options['check_external']))
+    {
+    	if(@intval($ct_options['check_external'])==1)
+    	{
+    		$test_external_forms=true;
+    	}
+    	else
+    	{
+    		$test_external_forms=false;
+    	}
+    }
+    else
+    {
+    	$test_external_forms=false;
+    }
 
     // Activation/deactivation functions must be in main plugin file.
     // http://codex.wordpress.org/Function_Reference/register_activation_hook
