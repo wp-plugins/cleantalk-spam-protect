@@ -1,6 +1,6 @@
 === Anti-spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget spam, registration, plugin, antispam plugin, anti-spam plugin, ninja, cache
+Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget spam, registration, plugin, antispam plugin, anti-spam plugin, ninja, cache, subscribe spam
 Requires at least: 3.0
 Tested up to: 4.3
 Stable tag: 5.14
@@ -184,6 +184,9 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
+= 5.15 2015-07-13 =
+  * New feature: anti-spam protection for forms, that uses external services
+  
 = 5.14 2015-07-03 =
   * Added anti-spam protection for some themes and plugins
   * Some backend fixes
@@ -590,6 +593,9 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * First version
 
 == Upgrade Notice ==
+= 5.15 2015-07-13 =
+  * New feature: anti-spam protection for forms, that uses external services
+  
 = 5.14 2015-07-03 =
   * Added anti-spam protection for some themes and plugins
   * Some backend fixes
