@@ -186,6 +186,7 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 == Changelog ==
 = 5.15 2015-07-16 =
   * New feature: anti-spam protection for forms, that uses external services
+  * Protection improvement: checking registrations, even connect to our servers failed.
   
 = 5.14 2015-07-03 =
   * Added anti-spam protection for some themes and plugins
@@ -595,6 +596,7 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 == Upgrade Notice ==
 = 5.15 2015-07-16 =
   * New feature: anti-spam protection for forms, that uses external services
+  * Protection improvement: checking registrations, even connect to our servers failed.
   
 = 5.14 2015-07-03 =
   * Added anti-spam protection for some themes and plugins
