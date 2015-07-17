@@ -235,5 +235,12 @@ if(is_admin())
 {
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-comments.php');
 }
+if(isset($_GET['ait-action'])&&$_GET['ait-action']=='register')
+{
+	$tmp=$_POST['redirect_to'];
+	unset($_POST['redirect_to']);
+	ct_contact_form_validate();
+	$_POST['redirect_to']=$tmp;
+}
 
 ?>

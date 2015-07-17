@@ -48,6 +48,9 @@ function ct_show_checkspam_page()
 		<div id="ct_working_message" style="display:none">
 			<?php _e("Please wait for a while. CleanTalk is checking all approved and pending comments via blacklist database at cleantalk.org. You will have option to delete found spam comments after plugin finish.", 'cleantalk'); ?>
 		</div>
+		<div id="ct_deleting_message" style="display:none">
+			<?php _e("Please wait for a while. CleanTalk is deleting spam comments. Comments left: ", 'cleantalk'); ?> <span id="cleantalk_comments_left"></span>
+		</div>
 		<div id="ct_done_message" <?php if($cnt_unchecked>0) print 'style="display:none"'; ?>>
 			<?php //_e("Done. All comments tested via blacklists database, please see result bellow.", 'cleantalk'); 
 			?>
@@ -403,6 +406,7 @@ function ct_ajax_delete_all()
 {
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
 	$args_spam = array(
+		'number'=>100,
 		'meta_query' => array(
 			Array(
 				'key' => 'ct_marked_as_spam',
@@ -412,10 +416,25 @@ function ct_ajax_delete_all()
 		)
 	);	
 	$c_spam=get_comments($args_spam);
+	$cnt=sizeof($c_spam);
+	
+	$args_spam = array(
+		'count'=>true,
+		'meta_query' => array(
+			Array(
+				'key' => 'ct_marked_as_spam',
+				'value' => '1',
+				'compare' => 'NUMERIC'
+			)
+		)
+	);
+	$cnt_all=get_comments($args_spam);
 	for($i=0;$i<sizeof($c_spam);$i++)
 	{
 		wp_delete_comment($c_spam[$i]->comment_ID, false);
+		usleep(10000);
 	}
+	print $cnt_all;
 	die();
 }
 

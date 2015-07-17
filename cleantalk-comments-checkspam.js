@@ -109,7 +109,15 @@ function ct_delete_all()
 		url: ajaxurl,
 		data: data,
 		success: function(msg){
-			location.href='edit-comments.php?page=ct_check_spam';
+			if(msg>0)
+			{
+				jQuery('#cleantalk_comments_left').html(msg);
+				ct_delete_all();
+			}
+			else
+			{
+				location.href='edit-comments.php?page=ct_check_spam';
+			}
 		}
 	});
 }
@@ -154,6 +162,8 @@ jQuery("#ct_insert_comments").click(function(){
 	ct_insert_comments();
 });
 jQuery("#ct_delete_all").click(function(){
+	jQuery('#ct_deleting_message').show();
+	jQuery("html, body").animate({ scrollTop: 0 }, "slow");
 	ct_delete_all();
 });
 jQuery("#ct_delete_checked").click(function(){

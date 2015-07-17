@@ -54,7 +54,7 @@ function ct_init() {
 			$_POST['redirect_to']=$tmp;
 		}*/
 	}
-
+	
     if($ct_general_postdata_test==1)
     {
     	add_action('CMA_custom_post_type_nav','ct_contact_form_validate_postdata',1);
@@ -1474,6 +1474,7 @@ function ct_contact_form_validate () {
 	{
 		return null;
 	}
+	$cleantalk_executed=true;
 	/*if ((defined( 'DOING_AJAX' ) && DOING_AJAX))
 	{
 		return null;
@@ -1522,8 +1523,6 @@ function ct_contact_form_validate () {
 	    'sender_info' => get_sender_info(),
         'checkjs' => $checkjs
     ));
-    
-    $cleantalk_executed=true;
     
     $ct = $ct_base_call_result['ct'];
     $ct_result = $ct_base_call_result['ct_result'];
