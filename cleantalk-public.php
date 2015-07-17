@@ -1475,10 +1475,6 @@ function ct_contact_form_validate () {
 		return null;
 	}
 	$cleantalk_executed=true;
-	/*if ((defined( 'DOING_AJAX' ) && DOING_AJAX))
-	{
-		return null;
-	}*/
 
     if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
         (isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
