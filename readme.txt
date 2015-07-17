@@ -148,6 +148,9 @@ Anti-spam by CleanTalk doesn't use static HTML code into templates, so all anti-
 = Does the plugin protects against spam bots at forms with third-party services? =
 If your contact or subscribe form sends data to third-party servers (like mailchimp.com and etc.) the plugin will not protect your form against spam bots. Because the plugin protects only forms which are sends data directly to your WordPress website.
 
+= What is "Connection test" message? =
+After activation CleanTalk sends test message with email stop_email@example.com. This request required for test our plugin and in some cases it can give us information about problems in plugin, so you can contact our support in time. Result of test query you can see in plugin's settings - green ticks or red crosses.
+
 == Other notes ==
 
 = Troubleshooting Guide =
@@ -186,7 +189,6 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 == Changelog ==
 = 5.15 2015-07-16 =
   * New feature: anti-spam protection for forms, that uses external services
-  * Protection improvement: checking registrations, even connect to our servers failed.
   
 = 5.14 2015-07-03 =
   * Added anti-spam protection for some themes and plugins
@@ -596,7 +598,6 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 == Upgrade Notice ==
 = 5.15 2015-07-16 =
   * New feature: anti-spam protection for forms, that uses external services
-  * Protection improvement: checking registrations, even connect to our servers failed.
   
 = 5.14 2015-07-03 =
   * Added anti-spam protection for some themes and plugins
