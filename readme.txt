@@ -62,15 +62,32 @@ CleanTalk is premium anti-spam service for WordPress, please look at the <a href
  * No captcha, puzzles, etc.
  * Free mobile app to control anti-spam function at your website.
 
-= How to protect sites from spam bots without CAPTCHA? =
-The most popular method is CAPTCHA - the annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won't discern these CAPTCHA, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. 
-Sometimes CAPTCHA reminds doodle 2x year old child. For users with vision problems captcha is just an insurmountable obstacle. Users hate captcha. Captcha for users means "hate". Unreadable CAPTCHA stops about 80% of site visitors. After 2 failed attempts to bring it up to 95% reject further attempts. 
-At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource both from bots and visitors. CAPTCHA is not a panacea from spam. Doubts Concerning the Need for CAPTCHA?
-
 = Additional features =
 * Online, daily and weekly anti-spam reports traffic VS spam. 
 * Apps for iPhone, Android to control anti-spam service, comments, signups, contacts. With traffic and spam statistics for last 7 days.
 * Anti-spam apps for most popular CMS on cleantalk.org. 
+
+= Troubleshooting Guide =
+<a href="http://wordpress.org/support/plugin/cleantalk-spam-protect">Anti-spam by CleanTalk support forum</a> | <a href="http://wordpress.org/plugins/cleantalk-spam-protect/faq/">Plugin FAQ</a>
+
+If you're having trouble getting things to work after installing the plugin, here are a few things to check:
+
+1. If you haven't yet, please upgrade plugin to the latest version.
+1. If you have error '*** Forbidden. Enable JavaScript. Anti-spam service cleantalk.org. ***' please check JavaScript support in your browser and do JavaScript test at this page <a href="http://cleantalk.org/checkout-javascript-support">Check out JavaScript support</a>.
+1. If you have spam comments, signups or contacts please check the Access key in plugin settings. The key should be same as you can find in service <a href="https://cleantalk.org/my/">Dashboard</a>.
+
+= Requirements =
+WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enabled 'allow_url_fopen' setting.
+
+= Translations =
+* Danish (da_DK)
+* French (fr_FR) - thanks to Gilles Santacreu <a href="http://net-ik.net">http://net-ik.net</a>
+* German (de_DE)
+* Italian (it_IT)
+* Polish (pl_PL)
+* Portuguese (pt_PT)
+* Spanish (es_ES) - thanks to Andrew Kurtis and <a href="http://www.webhostinghub.com/index-c.html">WebHostingHub</a>
+* Russian (ru_RU)
 
 = We recommend =
 Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
@@ -83,14 +100,17 @@ Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedw
 == Installation ==
 1. Download, install and activate Anti-spam by CleanTalk. 
 1. Get Access key <a href="https://cleantalk.org/register?platform=wordpress" target="_blank">https://cleantalk.org/register</a>
-1. Enter Access key on the plugin settings. 
+1. Enter Access key on the plugin settings,
+
+    WordPress console -> Settings -> Anti-spam by CleanTalk
+
 1. Do dummy spam comment (registration or contact message) with email **stop_email@example.com**.
 
 You should see notice,
 
-    *** Forbidden. Sender blacklisted. Antispam service cleantalk.org. ***
+    *** Forbidden. Sender blacklisted. ***
 
-The setup is done! You can control anti-spam plugin by <a href="https://cleantalk.org/my" target="_blank">Dashboard</a> at the cleantalk.org or use <a href="https://play.google.com/store/apps/details?id=org.cleantalk.app">Android</a>, <a href="https://itunes.apple.com/us/app/cleantalk/id825479913?mt=8">iPhone</a> anti-spam app. 
+The setup is done! Use dashboard to control anti-spam plugin at <a href="https://cleantalk.org/my" target="_blank">cleantalk.org</a> or use <a href="https://play.google.com/store/apps/details?id=org.cleantalk.app">Android</a>, <a href="https://itunes.apple.com/us/app/cleantalk/id825479913?mt=8">iPhone</a> anti-spam app. 
 
 == Frequently Asked Questions ==
 
@@ -149,35 +169,8 @@ Anti-spam by CleanTalk doesn't use static HTML code into templates, so all anti-
 If your contact or subscribe form sends data to third-party servers (like mailchimp.com and etc.) the plugin will not protect your form against spam bots. Because the plugin protects only forms which are sends data directly to your WordPress website.
 
 = What is "Connection test" message? =
-After activation CleanTalk sends test message with email stop_email@example.com. This request required for test our plugin and in some cases it can give us information about problems in plugin, so you can contact our support in time. Result of test query you can see in plugin's settings - green ticks or red crosses.
+After activation Anti-spam by CleanTalk sends test message with email stop_email@example.com. This request required for test our plugin and in some cases it can give us information about problems in plugin, so you can contact our support in time. Result of test query you can see in plugin's settings - green ticks or red crosses.
 
-== Other notes ==
-
-= Troubleshooting Guide =
-<a href="http://wordpress.org/support/plugin/cleantalk-spam-protect">Anti-spam by CleanTalk support forum</a> | <a href="http://wordpress.org/plugins/cleantalk-spam-protect/faq/">Plugin FAQ</a>
-
-If you're having trouble getting things to work after installing the plugin, here are a few things to check:
-
-1. If you haven't yet, please upgrade plugin to the latest version.
-1. If you have error '*** Forbidden. Enable JavaScript. Anti-spam service cleantalk.org. ***' please check JavaScript support in your browser and do JavaScript test at this page <a href="http://cleantalk.org/checkout-javascript-support">Check out JavaScript support</a>.
-1. If you have spam comments, signups or contacts please check the Access key at plugin settings. The key should be same as you can find in service <a href="https://cleantalk.org/my/">Dashboard</a>.
-
-= CAPTCHA = 
-The annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won’t discern these symbols, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource from visitors. Spam bots can automatically recognize Captcha. 
-Spam bots can not pass through the anti-spam CleanTalk, complex invisible checks can immediately detect spam bots.
-
-= Requirements =
-WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enabled 'allow_url_fopen' setting. <a href="http://cleantalk.org/register?platform=wordpress">Sign up</a> to get an Access key.
-
-= Translations =
-* Danish (da_DK)
-* French (fr_FR) - thanks to Gilles Santacreu <a href="http://net-ik.net">http://net-ik.net</a>
-* German (de_DE)
-* Italian (it_IT)
-* Polish (pl_PL)
-* Portuguese (pt_PT)
-* Spanish (es_ES) - thanks to Andrew Kurtis and <a href="http://www.webhostinghub.com/index-c.html">WebHostingHub</a>
-* Russian (ru_RU)
 
 == Screenshots ==
 1. Anti-spam plugin settings. 
@@ -189,6 +182,7 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 == Changelog ==
 = 5.15 2015-07-16 =
   * New feature: anti-spam protection for forms, that uses external services
+  * Protection improvement: plugin filter spam bots registrations, even connect to our servers failed.
   
 = 5.14 2015-07-03 =
   * Added anti-spam protection for some themes and plugins
