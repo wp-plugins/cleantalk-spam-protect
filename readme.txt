@@ -1,4 +1,4 @@
-=== Anti-spam - no Captcha, no comments spam, no registrations spam ===
+=== Anti-spam (No comments spam, no registrations spam and no Captcha) ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
 Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget spam, registration, plugin, antispam plugin, anti-spam plugin, ninja, cache
 Requires at least: 3.0
