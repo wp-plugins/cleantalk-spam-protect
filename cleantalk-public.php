@@ -29,7 +29,7 @@ function ct_init() {
     	ct_contact_form_validate();
     	print "<html><body><form method='$method' action='$action'>";
     	ct_print_form($_POST,'');
-    	print "</form></body></html>";
+    	print "</form><center>Redirecting to ".$action.". Anti-spam by CleanTalk.</center></body></html>";
     	print "<script>document.forms[0].submit();</script>";
     	die();
     }
@@ -1582,6 +1582,19 @@ function ct_contact_form_validate_postdata () {
     {
     	return null;
     }
+    $skip_params = array(
+	    'ipn_track_id', // PayPal IPN #
+	    'txn_type', // PayPal transaction type
+	    'payment_status', // PayPal payment status
+    );
+    
+    foreach($skip_params as $key=>$value)
+   	{
+   		if(@array_key_exists($value,$_GET)||@array_key_exists($value,$_POST))
+   		{
+   			return null;
+   		}
+   	}
     
     $ct_base_call_result = ct_base_call(array(
         'message' => $message,
@@ -1656,11 +1669,11 @@ function ct_print_form($arr,$k)
 		{
 			if($k=='')
 			{
-				print '<textarea name="'.$key.'">'.htmlspecialchars($value).'</textarea>';
+				print '<textarea name="'.$key.'" style="display:none;">'.htmlspecialchars($value).'</textarea>';
 			}
 			else
 			{
-				print '<textarea name="'.$k.'['.$key.']">'.htmlspecialchars($value).'</textarea>';
+				print '<textarea name="'.$k.'['.$key.']" style="display:none;">'.htmlspecialchars($value).'</textarea>';
 			}
 		}
 		else
