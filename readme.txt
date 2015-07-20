@@ -1,4 +1,4 @@
-=== Anti-spam by CleanTalk ===
+=== Anti-spam - no Captcha, no comments spam, no registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
 Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget spam, registration, plugin, antispam plugin, anti-spam plugin, ninja, cache
 Requires at least: 3.0
@@ -31,7 +31,7 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 * WordPress Landing Pages.
 * Any WordPress form (option 'Custom contact forms'). 
 
-= Compatible with WordPress cache plugins =
+= Supports WordPress cache plugins =
 * W3 Total Cache, Quick Cache, WP Fastest Cache, Hyper Cache, WP Super cache
 
 = Check existing comments for spam =
@@ -41,7 +41,7 @@ With the help of anti-spam CleanTalk you can check existing comments, to find a
 Spam is one of the most irritating factors.  Spam become every year more and conventional anti-spam can no longer handle all the spam bots. CleanTalk prevents spam and automatically blocks it. You'll be surprised of effective protection against spam.
 
 = Anti-spam plugin info = 
-CleanTalk is an anti-spam protection **4 in 1 for WordPress** that protects login, comments, contact and WooCommerce forms all at once. You don't need to install separate anti-spam plugins for each form. This allows your blog to work faster and save resources. After installation **you will forget about spam**, CleanTalk plugin will do all the work. You won't have to deal with spam, CleanTalk will do this for you automatically. 
+CleanTalk is an anti-spam protection **7 in 1 for WordPress** that protects login, comments, contact and WooCommerce forms all at once. You don't need to install separate anti-spam plugins for each form. This allows your blog to work faster and save resources. After installation **you will forget about spam**, CleanTalk plugin will do all the work. You won't have to deal with spam, CleanTalk will do this for you automatically. 
 
 CleanTalk is a transparent anti-spam protection, we provide detailed statistics of all entering comments and logins. You can always be sure that **there are no errors**. We have developed a mobile app for you to see anti-spam statistics wherever.
 
