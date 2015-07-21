@@ -1,6 +1,6 @@
 <?php
 
-$ct_agent_version = 'wordpress-515';
+$ct_agent_version = 'wordpress-516';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
