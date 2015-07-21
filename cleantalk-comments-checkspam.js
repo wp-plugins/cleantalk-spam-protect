@@ -162,6 +162,7 @@ jQuery("#ct_insert_comments").click(function(){
 	ct_insert_comments();
 });
 jQuery("#ct_delete_all").click(function(){
+	jQuery('#ct_check_comments_table').hide();
 	jQuery('#ct_deleting_message').show();
 	jQuery("html, body").animate({ scrollTop: 0 }, "slow");
 	ct_delete_all();

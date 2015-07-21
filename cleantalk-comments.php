@@ -90,7 +90,7 @@ function ct_show_checkspam_page()
 			if($cnt_spam>0)
 			{
 		?>
-		<table class="widefat fixed comments">
+		<table class="widefat fixed comments" id="ct_check_comments_table">
 			<thead>
 				<th scope="col" id="cb" class="manage-column column-cb check-column">
 					<label class="screen-reader-text" for="cb-select-all-1">Select All</label>
@@ -192,7 +192,7 @@ function ct_show_checkspam_page()
 				?>
 			</tbody>
 		</table>
-		<button class="button" id="ct_delete_all"><?php _e('Delete all content.'); ?></button> 
+		<button class="button" id="ct_delete_all"><?php _e('Delete all content'); ?></button> 
 		<button class="button" id="ct_delete_checked"><?php _e('Delete selected', 'cleantalk'); ?></button>
 		<?php
 		}

@@ -29,7 +29,7 @@ function ct_init() {
     	ct_contact_form_validate();
     	print "<html><body><form method='$method' action='$action'>";
     	ct_print_form($_POST,'');
-    	print "</form><center>Redirecting to ".$action.". Anti-spam by CleanTalk.</center></body></html>";
+    	print "</form><center>Redirecting to ".$action."... Anti-spam by CleanTalk.</center></body></html>";
     	print "<script>document.forms[0].submit();</script>";
     	die();
     }
