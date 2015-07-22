@@ -1,6 +1,6 @@
 === Anti-spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget spam, registration, plugin, antispam plugin, anti-spam plugin, ninja, cache
+Tags: anti-spam, antispam, bbpress spam, buddypress spam, captcha, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, gravity forms spam, widget spam 
 Requires at least: 3.0
 Tested up to: 4.3
 Stable tag: 5.16
