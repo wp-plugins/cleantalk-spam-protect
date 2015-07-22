@@ -32,7 +32,7 @@ Filers spam bots on registrations forms WordPress, BuddyPress, bbPress, S2Member
 = Protection against contact form spam messages  =
 The plugin is tested and ready to protect against spam emails via Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages, Gravity forms and any themes/custom contact forms.
 
-= Othere spam filters =
+= Other spam filters =
 * WooCommerce review form.
 * WordPress Landing Pages.
 * Any WordPress form (option 'Custom contact forms'). 
