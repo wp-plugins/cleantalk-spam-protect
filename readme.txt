@@ -24,13 +24,13 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 1. Check existing comments for spam.
 
 = Includes comments spam protection =
-Supports WordPress, JetPack comments and any other comments plugins. Plugin moves spam comments to SPAM folder or you can set option to silent ban spam comments.
+Supports native WordPress, JetPack comments and any other comments plugins. Plugin moves spam comments to SPAM folder or you can set option to silent ban spam comments.
 
 = Spam bots registrations filter =
 Filers spam bots on registrations forms WordPress, BuddyPress, bbPress, S2Member, WooCommerce and any other registrations plugins.
 
 = Protection against contact form spam messages  =
-The plugin is tested and ready to protect against spam emails via Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages, Gravity forms and any themes/custom contact form.
+The plugin is tested and ready to protect against spam emails via Formidable forms, Contact form 7, JetPack Contact form, Fast Secure Contact form, Ninja forms, Landing pages, Gravity forms and any themes/custom contact forms.
 
 = Othere spam filters =
 * WooCommerce review form.
