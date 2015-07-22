@@ -81,7 +81,7 @@ At the sight of CAPTCHA and after input errors, many visitors leave the resource
 = We recommend =
 Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
 
-> ### **Use spam free WordPress with Anti-spam by CleanTalk**
+> ### **Use spam free, CAPTCHA less WordPress with Anti-spam by CleanTalk**
 > Max power, all-in-one, premium anti-spam WordPress plugin. No comments & registrations spam, no contact spam, protects any forms. Just install and forget spam. 
 
 
@@ -124,13 +124,13 @@ Plugin by default pass pingbacks without any checks. All trackbacks will be bloc
 = Can I use CleanTalk with Akismet? =
 Sure, you can use CleanTalk with Akismet. In this case probably you will have bigger false/positive rate (when legitimate comments/signups denies), but you will have stronger antispam protection at website.
 
-= Should I use another anti-spam plugins? =
+= Should I use another anti-spam tools (Captcha)? =
 CleanTalk stops up to 100% of spam bots, so you can disable other anti-spam plugins (especially CAPTCHA like anti-spam plugins). In some cases several anti-spam plugins can conflict, so it will be better use just one plugin.  
 
 = Is the plugin WordPress MultiUser (WPMU or WordPress network) compatible? =
 The plugin is WordPress MultiUser (WPMU or WordPress network) compatible. Each blog in multisite environment has individual anti-spam options for spam bots protection.
 
-= After the installation I noticed in the statistics that the number of spam attacks had increased =
+= After installation I noticed in the statistics that the number of spam attacks had increased =
 There are a few reasons for this:
 
 * With the indexing of your web-site by the search systems, appearance of external links and better search results position, your web-site attracts more and more spambots.
@@ -167,9 +167,8 @@ If you're having trouble getting things to work after installing the plugin, her
 1. If you have error '*** Forbidden. Enable JavaScript. Anti-spam service cleantalk.org. ***' please check JavaScript support in your browser and do JavaScript test at this page <a href="http://cleantalk.org/checkout-javascript-support">Check out JavaScript support</a>.
 1. If you have spam comments, signups or contacts please check the Access key at plugin settings. The key should be same as you can find in service <a href="https://cleantalk.org/my/">Dashboard</a>.
 
-= CAPTCHA = 
-The annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won’t discern these symbols, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource from visitors. Spam bots can automatically recognize Captcha. 
-Spam bots can not pass through the anti-spam CleanTalk, complex invisible checks can immediately detect spam bots.
+= Some thoughts about CAPTCHA = 
+The annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won’t discern these symbols, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource from visitors. Spam bots can automatically recognize Captcha. Spam bots can not pass through the anti-spam CleanTalk, complex invisible checks can immediately detect spam bots.
 
 = Requirements =
 WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enabled 'allow_url_fopen' setting. <a href="http://cleantalk.org/register?platform=wordpress">Sign up</a> to get an Access key.
