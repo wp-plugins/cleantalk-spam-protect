@@ -1,9 +1,9 @@
 === Anti-spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget spam, registration, plugin, antispam plugin, anti-spam plugin, ninja, cache, subscribe spam
+Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha antispam, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, math, registration spam, s2member spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, comments, gravity spam, gravity forms spam, widget, widget spam, registration, plugin, antispam plugin, anti-spam plugin, ninja, cache
 Requires at least: 3.0
 Tested up to: 4.3
-Stable tag: 5.14
+Stable tag: 5.16
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,9 @@ Anti-spam by CleanTalk doesn't use static HTML code into templates, so all anti-
 = Does the plugin protects against spam bots at forms with third-party services? =
 If your contact or subscribe form sends data to third-party servers (like mailchimp.com and etc.) the plugin will not protect your form against spam bots. Because the plugin protects only forms which are sends data directly to your WordPress website.
 
+= What is "Connection test" message? =
+After activation CleanTalk sends test message with email stop_email@example.com. This request required for test our plugin and in some cases it can give us information about problems in plugin, so you can contact our support in time. Result of test query you can see in plugin's settings - green ticks or red crosses.
+
 == Other notes ==
 
 = Troubleshooting Guide =
@@ -184,7 +187,12 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
-= 5.15 2015-07-13 =
+= 5.16 2015-07-22 =
+  * Fixed external services checking
+  * Fixed mass comments deletion
+  * Fixed AJAX anti-spam protection
+  
+= 5.15 2015-07-16 =
   * New feature: anti-spam protection for forms, that uses external services
   
 = 5.14 2015-07-03 =
@@ -593,7 +601,12 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * First version
 
 == Upgrade Notice ==
-= 5.15 2015-07-13 =
+= 5.16 2015-07-22 =
+  * Fixed external services checking
+  * Fixed mass comments deletion
+  * Fixed AJAX anti-spam protection
+  
+= 5.15 2015-07-16 =
   * New feature: anti-spam protection for forms, that uses external services
   
 = 5.14 2015-07-03 =

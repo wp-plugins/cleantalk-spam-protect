@@ -1,6 +1,6 @@
 <?php
 
-$ct_agent_version = 'wordpress-515';
+$ct_agent_version = 'wordpress-516';
 $ct_plugin_name = 'Anti-spam by CleanTalk';
 $ct_checkjs_frm = 'ct_checkjs_frm';
 $ct_checkjs_register_form = 'ct_checkjs_register_form';
@@ -557,6 +557,13 @@ function ct_get_fields_any(&$email,&$message,&$nickname,&$subject, &$contact,$ar
 	    'txn_type', // PayPal transaction type
 	    'payment_status', // PayPal payment status
     );
+   	foreach($skip_params as $key=>$value)
+   	{
+   		if(@array_key_exists($value,$_GET)||@array_key_exists($value,$_POST))
+   		{
+   			$contact = false;
+   		}
+   	}
 	foreach($arr as $key=>$value)
 	{
 		if(!is_array($value)&&!is_object($value)&&@get_class($value)!='WP_User')
