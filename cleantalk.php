@@ -201,11 +201,11 @@ function ct_add_nocache_script()
 function ct_add_nocache_script_footer()
 {
 	global $test_external_forms;
-	print "<script type='text/javascript' src='".plugins_url( '/cleantalk_nocache.js' , __FILE__ )."?random=".rand()."'></script>\n";
+	print "<script async type='text/javascript' src='".plugins_url( '/cleantalk_nocache.js' , __FILE__ )."?random=".rand()."'></script>\n";
 	if($test_external_forms)
 	{
 		print "\n<script type='text/javascript'>var ct_blog_home = '".get_home_url()."';</script>\n";
-		print "<script type='text/javascript' src='".plugins_url( '/cleantalk_external.js' , __FILE__ )."?random=".rand()."'></script>\n";
+		print "<script async type='text/javascript' src='".plugins_url( '/cleantalk_external.js' , __FILE__ )."?random=".rand()."'></script>\n";
 	}
 }
 
@@ -220,11 +220,11 @@ function ct_inject_nocache_script($html)
 	if(!is_admin()&&stripos($html,"</body")!==false)
 	{
 		//$ct_replace.="\n<script type='text/javascript'>var ajaxurl = '".admin_url('admin-ajax.php')."';</script>\n";
-		$ct_replace="<script type='text/javascript' src='".plugins_url( '/cleantalk_nocache.js' , __FILE__ )."?random=".rand()."'></script>\n";
+		$ct_replace="<script async type='text/javascript' src='".plugins_url( '/cleantalk_nocache.js' , __FILE__ )."?random=".rand()."'></script>\n";
 		if($test_external_forms)
 		{
 			$ct_replace.="\n<script type='text/javascript'>var ct_blog_home = '".get_home_url()."';</script>\n";
-			$ct_replace.="<script type='text/javascript' src='".plugins_url( '/cleantalk_external.js' , __FILE__ )."?random=".rand()."'></script>\n";
+			$ct_replace.="<script async type='text/javascript' src='".plugins_url( '/cleantalk_external.js' , __FILE__ )."?random=".rand()."'></script>\n";
 		}
 		
 		//$html=str_ireplace("</body",$ct_replace."</body",$html);
