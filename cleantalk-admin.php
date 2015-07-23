@@ -90,6 +90,17 @@ function ct_admin_init() {
 	        'checkjs' => 1
 	    ));
     }
+    if(isset($_POST['option_page'])&&$_POST['option_page']=='cleantalk_settings')
+    {
+    	$ct_base_call_result = ct_base_call(array(
+	        'message' => 'CleanTalk connection test',
+	        'example' => null,
+	        'sender_email' => 'stop_email@example.com',
+	        'sender_nickname' => 'CleanTalk',
+	        'post_info' => '',
+	        'checkjs' => 1
+	    ));
+    }
 
     $show_ct_notice_trial = false;
     if (isset($_COOKIE[$ct_notice_trial_label])) {
@@ -130,8 +141,19 @@ function ct_admin_init() {
 					$ct_data['user_token'] = $result['user_token'];
 					update_option('cleantalk_data', $ct_data);
 				}
-                if (isset($result['auth_key']) && !empty($result['auth_key'])) {
-		    $_POST['cleantalk_settings']['apikey'] = $result['auth_key'];
+                if (isset($result['auth_key']) && !empty($result['auth_key']))
+                {
+					$_POST['cleantalk_settings']['apikey'] = $result['auth_key'];
+					$ct_options['apikey']=$result['auth_key'];
+					update_option('cleantalk_settings', $ct_options);
+					$ct_base_call_result = ct_base_call(array(
+				        'message' => 'CleanTalk connection test',
+				        'example' => null,
+				        'sender_email' => 'stop_email@example.com',
+				        'sender_nickname' => 'CleanTalk',
+				        'post_info' => '',
+				        'checkjs' => 1
+				    ));					
                 } else {
 		    setcookie($ct_notice_autokey_label, (string) base64_encode($result['error_message']), 0, '/');
 		}

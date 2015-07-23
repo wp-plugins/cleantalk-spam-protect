@@ -3,7 +3,7 @@ Contributors: znaeff, shagimuratov, vlad-cleantalk
 Tags: anti-spam, antispam, bbpress spam, buddypress spam, captcha, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, gravity forms spam, widget spam, spam spam, captcha spam, spam blocker, spam filter, spam contacts, spam emails, spam attacks, spam cache, spam theme
 Requires at least: 3.0
 Tested up to: 4.3
-Stable tag: 5.16
+Stable tag: 5.17
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -206,6 +206,10 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 1. Setup Android/iOS app to have push notices when new legitiamte comments/registrations or contactcs appears on the website. 
 
 == Changelog ==
+= 5.17 2015-07-23 =
+  * Fixed infinite redirection after activation
+  * Minor backend fixes
+
 = 5.16 2015-07-22 =
   * Fixed external services checking
   * Fixed mass comments deletion
@@ -620,6 +624,10 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
   * First version
 
 == Upgrade Notice ==
+= 5.17 2015-07-23 =
+  * Fixed infinite redirection after activation
+  * Minor backend fixes
+  
 = 5.16 2015-07-22 =
   * Fixed external services checking
   * Fixed mass comments deletion
