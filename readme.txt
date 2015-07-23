@@ -39,7 +39,7 @@ Plugin is tested and ready to protect against spam emails via Formidable forms, 
 Anti-spam by CleanTalk filters spam bots registrations and spam reviews for WooCommerce. Plugin is fully compatible with WooCommerce 2.1 and upper.
 
 = Spam filter for themes contact forms =
-Plugin blocks spam emails via any themes (built-in) contact forms. With AJAX forms plugin silent (without any error nonice on WordPress frontend) filters spam emails. 
+Plugin blocks spam emails via any themes (built-in) contact forms. With AJAX forms plugin silent (without any error notices on WordPress frontend) filters spam emails. 
 
 = Other spam filters =
 * WordPress Landing Pages.
@@ -91,23 +91,27 @@ Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedw
 
 
 == Installation ==
+= Setup plugin =
 1. Download, install and activate Anti-spam by CleanTalk. 
 1. Get Access key <a href="https://cleantalk.org/register?platform=wordpress" target="_blank">https://cleantalk.org/register</a>
-1. Enter Access key on the plugin settings. 
-1. Do dummy spam comment (registration or contact message) with email **stop_email@example.com**.
+1. Enter Access key on the plugin settings,
 
-You should see notice,
+> WordPress console -> Settings -> CleanTalk
 
-    *** Forbidden. Sender blacklisted. Antispam service cleantalk.org. ***
+1. Do dummy spam comment (registration or contact message) with email **stop_email@example.com**. You should see notice,
 
-The setup is done! You can control anti-spam plugin by <a href="https://cleantalk.org/my" target="_blank">Dashboard</a> at the cleantalk.org or use <a href="https://play.google.com/store/apps/details?id=org.cleantalk.app">Android</a>, <a href="https://itunes.apple.com/us/app/cleantalk/id825479913?mt=8">iPhone</a> anti-spam app. 
+> *** Forbidden. Sender blacklisted. ***
+
+Done!
+= Manage and control spam protection = 
+Go to <a href="https://cleantalk.org/my" target="_blank">Dashboard</a> at the cleantalk.org or use <a href="https://play.google.com/store/apps/details?id=org.cleantalk.app">Android</a>, <a href="https://itunes.apple.com/us/app/cleantalk/id825479913?mt=8">iPhone</a> anti-spam app to manage and control spam protection. 
 
 == Frequently Asked Questions ==
 
 = Does the plugin protects against brute force, DoS attacks as well as against spam attacks? =
 No, it doesn't. Anti-spam by CleanTalk **is only anti-spam solution** for comments, registrations and other other forms on a website. Plugin saves your time against manage spam problem, but doesn't protect against any security issues.
 
-= Does anti spam protection safe for mobiles visitors? =
+= Does anti spam protection safe for mobile visitors? =
 Yes, it does. Plugin doesn't block mobile visitors as well as desktop websites visitors. Because this plugin uses several anti-spam tests to detect spam bots and lower false/positive rate. Multiple anti-spam tests helps avoid false/positive blocks for real website visitors even if one of tests failed.
 
 = How does the plugin work with spam comments? =
