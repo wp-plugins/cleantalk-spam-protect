@@ -50,6 +50,9 @@ Plugin blocks spam emails via any themes (built-in) contact forms. With AJAX for
 = Check existing comments for spam =
 With the help of anti-spam by CleanTalk you can check existing comments, to find and quickly delete spam comments. For use this function, go to WP Console->Comments->Find spam comments.
 
+= Low false/positive rate =
+This plugin uses multiple anti-spam tests to filter spam bots with lower false/positive rate as possible. Multiple anti-spam tests avoid false/positive blocks for real website visitors even if one of the tests failed.
+
 = Anti-spam plugin info = 
 CleanTalk is an anti-spam solution **all in 1 for WordPress** that protects login, comments, contact and WooCommerce forms all at once. You don't need to install separate anti-spam plugins for each form. This allows your blog to work faster and save resources. After installation **you will forget about spam**, CleanTalk plugin will do all the work. You won't have to deal with spam, CleanTalk will do this for you automatically. 
 
@@ -76,6 +79,11 @@ CleanTalk is premium anti-spam service for WordPress, please look at the <a href
 * Online, daily and weekly anti-spam reports traffic VS spam. 
 * Apps for iPhone, Android to control anti-spam service, comments, signups, contacts. With traffic and spam statistics for last 7 days.
 * Anti-spam apps for most popular CMS on cleantalk.org. 
+
+= How to protect sites from spam bots without CAPTCHA? =
+The most popular method is CAPTCHA - the annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won't discern these CAPTCHA, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. 
+Sometimes CAPTCHA reminds doodle 2x year old child. For users with vision problems captcha is just an insurmountable obstacle. Users hate captcha. Captcha for users means "hate". Unreadable CAPTCHA stops about 80% of site visitors. After 2 failed attempts to bring it up to 95% reject further attempts. 
+At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource both from bots and visitors. CAPTCHA is not a panacea from spam. Doubts Concerning the Need for CAPTCHA?
 
 = We recommend =
 Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
@@ -175,6 +183,60 @@ If you're having trouble getting things to work after installing the plugin, her
 1. If you haven't yet, please upgrade plugin to the latest version.
 1. If you have error '*** Forbidden. Enable JavaScript. Anti-spam service cleantalk.org. ***' please check JavaScript support in your browser and do JavaScript test at this page <a href="http://cleantalk.org/checkout-javascript-support">Check out JavaScript support</a>.
 1. If you have spam comments, signups or contacts please check the Access key at plugin settings. The key should be same as you can find in service <a href="https://cleantalk.org/my/">Dashboard</a>.
+
+= Spam protection, backend and frontend perfomance =
+We develop plugin to do it as optimized as possible, CleanTalk doesn't downgrade response time in backend or frontend. The plugin proccess only POST requests to WordPress core, it tackes less than 1 second to return results. Here are some P3 Profiler results from a real WordPress blog,
+
+> WordPress Plugin Profile Report
+> ===========================================
+> Report date: July 9, 2015
+> Theme name: amongsthumans (Canvas child theme)
+> Pages browsed: 24
+> Avg. load time: 2.1155 sec
+> Number of plugins: 28
+> Plugin impact: 45.25% of load time
+> Avg. plugin time: 0.9573 sec
+> Avg. core time: 0.1093 sec
+> Avg. theme time: 0.9339 sec
+> Avg. mem usage: 44.94 MB
+> Avg. ticks: 9,890
+> Avg. db queries : 65.00
+> Margin of error : 0.1149 sec
+
+> Plugin list:
+> ===========================================
+> P3 (Plugin Performance Profiler) - 0.1290 sec - 13.48%
+> Advanced Code Editor - 0.0045 sec - 0.47%
+> Bulk Comment Remove - 0.0029 sec - 0.30%
+> Bulk Delete - 0.0275 sec - 2.87%
+> Cleantalk Spam Protect - 0.0187 sec - 1.95%
+> Custom Share Buttons with Floating Sidebar - 0.0173 sec - 1.81%
+> Exclude Pages - 0.0009 sec - 0.10%
+> Google Sitemap Generator - 0.0032 sec - 0.34%
+> Jetpack by WordPress.com - 0.3644 sec - 38.06%
+> Last Modified Timestamp - 0.0031 sec - 0.32%
+> Le Petite Url - 0.0112 sec - 1.17%
+> Onenote Publisher - 0.0015 sec - 0.16%
+> Popups Premium Plugin - 0.0074 sec - 0.77%
+> Popups - WordPress Popup - 0.0419 sec - 4.37%
+> Post Duplicator - 0.0059 sec - 0.62%
+> Post Teaser - 0.0237 sec - 2.48%
+> Q2W3 Fixed Widget - 0.0017 sec - 0.18%
+> SSL Insecure Content Fixer - 0.0111 sec - 1.16%
+> TinyMCE Advanced - 0.0022 sec - 0.22%
+> Ultimate Follow Me Plugin by Free Blog Factory - 0.0008 sec - 0.08%
+> WooThemes Helper - 0.0282 sec - 2.95%
+> Wp Social Avatar - 0.0013 sec - 0.13%
+> WP User Avatar - 0.0559 sec - 5.84%
+> Wpcommentcleaner - 0.0119 sec - 1.24%
+> Wpdiscuz - 0.0369 sec - 3.85%
+> Online Backup for WordPress - 0.0039 sec - 0.41%
+> WPSSO Pro Update Manager (WPSSO UM) - 0.0114 sec - 1.19%
+> WordPress Social Sharing Optimization (WPSSO) Pro - 0.1288 sec - 13.45%
+
+
+= Some thoughts about CAPTCHA =
+186	The annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won’t discern these symbols, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource from visitors. Spam bots can automatically recognize Captcha. Spam bots can not pass through the anti-spam CleanTalk, complex invisible checks can immediately detect spam bots.
 
 = Requirements =
 WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enabled 'allow_url_fopen' setting. <a href="http://cleantalk.org/register?platform=wordpress">Sign up</a> to get an Access key.
