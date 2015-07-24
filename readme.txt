@@ -7,7 +7,7 @@ Stable tag: 5.17
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Max power, all-in-one, premium anti-spam. No comments spam, no registrations spam, no contact spam, protects any forms. Use spam free WordPress. 
+Max power, all-in-one, premium anti-spam. No comments & registrations spam, no contact spam, protects any forms. Just install and forget spam. 
 
 == Description ==
 No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam bots.
@@ -88,7 +88,6 @@ At the sight of CAPTCHA and after input errors, many visitors leave the resource
 = We recommend =
 Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
 
-> ### **Use spam free, CAPTCHA less WordPress with Anti-spam by CleanTalk**
 > Max power, all-in-one, premium anti-spam WordPress plugin. No comments & registrations spam, no contact spam, protects any forms. Just install and forget spam. 
 
 
