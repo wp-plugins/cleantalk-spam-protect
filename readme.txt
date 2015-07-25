@@ -1,6 +1,6 @@
 === Anti-spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, gravity forms spam, widget spam, spam spam, captcha spam, spam blocker, spam filter, spam contacts, spam emails
+Tags: akismet, anti-spam, antispam, bbpress, buddypress, captcha, cf7 spam, comments, contact form spam, form, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, widget, spam spam, captcha spam, spam blocker, spam filter, spam contacts, spam emails, jetpack, javascript, bots, contact form 7, contact form, registrations, cache, ninja forms, ninja, Fast Secure Contact, Landing pages Gravity forms, login, cloudflare, email, e-mail, address, contact, formidable, mailchimp, wpmu, multisite, plugin, s2member, protect, protection, visitors, users, trackbacks, ajax 
 Requires at least: 3.0
 Tested up to: 4.3
 Stable tag: 5.17
@@ -167,7 +167,7 @@ The plugin is free. But the plugin uses CleanTalk cloud service to filter spam b
 Anti-spam by CleanTalk doesn't use static HTML code into templates, so all anti-spam functions works correctly with any WordPress cache plugins.
 
 = Does the plugin protects against spam bots at forms with third-party services? =
-If your contact or subscribe form sends data to third-party servers (like mailchimp.com and etc.) the plugin will not protect your form against spam bots. Because the plugin protects only forms which are sends data directly to your WordPress website.
+Yes, it does. Plugin protects web-forms on your websites which are send data to third-party servers (like MailChimp). To enable this protection set option 'Protect external forms' in plugin settings. 
 
 = What is "Connection test" message? =
 After activation CleanTalk sends test message with email stop_email@example.com. This request required for test our plugin and in some cases it can give us information about problems in plugin, so you can contact our support in time. Result of test query you can see in plugin's settings - green ticks or red crosses.
