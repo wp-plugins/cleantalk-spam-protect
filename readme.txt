@@ -1,6 +1,6 @@
 === Anti-spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: anti-spam, antispam, bbpress spam, buddypress spam, captcha, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, gravity forms spam, widget spam, spam spam, captcha spam, spam blocker, spam filter, spam contacts, spam emails
+Tags: akismet, anti-spam, antispam, bbpress spam, buddypress spam, captcha, cf7 spam, comments spam, contact form spam, form, Formidable spam, jetpack spam, signup spam, spam, spammers, spammy, WooCommerce spam, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, gravity forms spam, widget spam, spam spam, captcha spam, spam blocker, spam filter, spam contacts, spam emails
 Requires at least: 3.0
 Tested up to: 4.3
 Stable tag: 5.17
@@ -173,7 +173,10 @@ If your contact or subscribe form sends data to third-party servers (like mailch
 After activation CleanTalk sends test message with email stop_email@example.com. This request required for test our plugin and in some cases it can give us information about problems in plugin, so you can contact our support in time. Result of test query you can see in plugin's settings - green ticks or red crosses.
 
 = Compatible with Cloudflare? = 
-Sure, CleanTalk is fully compatible with CloudFlare. Service doesn't filter CloudFlares IP's (AS13335) over blacklists database, so in this way plugin/service filters spam bots uses other anti spam tests.
+CleanTalk is fully compatible with CloudFlare. Service doesn't filter CloudFlares IP's (AS13335) over blacklists database, so in this way plugin/service filters spam bots uses other anti spam tests.
+
+= Can I use Akismet and CleanTalk to protect my website against spam bots?
+Sure, you can. You can use CleanTalk and any backend anti-spam tools to protect your website.
 
 == Other notes ==
 
