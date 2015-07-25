@@ -175,7 +175,7 @@ After activation CleanTalk sends test message with email stop_email@example.com.
 = Compatible with Cloudflare? = 
 CleanTalk is fully compatible with CloudFlare. Service doesn't filter CloudFlares IP's (AS13335) over blacklists database, so in this way plugin/service filters spam bots uses other anti spam tests.
 
-= Can I use Akismet and CleanTalk to protect my website against spam bots?
+= Can I use Akismet and CleanTalk to protect my website against spam bots? =
 Sure, you can. You can use CleanTalk and any backend anti-spam tools to protect your website.
 
 == Other notes ==
