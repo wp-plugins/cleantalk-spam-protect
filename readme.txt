@@ -50,6 +50,9 @@ With the help of anti-spam by CleanTalk you can check existing comments, to fin
 = Low false/positive rate =
 This plugin uses multiple anti-spam tests to filter spam bots with lower false/positive rate as possible. Multiple anti-spam tests avoid false/positive blocks for real website visitors even if one of the tests failed.
 
+= Spam attacks logs =
+Service CleanTalk (this plugin is client appliceation for CleanTalk anit-spam service) records all filtered comments, registration and other spam attacks in the "Log of spam oattacks" and stores the data in the log up to 45 days. Using the log, you can ensure reliable protection of your website from spam and no false/positive filtering.
+
 = No spam comments, no spam registrations, no spam contact emails, no spam trackbacks. CAPTCHA less anti-spam for WordPress =
 Spam is one of the most irritating factors.  Spam become every year more and conventional anti-spam can no longer handle all the spam bots. CleanTalk prevents spam and automatically blocks it. You'll be surprised of effective protection against spam.
 
