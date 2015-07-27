@@ -1528,7 +1528,17 @@ function ct_contact_form_validate () {
         if (!(defined( 'DOING_AJAX' ) && DOING_AJAX)) {
             global $ct_comment;
             $ct_comment = $ct_result->comment;
-            ct_die(null, null);
+            if(isset($_POST['cma-action'])&&$_POST['cma-action']=='add')
+            {
+            	$result=Array('success'=>0, 'thread_id'=>null,'messages'=>Array($ct_result->comment));
+            	header("Content-Type: application/json");
+				print json_encode($result);
+				die();
+            }
+            else
+            {
+            	ct_die(null, null);
+            }
         } else {
             echo $ct_result->comment; 
         }
