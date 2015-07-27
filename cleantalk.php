@@ -82,7 +82,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     	    add_action('admin_menu', 'ct_admin_add_page');
     	    add_action('admin_notices', 'admin_notice_message');
 	}
-	if (defined( 'DOING_AJAX' ) && DOING_AJAX)
+	if (defined( 'DOING_AJAX' ) && DOING_AJAX||isset($_POST['cma-action']))
 		{
 			require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-public.php');
 			require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-ajax.php');

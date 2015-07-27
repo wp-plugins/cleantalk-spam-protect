@@ -75,6 +75,9 @@ add_action( 'wp_ajax_woocommerce_checkout', 'ct_ajax_hook',1 );
 add_action( 'wp_ajax_nopriv_frm_entries_create', 'ct_ajax_hook',1 );
 add_action( 'wp_ajax_frm_entries_create', 'ct_ajax_hook',1 );
 
+/**hooks for cm answers pro */
+add_action( 'template_redirect', 'ct_ajax_hook',1 );
+
 function ct_get_stats()
 {
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
@@ -420,6 +423,12 @@ function ct_ajax_hook()
 			else if($_POST['action']=='frm_entries_create')
 			{
 				$result=Array('112'=>$ct_result->comment);
+				print json_encode($result);
+				die();
+			}
+			else if(isset($_POST['cma-action'])&&$_POST['cma-action']=='add')
+			{
+				$result=Array('success'=>0, 'thread_id'=>null,'messages'=>Array($ct_result->comment));
 				print json_encode($result);
 				die();
 			}
