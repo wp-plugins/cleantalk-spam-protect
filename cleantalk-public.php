@@ -148,6 +148,7 @@ function ct_init() {
     
     //hook for Anonymous Post
     add_action('template_redirect','ct_contact_form_validate',1);
+    add_action('template_redirect','ct_contact_form_validate_postdata',1);
     
     //
     // New user approve hack
@@ -1474,7 +1475,6 @@ function ct_contact_form_validate () {
 	{
 		return null;
 	}
-	$cleantalk_executed=true;
 
     if ($_SERVER['REQUEST_METHOD'] != 'POST' || 
         (isset($pagenow) && $pagenow == 'wp-login.php') || // WordPress log in form
@@ -1509,6 +1509,7 @@ function ct_contact_form_validate () {
     if ($sender_email===''|| !$contact_form) {
         return false;
     }
+    $cleantalk_executed=true;
 
     $ct_base_call_result = ct_base_call(array(
         'message' => $subject . "\n\n" . $message,
@@ -1626,7 +1627,17 @@ function ct_contact_form_validate_postdata () {
         if (!(defined( 'DOING_AJAX' ) && DOING_AJAX)) {
             global $ct_comment;
             $ct_comment = $ct_result->comment;
-            ct_die(null, null);
+            if(isset($_POST['cma-action'])&&$_POST['cma-action']=='add')
+            {
+            	$result=Array('success'=>0, 'thread_id'=>null,'messages'=>Array($ct_result->comment));
+            	header("Content-Type: application/json");
+				print json_encode($result);
+				die();
+            }
+            else
+            {
+            	ct_die(null, null);
+            }
         } else {
             echo $ct_result->comment; 
         }

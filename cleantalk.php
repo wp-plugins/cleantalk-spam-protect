@@ -18,7 +18,12 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-common.php');
     $ct_options=ct_get_options();
     $ct_data=ct_get_data();
-    ct_init_session();
+    $jigo_version=@get_option('jigoshop_db_version', '');
+    if($jigo_version=='')
+    {
+    	ct_init_session();
+    }
+    
     if(!isset($_SESSION['ct_redirects']))
     {
     	$_SESSION['ct_redirects']=0;
