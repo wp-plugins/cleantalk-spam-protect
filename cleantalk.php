@@ -181,6 +181,28 @@ function ct_add_event($event_type)
 		@$ct_data['stat_blocked']++;
 	}
 	$ct_data['stat_all']++;
+	
+	$t=time();
+	
+	if(!isset($ct_data['stat_accepted']))
+	{
+		$ct_data['stat_accepted']=0;
+		$ct_data['stat_blocked']=0;
+		$ct_data['stat_all']=0;
+		$ct_data['last_time']=$t;
+		update_option('cleantalk_data', $ct_data);
+	}
+	
+	$last_time=intval($ct_data['last_time']);
+	if($t-$last_time>86400)
+	{
+		$ct_data['stat_accepted']=0;
+		$ct_data['stat_blocked']=0;
+		$ct_data['stat_all']=0;
+		$ct_data['last_time']=$t;
+		update_option('cleantalk_data', $ct_data);
+	}
+	
 	update_option('cleantalk_data', $ct_data);
 	$cleantalk_executed=true;
 }

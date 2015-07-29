@@ -852,38 +852,24 @@ function ct_update_option($option_name) {
     $key_valid = true;
     $app_server_error = false;
     $ct_data['testing_failed']=0;
-    if (function_exists('curl_init') && function_exists('json_decode')) {
-        $url = 'https://cleantalk.org/app_notice';
-        $data['auth_key'] = $api_key; 
-        $data['param'] = 'notice_validate_key'; 
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_TIMEOUT, $ct_server_timeout);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-
-        // receive server response ...
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // resolve 'Expect: 100-continue' issue
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
-
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-
-        $result = curl_exec($ch);
-        curl_close($ch);
-        if ($result) {
-            $result = json_decode($result, true);
-            if (isset($result['valid']) && $result['valid'] == 0) {
-                $key_valid = false;
-                $ct_data['testing_failed']=1;
-            }
-        }
-        if (!$result || !isset($result['valid'])) {
-            $app_server_error = true;
+    
+    $request=Array();
+	$request['method_name'] = 'notice_validate_key'; 
+	$request['auth_key'] = $api_key;
+	$url='https://api.cleantalk.org';
+    $result=sendRawRequest($url, $request);
+    if ($result)
+    {
+        $result = json_decode($result, true);
+        if (isset($result['valid']) && $result['valid'] == 0) {
+            $key_valid = false;
             $ct_data['testing_failed']=1;
         }
+    }
+    if (!$result || !isset($result['valid']))
+    {
+        $app_server_error = true;
+        $ct_data['testing_failed']=1;
     }
     
     update_option('cleantalk_data', $ct_data);

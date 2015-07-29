@@ -1510,6 +1510,12 @@ function ct_contact_form_validate () {
         return false;
     }
     $cleantalk_executed=true;
+    
+    if(isset($_POST['TellAFriend_Link']))
+    {
+    	$tmp=$_POST['TellAFriend_Link'];
+    	unset($_POST['TellAFriend_Link']);
+    }
 
     $ct_base_call_result = ct_base_call(array(
         'message' => $subject . "\n\n" . $message,
@@ -1520,6 +1526,11 @@ function ct_contact_form_validate () {
 	    'sender_info' => get_sender_info(),
         'checkjs' => $checkjs
     ));
+    
+    if(isset($_POST['TellAFriend_Link']))
+    {
+    	$_POST['TellAFriend_Link']=$tmp;
+    }
     
     $ct = $ct_base_call_result['ct'];
     $ct_result = $ct_base_call_result['ct_result'];
@@ -1535,6 +1546,11 @@ function ct_contact_form_validate () {
             	header("Content-Type: application/json");
 				print json_encode($result);
 				die();
+            }
+            else if(isset($_POST['TellAFriend_email']))
+            {
+            	echo $ct_result->comment;
+            	die();
             }
             else
             {
