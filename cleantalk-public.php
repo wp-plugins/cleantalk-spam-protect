@@ -8,6 +8,12 @@ function ct_init() {
     global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data, $ct_check_post_result, $test_external_forms;;
 
     //$ct_options = ct_get_options();
+    
+    //fix for EPM registration form
+    if(isset($_POST) && shortcode_exists( 'epm_registration_form' ))
+    {
+    	unset($_POST['ct_checkjs_register_form']);
+    }
 
     ct_init_session();
     
