@@ -5,19 +5,18 @@
  * @return 	mixed[] Array of options
  */
 function ct_init() {
-    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data, $ct_check_post_result, $test_external_forms;;
+    global $ct_wplp_result_label, $ct_jp_comments, $ct_post_data_label, $ct_post_data_authnet_label, $ct_formtime_label, $ct_direct_post, $ct_options, $ct_data, $ct_check_post_result, $test_external_forms;
 
     //$ct_options = ct_get_options();
     
     //fix for EPM registration form
-    if(isset($_POST) && shortcode_exists( 'epm_registration_form' ))
+    if(isset($_POST) && isset($_POST['reg_email']) && shortcode_exists( 'epm_registration_form' ))
     {
     	unset($_POST['ct_checkjs_register_form']);
     }
 
     ct_init_session();
     
-
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (is_array($_SESSION) && !array_key_exists($ct_formtime_label, $_SESSION) && session_id() != '') {
             $ct_direct_post = 1;
@@ -836,6 +835,100 @@ function ct_registration_errors_wpmu($errors) {
  */
 function ct_register_post($sanitized_user_login = null, $user_email = null, $errors) {
     return ct_registration_errors($errors, $sanitized_user_login, $user_email);
+}
+
+/**
+ * Check messages for external plugins
+ * @return array with checking result;
+ */
+
+function ct_test_message($nickname, $email, $ip, $text){
+	$checkjs = js_test('ct_checkjs', $_COOKIE, true);
+  
+    $post_info['comment_type'] = 'feedback_plugin_check';
+    $post_info = json_encode($post_info);
+    
+    $ct_base_call_result = ct_base_call(array(
+        'message' => $text,
+        'example' => null,
+        'sender_email' => $email,
+        'sender_nickname' => $nickname,
+        'post_info' => $post_info,
+	    'sender_info' => get_sender_info(),
+        'checkjs' => $checkjs
+    ));
+    
+    $ct_result = $ct_base_call_result['ct_result'];
+    
+    $result=Array(
+        'allow' => $ct_result->allow,
+        'comment' => $ct_result->comment,
+    );
+    return $result;
+}
+
+/**
+ * Check registrations for external plugins
+ * @return array with checking result;
+ */
+
+function ct_test_registration($nickname, $email, $ip){
+    global $ct_checkjs_register_form, $ct_agent_version, $ct_options, $ct_data;
+    
+    $submit_time = submit_time_test();
+    
+    $sender_info = get_sender_info();
+    
+    $checkjs=0;
+
+    $checkjs = js_test($ct_checkjs_register_form, $_POST, true);
+    $sender_info['post_checkjs_passed'] = $checkjs;
+   
+    //
+    // This hack can be helpfull when plugin uses with untested themes&signups plugins.
+    //
+    if ($checkjs == 0) {
+        $checkjs = js_test('ct_checkjs', $_COOKIE, true);
+        $sender_info['cookie_checkjs_passed'] = $checkjs;
+    }
+
+    $sender_info = json_encode($sender_info);
+    if ($sender_info === false) {
+        $sender_info= '';
+    }
+ 
+    require_once('cleantalk.class.php');
+    $config = get_option('cleantalk_server');
+    $ct = new Cleantalk();
+    $ct->work_url = $config['ct_work_url'];
+    $ct->server_url = $ct_options['server'];
+
+    $ct->server_ttl = $config['ct_server_ttl'];
+    $ct->server_changed = $config['ct_server_changed'];
+    $ct->ssl_on = $ct_options['ssl_on'];
+    
+    $ct_request = new CleantalkRequest();
+    $ct_request->auth_key = $ct_options['apikey'];
+    $ct_request->sender_email = $email; 
+    $ct_request->sender_ip = $ip;
+    $ct_request->sender_nickname = $nickname; 
+    $ct_request->agent = $ct_agent_version; 
+    $ct_request->sender_info = $sender_info;
+    $ct_request->js_on = $checkjs;
+    $ct_request->submit_time = $submit_time; 
+    
+    $ct_result = $ct->isAllowUser($ct_request);
+    
+    if ($ct_result->errno != 0 && $checkjs==0)
+    {
+    	$ct_result->allow=0;
+    }
+    
+    $result=Array(
+        'allow' => $ct_result->allow,
+        'comment' => $ct_result->comment,
+    );
+    return $result;
 }
 
 /**
