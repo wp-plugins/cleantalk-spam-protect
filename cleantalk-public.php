@@ -479,12 +479,21 @@ function ct_preprocess_comment($comment) {
     //
     // JetPack comments logic
     //
+    $checkjs = 0;
     if ($ct_jp_comments) {
         $post_info['comment_type'] = 'jetpack_comment'; 
         $checkjs = js_test('ct_checkjs', $_COOKIE, true);
     } else {
         $post_info['comment_type'] = $comment['comment_type'];
         $checkjs = js_test('ct_checkjs', $_POST, true);
+    }
+    if($checkjs==0)
+    {
+    	$checkjs = js_test('ct_checkjs', $_POST, true);
+    }
+    if($checkjs==0)
+    {
+    	$checkjs = js_test('ct_checkjs', $_COOKIE, true);
     }
 
     $post_info['post_url'] = ct_post_url(null, $comment_post_id); 
