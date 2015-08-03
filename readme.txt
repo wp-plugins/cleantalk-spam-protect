@@ -1,6 +1,6 @@
 === Anti-spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: akismet, anti-spam, antispam, bbpress, buddypress, captcha, cf7 spam, comments, contact form spam, form, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, widget, spam spam, captcha spam, spam blocker, spam filter, spam contacts, spam emails, jetpack, javascript, bots, contact form 7, contact form, registrations, cache, ninja forms, ninja, Fast Secure Contact, Landing pages Gravity forms, login, cloudflare, email, e-mail, address, contact, formidable, mailchimp, wpmu, multisite, plugin, s2member, protect, protection, visitors, users, trackbacks, ajax 
+Tags: akismet, anti-spam, antispam, bbpress, buddypress, captcha, cf7 spam, comments, contact form spam, form, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, widget, spam spam, captcha spam, spam blocker, spam filter, spam contacts, spam emails, jetpack, javascript, bots, contact form 7, contact form, registrations, cache, ninja forms, ninja, Fast Secure Contact, Landing pages Gravity forms, login, cloudflare, email, e-mail, address, contact, formidable, mailchimp, wpmu, multisite, plugin, s2member, protect, protection, visitors, users, trackbacks, ajax, theme 
 Requires at least: 3.0
 Tested up to: 4.3
 Stable tag: 5.17
@@ -180,6 +180,23 @@ CleanTalk is fully compatible with CloudFlare. Service doesn't filter CloudFlare
 
 = Can I use Akismet and CleanTalk to protect my website against spam bots? =
 Sure, you can. You can use CleanTalk and any backend anti-spam tools to protect your website.
+
+= Can i use CleanTalk functionality in my plugins? =
+Yes, you can. Just use following snippet:
+
+<?php 
+if(!function_exists('ct_test_message')){
+	include_once( ABSPATH . '/wp-content/plugins/cleantalk-spam-protect/cleantalk.php' );
+}	
+//for registration test:
+$res=ct_test_registration("nickname", "stop_email@example.com", "127.0.0.1");
+//or for some other messages (contact forms, comments etc.)
+$res=ct_test_message("nickname", "stop_email@example.com", "127.0.0.1", "test message");
+?>
+
+$res now contents array with two parameters:
+ * $res['allow'] - is request allowed (1) or not (0)
+ * $rew['comment'] - comment for our server's decision.
 
 == Other notes ==
 
