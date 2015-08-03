@@ -166,7 +166,7 @@ function ct_admin_init() {
     	isset($_POST['option_page'])&&$_POST['option_page']=='cleantalk_settings'&&$ct_options['apikey']!=$_POST['cleantalk_settings']['apikey']) {
         $result = false;
 	    if (function_exists('curl_init') && function_exists('json_decode') && ct_valid_key($ct_options['apikey'])) {
-            $result=noticePaidTill($ct_options['apikey']);            
+            $result=noticePaidTill($_POST['cleantalk_settings']['apikey']);            
             
             if ($result) {
                 $result = json_decode($result, true);
