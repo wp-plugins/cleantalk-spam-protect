@@ -195,8 +195,8 @@ Yes, you can. Just use following snippet:
 
 
 $res now contents array with two parameters:
- * $res['allow'] - is request allowed (1) or not (0)
- * $rew['comment'] - comment for our server's decision.
+  * $res['allow'] - is request allowed (1) or not (0)
+  * $res['comment'] - comment for our server's decision.
 
 == Other notes ==
 
