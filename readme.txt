@@ -1,6 +1,6 @@
 === Anti-spam by CleanTalk ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: akismet, anti-spam, antispam, bbpress, buddypress, captcha, cf7 spam, comments, contact form spam, form, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, widget, spam spam, captcha spam, spam blocker, spam filter, spam contacts, spam emails, jetpack, javascript, bots, contact form 7, contact form, registrations, cache, ninja forms, ninja, Fast Secure Contact, Landing pages Gravity forms, login, cloudflare, email, e-mail, address, contact, formidable, mailchimp, wpmu, multisite, plugin, s2member, protect, protection, visitors, users, trackbacks, ajax, theme 
+Tags: anti-spam, antispam, bbpress, buddypress, captcha, cf7 spam, comments, contact form spam, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, captcha spam, spam blocker, spam filter, jetpack, javascript, bots, contact form 7, contact form, registrations, ninja, Fast Secure Contact, Gravity forms, formidable, mailchimp, wpmu, s2member, protect, protection
 Requires at least: 3.0
 Tested up to: 4.3
 Stable tag: 5.17
