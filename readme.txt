@@ -1,13 +1,13 @@
 === Anti-Spam by CleanTalk ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: anti-spam, antispam, bbpress, buddypress, captcha, cf7 spam, comments, contact form spam, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, captcha spam, spam blocker, spam filter, jetpack, javascript, bots, contact form 7, contact form, registrations, ninja, Fast Secure Contact, Gravity forms, formidable, mailchimp, s2member, protection
+Tags: anti-spam, antispam, bbpress, buddypress, captcha, cf7 spam, comments, contact form spam, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, jetpack, bots, contact form 7, contact form, registrations, ninja, Fast Secure Contact, Gravity forms, formidable, mailchimp, s2member, protection
 Requires at least: 3.0
 Tested up to: 4.3
 Stable tag: 5.18
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Max power, all-in-one, premium anti-spam. No comments & registrations spam, no contact spam, protects any forms. Just install and forget spam. 
+Max power, no CAPTCHA, premium anti-spam. No comments & registrations spam, no contact spam, protects any forms. Just install and forget spam. 
 
 == Description ==
 No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam bots.
