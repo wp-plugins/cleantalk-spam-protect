@@ -192,7 +192,7 @@ if(!function_exists('ct_test_message')){
 $res=ct_test_registration("nickname", "stop_email@example.com", "127.0.0.1");
 //or for some other messages (contact forms, comments etc.)
 $res=ct_test_message("nickname", "stop_email@example.com", "127.0.0.1", "test message");
-?>
+
 
 $res now contents array with two parameters:
  * $res['allow'] - is request allowed (1) or not (0)
