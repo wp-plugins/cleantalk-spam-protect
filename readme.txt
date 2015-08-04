@@ -184,14 +184,14 @@ Sure, you can. You can use CleanTalk and any backend anti-spam tools to protect 
 = Can i use CleanTalk functionality in my plugins? =
 Yes, you can. Just use following snippet:
 
-<?php 
-if(!function_exists('ct_test_message')){
-	include_once( ABSPATH . '/wp-content/plugins/cleantalk-spam-protect/cleantalk.php' );
-}	
-//for registration test:
-$res=ct_test_registration("nickname", "stop_email@example.com", "127.0.0.1");
-//or for some other messages (contact forms, comments etc.)
-$res=ct_test_message("nickname", "stop_email@example.com", "127.0.0.1", "test message");
+    <?php 
+    if(!function_exists('ct_test_message')){
+    	include_once( ABSPATH . '/wp-content/plugins/cleantalk-spam-protect/cleantalk.php' );
+    }	
+    //for registration test:
+    $res=ct_test_registration("nickname", "stop_email@example.com", "127.0.0.1");
+    //or for some other messages (contact forms, comments etc.)
+    $res=ct_test_message("nickname", "stop_email@example.com", "127.0.0.1", "test message");
 
 
 $res now contents array with two parameters:
