@@ -268,6 +268,7 @@ function ct_inject_nocache_script($html)
 if(is_admin())
 {
 	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-comments.php');
+	require_once(CLEANTALK_PLUGIN_DIR . 'cleantalk-users.php');
 }
 if(isset($_GET['ait-action'])&&$_GET['ait-action']=='register')
 {
