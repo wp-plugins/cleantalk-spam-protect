@@ -41,7 +41,7 @@ function ct_show_users_page()
 		}
 		?>
 <?php
-		print '<button class="button" id="ct_insert_users">Insert users</button><br />';
+		//print '<button class="button" id="ct_insert_users">Insert users</button><br />';
 ?>
 
 		<div id="ct_working_message" style="display:none">
