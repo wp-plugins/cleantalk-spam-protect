@@ -65,8 +65,8 @@ function ct_setCookie(name, value)
 	
 	var date = new Date;
 	date.setDate(date.getDate() + 1);
-	//setTimeout(function() { document.cookie = name+"=" + value + "; expires=" + date.toUTCString() + "; path = /; domain = " + domain}, 200)
-	setTimeout(function() { document.cookie = name+"=" + value + "; expires=" + date.toUTCString() + "; path = /;"}, 200)
+	//setTimeout(function() { document.cookie = name+"=" + value + "; expires=" + date.toUTCString() + "; path = /; domain = " + domain}, 500)
+	setTimeout(function() { document.cookie = name+"=" + value + "; expires=" + date.toUTCString() + "; path = /;"}, 500)
 }
 
 function ct_callback(req)
@@ -123,7 +123,7 @@ if(ct_nocache_executed==undefined)
 		}
 	}	
 	
-	if(old_timestamp==undefined||new_timestamp-old_timestamp>82800) //82800 is 23 hours
+	if(old_timestamp==undefined||new_timestamp-old_timestamp>86400||checkjs_cookie==undefined) //86400 is 24 hours
 	{
 		ct_setCookie('ct_timestamp', new_timestamp);
 		//alert('set!');
