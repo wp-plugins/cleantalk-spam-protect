@@ -175,4 +175,8 @@ jQuery(document).ready(function(){
 	working=true;
 	ct_show_info();
 	working=false;
+	if(location.href.match(/do_check/))
+	{
+		jQuery("#ct_check_spam_button").click();
+	}
 });

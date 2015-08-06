@@ -227,9 +227,25 @@ function ct_admin_init() {
 
     ct_init_session();
     
+    $buttons_html='
+<style type="text/css">
+#ct_button_check_comments, #ct_button_check_users  {padding: 10px; background: #FF9933; color: #fff; border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    font-size: 12pt;
+    text-decoration:none;
+    margin-bottom:5px;
+    display:inline-block;
+}
+#ct_button_check_users {background: #339933;}
+</style>
+<a href="edit-comments.php?page=ct_check_spam&do_check=1" id="ct_button_check_comments">'.__('Check comments', 'cleantalk').'</a>
+<a href="users.php?page=ct_check_users&do_check=1" id="ct_button_check_users">'.__('Check users', 'cleantalk').'</a><div class="clear"></div>';
+    
     register_setting('cleantalk_settings', 'cleantalk_settings', 'ct_settings_validate');
     add_settings_section('cleantalk_settings_main', __($ct_plugin_name, 'cleantalk'), 'ct_section_settings_main', 'cleantalk');
-    add_settings_section('cleantalk_settings_state', "<hr>".__('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
+    add_settings_section('cleantalk_settings_state', "$buttons_html<hr>".__('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
     //add_settings_section('cleantalk_settings_autodel', "<hr>", 'ct_section_settings_autodel', 'cleantalk');
     add_settings_section('cleantalk_settings_anti_spam', "<hr>".__('Advanced settings', 'cleantalk'), 'ct_section_settings_anti_spam', 'cleantalk');
     add_settings_field('cleantalk_apikey', __('Access key', 'cleantalk'), 'ct_input_apikey', 'cleantalk', 'cleantalk_settings_main');

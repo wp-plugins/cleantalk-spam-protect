@@ -36,7 +36,7 @@ function ct_show_users_page()
 		{
 		?>
 			<button class="button" id="ct_check_users_button"><?php _e("Find spam users", 'cleantalk'); ?></button><br />
-			<div><?php _e("Anti-spam by CleanTalk will check all users against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam userss' to start.", 'cleantalk'); ?></div>
+			<div><?php _e("Anti-spam by CleanTalk will check all users against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam users' to start.", 'cleantalk'); ?></div>
 		<?php
 		}
 		?>
@@ -256,7 +256,7 @@ function ct_ajax_check_users()
 	);
 	
 	$u=get_users($args_unchecked);
-	$u=array_slice($u,0,10);
+	//$u=array_slice($u,0,10);
 	if(sizeof($u)>0)
 	{
 		$data=Array();
@@ -413,7 +413,7 @@ function ct_ajax_delete_checked_users()
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
 	foreach($_POST['ids'] as $key=>$value)
 	{
-		//wp_delete_comment($value, false);
+		wp_delete_user($value);
 	}
 	die();
 }
@@ -432,11 +432,10 @@ function ct_ajax_delete_all_users()
 			)
 		)
 	);	
-	$c_spam=get_comments($args_spam);
+	$c_spam=get_users($args_spam);
 	$cnt=sizeof($c_spam);
 	
 	$args_spam = array(
-		'count'=>true,
 		'meta_query' => array(
 			Array(
 				'key' => 'ct_marked_as_spam',
@@ -445,10 +444,10 @@ function ct_ajax_delete_all_users()
 			)
 		)
 	);
-	$cnt_all=get_comments($args_spam);
+	$cnt_all=sizeof(get_users($args_spam));
 	for($i=0;$i<sizeof($c_spam);$i++)
 	{
-		//wp_delete_comment($c_spam[$i]->comment_ID, false);
+		wp_delete_user($c_spam[$i]->ID);
 		usleep(10000);
 	}
 	print $cnt_all;

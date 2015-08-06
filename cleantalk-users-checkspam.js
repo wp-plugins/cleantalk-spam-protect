@@ -100,7 +100,7 @@ function ct_insert_users()
 function ct_delete_all_users()
 {
 	var data = {
-		'action': 'ajax_delete_all',
+		'action': 'ajax_delete_all_users',
 		'security': ajax_nonce
 	};
 	
@@ -133,7 +133,7 @@ function ct_delete_checked_users()
 		}
 	});
 	var data = {
-		'action': 'ajax_delete_checked',
+		'action': 'ajax_delete_checked_users',
 		'security': ajax_nonce,
 		'ids':ids
 	};
@@ -147,6 +147,7 @@ function ct_delete_checked_users()
 			//alert(msg);
 		}
 	});
+	return false;
 }
 jQuery("#ct_check_users_button").click(function(){
 	jQuery('#ct_working_message').show();
@@ -175,4 +176,8 @@ jQuery(document).ready(function(){
 	working=true;
 	ct_show_users_info();
 	working=false;
+	if(location.href.match(/do_check/))
+	{
+		jQuery("#ct_check_users_button").click();
+	}
 });
