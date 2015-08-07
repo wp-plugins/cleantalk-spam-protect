@@ -68,7 +68,9 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     	$use_ajax=1;
     }
     
-    if($use_ajax==1)
+    if($use_ajax==1 && 
+    	stripos($_SERVER['REQUEST_URI'],'.xml')===false && 
+    	stripos($_SERVER['REQUEST_URI'],'.xsl')===false)
     {
 		add_action('wp_loaded', 'ct_add_nocache_script', 1);
 		add_action('wp_footer', 'ct_add_nocache_script_footer', 1);
