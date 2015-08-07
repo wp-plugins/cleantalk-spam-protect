@@ -42,6 +42,8 @@ function ct_init() {
     if(isset($ct_options['general_postdata_test']))
     {
     	$ct_general_postdata_test = @intval($ct_options['general_postdata_test']);
+    	//hook for Anonymous Post
+    	add_action('template_redirect','ct_contact_form_validate_postdata',1);
     }
     else
     {
@@ -51,6 +53,7 @@ function ct_init() {
     if (isset($ct_options['general_contact_forms_test']) && $ct_options['general_contact_forms_test'] == 1)
     {
 		add_action('CMA_custom_post_type_nav','ct_contact_form_validate_postdata',1);
+		add_action('template_redirect','ct_contact_form_validate',1);
 		/*if(isset($_GET['ait-action'])&&$_GET['ait-action']=='register')
 		{
 			$tmp=$_POST['redirect_to'];
@@ -151,9 +154,7 @@ function ct_init() {
         ct_s2member_registration_test(); 
     }
     
-    //hook for Anonymous Post
-    add_action('template_redirect','ct_contact_form_validate',1);
-    add_action('template_redirect','ct_contact_form_validate_postdata',1);
+    
     
     //
     // New user approve hack
