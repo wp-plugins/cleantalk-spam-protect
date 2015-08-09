@@ -22,8 +22,8 @@ No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam b
 1. Stops spam in widgets.
 1. Check existing comments for spam.
 
-= Includes comments spam protection =
-Supports native WordPress, JetPack comments and any other comments plugins. Plugin moves spam comments to SPAM folder or you can set option to silent ban spam comments.
+= Comments spam protection =
+Supports native WordPress, JetPack comments and any other comments plugins. Plugin moves spam comments to SPAM folder or set option to silent ban spam comments.
 
 = Spam bots registrations filter =
 Filers spam bots on registrations forms WordPress, BuddyPress, bbPress, S2Member, WooCommerce and any other registrations plugins.
