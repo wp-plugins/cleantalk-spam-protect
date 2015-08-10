@@ -88,6 +88,10 @@ The most popular method is CAPTCHA - the annoying picture with curved and slopin
 Sometimes CAPTCHA reminds doodle 2x year old child. For users with vision problems captcha is just an insurmountable obstacle. Users hate captcha. Captcha for users means "hate". Unreadable CAPTCHA stops about 80% of site visitors. After 2 failed attempts to bring it up to 95% reject further attempts. 
 At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource both from bots and visitors. CAPTCHA is not a panacea from spam. Doubts Concerning the Need for CAPTCHA?
 
+= Public reviews =
+> Using on WPLift was a great test as we receive huge amounts of spam.
+> *Oliver Dale. <a href="http://wplift.com/wordpress-anti-spam-plugin">WPLift.com</a>.*
+
 = We recommend =
 Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
 
