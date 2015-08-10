@@ -90,7 +90,7 @@ At the sight of CAPTCHA and after input errors, many visitors leave the resource
 
 = Public reviews =
 > Using on WPLift was a great test as we receive huge amounts of spam.
-> *Oliver Dale. <a href="http://wplift.com/wordpress-anti-spam-plugin">WPLift.com</a>.*
+> *Oliver Dale. <a href="http://wplift.com/wordpress-anti-spam-plugin" target="_blank">WPLift.com</a>.*
 
 = We recommend =
 Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
