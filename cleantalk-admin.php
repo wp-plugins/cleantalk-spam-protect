@@ -268,9 +268,9 @@ else
     
     register_setting('cleantalk_settings', 'cleantalk_settings', 'ct_settings_validate');
     add_settings_section('cleantalk_settings_main', __($ct_plugin_name, 'cleantalk'), 'ct_section_settings_main', 'cleantalk');
-    add_settings_section('cleantalk_settings_state', "<hr>Check existing comments and users <br /><br />$buttons_html<hr>".__('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
+    add_settings_section('cleantalk_settings_state', "<hr>".__('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
     //add_settings_section('cleantalk_settings_autodel', "<hr>", 'ct_section_settings_autodel', 'cleantalk');
-    add_settings_section('cleantalk_settings_anti_spam', "<hr>".__('Advanced settings', 'cleantalk'), 'ct_section_settings_anti_spam', 'cleantalk');
+    add_settings_section('cleantalk_settings_anti_spam', "<hr>Check existing comments and users <br /><br />$buttons_html<hr>".__('Advanced settings', 'cleantalk'), 'ct_section_settings_anti_spam', 'cleantalk');
     add_settings_field('cleantalk_apikey', __('Access key', 'cleantalk'), 'ct_input_apikey', 'cleantalk', 'cleantalk_settings_main');
     add_settings_field('cleantalk_remove_old_spam', __('Automatically delete spam comments', 'cleantalk'), 'ct_input_remove_old_spam', 'cleantalk', 'cleantalk_settings_anti_spam');
     
