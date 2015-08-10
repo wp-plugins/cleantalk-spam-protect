@@ -71,7 +71,7 @@ function ct_admin_add_page() {
  * Admin action 'admin_init' - Add the admin settings and such
  */
 function ct_admin_init() {
-    global $ct_server_timeout, $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $ct_data, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label, $cleantalk_plugin_version;
+    global $ct_server_timeout, $show_ct_notice_autokey, $ct_notice_autokey_label, $ct_notice_autokey_value, $show_ct_notice_renew, $ct_notice_renew_label, $show_ct_notice_trial, $ct_notice_trial_label, $show_ct_notice_online, $ct_notice_online_label, $renew_notice_showtime, $trial_notice_showtime, $ct_plugin_name, $ct_options, $ct_data, $trial_notice_check_timeout, $account_notice_check_timeout, $ct_user_token_label, $cleantalk_plugin_version, $notice_check_timeout;
 
     //$ct_options = ct_get_options();
     //$ct_data = ct_get_data();
@@ -227,9 +227,25 @@ function ct_admin_init() {
 
     ct_init_session();
     
-    $buttons_html='
+    if(isset($ct_data['testing_failed'])&&$ct_data['testing_failed']==1)
+    {
+    	$buttons_html='	
 <style type="text/css">
-#ct_button_check_comments, #ct_button_check_users  {padding: 10px; background: #FF9933; color: #fff; border:0 none;
+#ct_button_check_comments, #ct_button_check_users {background: #999999;}
+    	
+    	';
+    }
+    else
+    {
+    	$buttons_html='
+<style type="text/css">
+#ct_button_check_comments, #ct_button_check_users {background: #69dd69;}
+    	
+    	';
+    }
+    
+    $buttons_html.='
+#ct_button_check_comments, #ct_button_check_users  {padding: 10px; color: #fff; border:0 none;
     cursor:pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px; 
@@ -238,14 +254,21 @@ function ct_admin_init() {
     margin-bottom:5px;
     display:inline-block;
 }
-#ct_button_check_users {background: #339933;}
-</style>
-<a href="edit-comments.php?page=ct_check_spam&do_check=1" id="ct_button_check_comments">'.__('Check comments', 'cleantalk').'</a>
+</style>';
+if(isset($ct_data['testing_failed'])&&$ct_data['testing_failed']==1)
+{
+	$buttons_html.='<a href="#" id="ct_button_check_comments" onclick="alert('."'".__('Feature is disabled, because testing of access key is failed!', 'cleantalk')."'".')">'.__('Check comments', 'cleantalk').'</a>
+<a href="#" id="ct_button_check_users" onclick="alert('."'".__('Feature is disabled, because testing of access key is failed!', 'cleantalk')."'".')">'.__('Check users', 'cleantalk').'</a><div class="clear"></div>';
+}
+else
+{
+	$buttons_html.='<a href="edit-comments.php?page=ct_check_spam&do_check=1" id="ct_button_check_comments">'.__('Check comments', 'cleantalk').'</a>
 <a href="users.php?page=ct_check_users&do_check=1" id="ct_button_check_users">'.__('Check users', 'cleantalk').'</a><div class="clear"></div>';
+}
     
     register_setting('cleantalk_settings', 'cleantalk_settings', 'ct_settings_validate');
     add_settings_section('cleantalk_settings_main', __($ct_plugin_name, 'cleantalk'), 'ct_section_settings_main', 'cleantalk');
-    add_settings_section('cleantalk_settings_state', "$buttons_html<hr>".__('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
+    add_settings_section('cleantalk_settings_state', "<hr>Check existing comments and users <br /><br />$buttons_html<hr>".__('Protection is active for:', 'cleantalk'), 'ct_section_settings_state', 'cleantalk');
     //add_settings_section('cleantalk_settings_autodel', "<hr>", 'ct_section_settings_autodel', 'cleantalk');
     add_settings_section('cleantalk_settings_anti_spam', "<hr>".__('Advanced settings', 'cleantalk'), 'ct_section_settings_anti_spam', 'cleantalk');
     add_settings_field('cleantalk_apikey', __('Access key', 'cleantalk'), 'ct_input_apikey', 'cleantalk', 'cleantalk_settings_main');

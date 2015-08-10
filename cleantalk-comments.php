@@ -198,6 +198,7 @@ function ct_show_checkspam_page()
 		}
 		?>
 	</div>
+	<br /><a href="options-general.php?page=cleantalk">&laquo;<?php print __('Back to CleanTalk settings', 'cleantalk'); ?></a>
 	<?php
 }
 
