@@ -36,8 +36,8 @@ function ct_show_checkspam_page()
 		//if($cnt_unchecked>0)
 		{
 		?>
-			<button class="button" id="ct_check_spam_button"><?php _e("Find spam comments", 'cleantalk'); ?></button><br />
-			<div><?php _e("Anti-spam by CleanTalk will check all not spam comments against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam comments' to start.", 'cleantalk'); ?></div>
+			<button class="button" id="ct_check_spam_button"><?php _e("Find spam comments", 'cleantalk'); ?></button><br /><br />
+			<div id="ct_info_message"><?php _e("Anti-spam by CleanTalk will check all not spam comments against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam comments' to start.", 'cleantalk'); ?></div>
 		<?php
 		}
 		?>
@@ -45,17 +45,17 @@ function ct_show_checkspam_page()
 		//print '<button class="button" id="ct_insert_comments">Insert comments</button><br />';
 ?>
 
-		<div id="ct_working_message" style="display:none">
+		<div id="ct_working_message" style="margin:auto;padding:3px;width:70%;border:2px dotted gray;display:none;background:#ffff99;">
 			<?php _e("Please wait for a while. CleanTalk is checking all approved and pending comments via blacklist database at cleantalk.org. You will have option to delete found spam comments after plugin finish.", 'cleantalk'); ?>
 		</div>
-		<div id="ct_deleting_message" style="display:none">
+		<div id="ct_deleting_message" style="display:none;">
 			<?php _e("Please wait for a while. CleanTalk is deleting spam comments. Comments left: ", 'cleantalk'); ?> <span id="cleantalk_comments_left"></span>
 		</div>
 		<div id="ct_done_message" <?php if($cnt_unchecked>0) print 'style="display:none"'; ?>>
 			<?php //_e("Done. All comments tested via blacklists database, please see result bellow.", 'cleantalk'); 
 			?>
 		</div>
-		<h3 id="ct_checking_status"></h3>
+		<h3 id="ct_checking_status" style="text-align:center;width:90%;"></h3>
 		<?php
 			$args_spam = array(
 				'meta_query' => array(

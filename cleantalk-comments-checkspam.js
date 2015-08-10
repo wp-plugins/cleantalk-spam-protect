@@ -150,6 +150,8 @@ function ct_delete_checked()
 }
 jQuery("#ct_check_spam_button").click(function(){
 	jQuery('#ct_working_message').show();
+	jQuery('#ct_check_spam_button').hide();
+	jQuery('#ct_info_message').hide();
 	working=true;
 	ct_clear_comments();
 });

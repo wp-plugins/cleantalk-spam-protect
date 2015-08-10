@@ -151,6 +151,8 @@ function ct_delete_checked_users()
 }
 jQuery("#ct_check_users_button").click(function(){
 	jQuery('#ct_working_message').show();
+	jQuery('#ct_check_users_button').hide();
+	jQuery('#ct_info_message').hide();
 	working=true;
 	ct_clear_users();
 });

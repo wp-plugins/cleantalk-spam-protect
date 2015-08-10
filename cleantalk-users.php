@@ -35,8 +35,8 @@ function ct_show_users_page()
 		//if($cnt_unchecked>0)
 		{
 		?>
-			<button class="button" id="ct_check_users_button"><?php _e("Find spam users", 'cleantalk'); ?></button><br />
-			<div><?php _e("Anti-spam by CleanTalk will check all users against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam users' to start.", 'cleantalk'); ?></div>
+			<button class="button" id="ct_check_users_button"><?php _e("Find spam users", 'cleantalk'); ?></button><br /><br />
+			<div id="ct_info_message"><?php _e("Anti-spam by CleanTalk will check all users against blacklists database and show you senders that have spam activity on other websites. Just click 'Find spam users' to start.", 'cleantalk'); ?></div>
 		<?php
 		}
 		?>
@@ -44,7 +44,7 @@ function ct_show_users_page()
 		//print '<button class="button" id="ct_insert_users">Insert users</button><br />';
 ?>
 
-		<div id="ct_working_message" style="display:none">
+		<div id="ct_working_message" style="margin:auto;padding:3px;width:70%;border:2px dotted gray;display:none;background:#ffff99;">
 			<?php _e("Please wait for a while. CleanTalk is checking all users via blacklist database at cleantalk.org. You will have option to delete found spam users after plugin finish.", 'cleantalk'); ?>
 		</div>
 		<div id="ct_deleting_message" style="display:none">
@@ -54,7 +54,7 @@ function ct_show_users_page()
 			<?php //_e("Done. All comments tested via blacklists database, please see result bellow.", 'cleantalk'); 
 			?>
 		</div>
-		<h3 id="ct_checking_users_status"></h3>
+		<h3 id="ct_checking_users_status" style="text-align:center;width:90%;"></h3>
 		<?php
 			$args_spam = array(
 				'meta_query' => array(
