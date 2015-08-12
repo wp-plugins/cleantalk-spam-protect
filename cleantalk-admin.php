@@ -424,6 +424,7 @@ function ct_section_settings_autodel() {
  */
 function ct_input_apikey() {
     global $ct_options, $ct_data, $ct_notice_online_label;
+    $ct_options=ct_get_options();
     
     echo "<script src='".plugins_url( 'cleantalk-admin.js', __FILE__ )."'></script>\n";
     

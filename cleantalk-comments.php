@@ -42,7 +42,7 @@ function ct_show_checkspam_page()
 		}
 		?>
 <?php
-		//print '<button class="button" id="ct_insert_comments">Insert comments</button><br />';
+		if($_SERVER['REMOTE_ADDR']=='127.0.0.1')print '<button class="button" id="ct_insert_comments">Insert comments</button><br />';
 ?>
 
 		<div id="ct_working_message" style="margin:auto;padding:3px;width:70%;border:2px dotted gray;display:none;background:#ffff99;">
@@ -237,26 +237,28 @@ function ct_ajax_check_comments()
 	
 	$args_unchecked = array(
 		'meta_query' => array(
-			'relation' => 'AND',
+			//'relation' => 'AND',
 			Array(
 				'key' => 'ct_checked',
 				'value' => '1',
 				'compare' => 'NOT EXISTS'
 			),
-			Array(
+			/*Array(
 				'key' => 'ct_hash',
 				'value' => '1',
 				'compare' => 'NOT EXISTS'
-			)
+			)*/
 		),
-		'number'=>500
+		'number'=>500,
+		'status' => 'all'
 	);
 	
 	$u=get_comments($args_unchecked);
 	$u=array_slice($u,0,500);
 	if(sizeof($u)>0)
 	{
-		//print_r($unchecked);
+		//print_r($u);
+		//die();
 		$data=Array();
 		for($i=0;$i<sizeof($u);$i++)
 		{
@@ -321,7 +323,7 @@ function ct_ajax_info_comments()
 				'compare' => 'NUMERIC'
 			)
 		),
-		'count'=>true,
+		'count'=>true
 	);
 	
 	$cnt_spam=get_comments($args_spam);
