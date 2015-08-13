@@ -1,6 +1,6 @@
 === Anti-Spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: anti-spam, antispam, bbpress, buddypress, captcha, capcha, cf7 spam, comments, contact form spam, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking, order, subscription, gravity spam, jetpack, bots, contact form 7, contact form, registrations, ninja, Fast Secure Contact, Gravity forms, formidable, mailchimp, s2member, protection, email, akismet, plugin, contact
+Tags: anti-spam, antispam, bbpress, buddypress, captcha, capcha, cf7 spam, comments, contact form spam, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking, order, subscription, gravity spam, jetpack, bots, contact form 7, contact form, registrations, ninja, Fast Secure Contact, Gravity forms, formidable, mailchimp, s2member, protection, email, akismet, plugin, contact, recaptcha, google captcha
 Requires at least: 3.0
 Tested up to: 4.3
 Stable tag: 5.19
@@ -79,7 +79,7 @@ CleanTalk is premium anti-spam service for WordPress, please look at the <a href
  * Traffic acquisition and user loyalty.
  * 24/7 technical support.
  * Clear statistics.
- * No captcha, puzzles, etc.
+ * No captcha (reCaptcha), puzzles, etc.
  * Free mobile app to control anti-spam function at your website.
 
 = Additional features =
@@ -147,7 +147,7 @@ Plugin by default pass pingbacks without any checks. All trackbacks will be bloc
 = Can I use CleanTalk with Akismet? =
 Sure, you can use CleanTalk with Akismet. In this case probably you will have bigger false/positive rate (when legitimate comments/signups denies), but you will have stronger antispam protection at website.
 
-= Should I use another anti-spam tools (Captcha)? =
+= Should I use another anti-spam tools (Captcha, reCaptcha and etc.)? =
 CleanTalk stops up to 100% of spam bots, so you can disable other anti-spam plugins (especially CAPTCHA like anti-spam plugins). In some cases several anti-spam plugins can conflict, so it will be better use just one plugin.  
 
 = Is the plugin WordPress MultiUser (WPMU or WordPress network) compatible? =
@@ -181,9 +181,6 @@ After activation CleanTalk sends test message with email stop_email@example.com.
 
 = Compatible with Cloudflare? = 
 CleanTalk is fully compatible with CloudFlare. Service doesn't filter CloudFlares IP's (AS13335) over blacklists database, so in this way plugin/service filters spam bots uses other anti spam tests.
-
-= Can I use Akismet and CleanTalk to protect my website against spam bots? =
-Sure, you can. You can use CleanTalk and any backend anti-spam tools to protect your website.
 
 = Can i use CleanTalk functionality in my plugins? =
 Yes, you can. Just use following snippet:
