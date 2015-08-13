@@ -1,13 +1,13 @@
 === Anti-Spam by CleanTalk - No Captcha, no comments & registrations spam ===
 Contributors: znaeff, shagimuratov, vlad-cleantalk
-Tags: anti-spam, antispam, bbpress, buddypress, captcha, cf7 spam, comments, contact form spam, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking spam, order spam, subscriptions spam, gravity spam, jetpack, bots, contact form 7, contact form, registrations, ninja, Fast Secure Contact, Gravity forms, formidable, mailchimp, s2member, protection
+Tags: anti-spam, antispam, bbpress, buddypress, captcha, capcha, cf7 spam, comments, contact form spam, signup, spam, spammers, spammy, WooCommerce, wordpress spam, booking, order, subscription, gravity spam, jetpack, bots, contact form 7, contact form, registrations, ninja, Fast Secure Contact, Gravity forms, formidable, mailchimp, s2member, protection, email, akismet
 Requires at least: 3.0
 Tested up to: 4.3
 Stable tag: 5.19
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Max power, all-in-one, premium anti-spam. No comments & registrations spam, no contact spam, protects any forms. Just install and forget spam. 
+Max power, all-in-one, premium anti-spam. No comments spam & registrations spam, no contact spam, protects any forms. Just install and forget spam. 
 
 == Description ==
 No CAPTCHA, no questions, no counting animals, no puzzles, no math and no spam bots.
@@ -56,6 +56,10 @@ Service CleanTalk (this plugin is a client application for CleanTalk anti-spam s
 = No spam comments, no spam registrations, no spam contact emails, no spam trackbacks. CAPTCHA less anti-spam for WordPress =
 Spam is one of the most irritating factors.  Spam become every year more and conventional anti-spam can no longer handle all the spam bots. CleanTalk prevents spam and automatically blocks it. You'll be surprised of effective protection against spam.
 
+= Public reviews =
+> Using on WPLift was a great test as we receive huge amounts of spam.
+> *Oliver Dale. <a href="http://wplift.com/wordpress-anti-spam-plugin" target="_blank">WPLift.com</a>.*
+
 = Anti-spam plugin info = 
 CleanTalk is an anti-spam solution **all in 1 for WordPress** that protects login, comments, contact and WooCommerce forms all at once. You don't need to install separate anti-spam plugins for each form. This allows your blog to work faster and save resources. After installation **you will forget about spam**, CleanTalk plugin will do all the work. You won't have to deal with spam, CleanTalk will do this for you automatically. 
 
@@ -87,10 +91,6 @@ CleanTalk is premium anti-spam service for WordPress, please look at the <a href
 The most popular method is CAPTCHA - the annoying picture with curved and sloping symbols, which are offered to the visitor to fill in. It is supposed that spam bots won't discern these CAPTCHA, but a visitor will. CAPTCHA provokes great irritation, but if one wants to speak out, he has to fill in these symbols time after time, making mistakes and starting once again. 
 Sometimes CAPTCHA reminds doodle 2x year old child. For users with vision problems captcha is just an insurmountable obstacle. Users hate captcha. Captcha for users means "hate". Unreadable CAPTCHA stops about 80% of site visitors. After 2 failed attempts to bring it up to 95% reject further attempts. 
 At the sight of CAPTCHA and after input errors, many visitors leave the resource. Thus, CAPTCHA helps to protect the resource both from bots and visitors. CAPTCHA is not a panacea from spam. Doubts Concerning the Need for CAPTCHA?
-
-= Public reviews =
-> Using on WPLift was a great test as we receive huge amounts of spam.
-> *Oliver Dale. <a href="http://wplift.com/wordpress-anti-spam-plugin" target="_blank">WPLift.com</a>.*
 
 = We recommend =
 Audience engagement plugin <a href="http://wordpress.org/plugins/feedweb/">Feedweb</a>
@@ -290,8 +290,8 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 == Changelog ==
 = 5.19 2015-08-11 =
   * New feature: anti-spam checking for registered users
-  * Fixed issue with AJAX JavaScript checking
-  * Fixed issue with SEO Yoast xml sitemaps.
+  * Fixed issue with AJAX JavaScript anti-spam test.
+  * Fixed issue with SEO Yoast xml sitemaps and JavaScript anti-spam test.
   
 = 5.18 2015-08-04 =
   * Fixed issue with user_token
