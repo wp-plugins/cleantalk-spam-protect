@@ -332,6 +332,7 @@ function ct_ajax_info_comments()
 		'meta_query' => array(
 			Array(
 				'key' => 'ct_hash',
+				'value'=>'1',
 				'compare' => 'EXISTS'
 			)
 		),
@@ -341,6 +342,7 @@ function ct_ajax_info_comments()
 		'meta_query' => array(
 			Array(
 				'key' => 'ct_checked',
+				'value'=>'1',
 				'compare' => 'EXISTS'
 			)
 		),

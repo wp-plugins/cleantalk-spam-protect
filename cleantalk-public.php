@@ -22,7 +22,14 @@ function ct_init() {
             $ct_direct_post = 1;
         }
     } else {
-        $_SESSION[$ct_formtime_label] = time();
+    	if(isset($_SERVER['HTTP_REFERER']) && stripos($_SERVER['HTTP_REFERER'],'preview')!==false)
+    	{
+    		//do nothing
+    	}
+    	else
+    	{
+        	$_SESSION[$ct_formtime_label] = time();
+        }
     }
     
     if($test_external_forms && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cleantalk_hidden_method']) && isset($_POST['cleantalk_hidden_action']))
@@ -1591,7 +1598,8 @@ function ct_contact_form_validate () {
         strpos($_SERVER['REQUEST_URI'],'/checkout/')!==false ||
         strpos($_SERVER['REQUEST_URI'],'/wp-admin/')!==false ||
         strpos($_SERVER['REQUEST_URI'],'wp-login.php')!==false||
-        strpos($_SERVER['REQUEST_URI'],'wp-comments-post.php')!==false
+        strpos($_SERVER['REQUEST_URI'],'wp-comments-post.php')!==false ||
+        @strpos($_SERVER['HTTP_REFERER'],'/wp-admin/')!==false
         )
         ) {
         return null;
@@ -1697,7 +1705,8 @@ function ct_contact_form_validate_postdata () {
         strpos($_SERVER['REQUEST_URI'],'/checkout/')!==false) ||
         strpos($_SERVER['REQUEST_URI'],'/wp-admin/')!==false ||
         strpos($_SERVER['REQUEST_URI'],'wp-login.php')!==false ||
-        strpos($_SERVER['REQUEST_URI'],'wp-comments-post.php')!==false
+        strpos($_SERVER['REQUEST_URI'],'wp-comments-post.php')!==false ||
+        @strpos($_SERVER['HTTP_REFERER'],'/wp-admin/')!==false
         ) {
         return null;
     }

@@ -47,6 +47,9 @@ Plugin blocks spam emails via any themes (built-in) contact forms. With AJAX for
 = Check existing comments for spam =
 With the help of anti-spam by CleanTalk you can check existing comments, to find and quickly delete spam comments. For use this function, go to WP Console->Comments->Find spam comments.
 
+= Check existing users for spam =
+With the help of anti-spam by CleanTalk you can check existing comments, to find and quickly delete spam users. For use this function, go to WP Console->Users->Check for spam.
+
 = Low false/positive rate =
 This plugin uses multiple anti-spam tests to filter spam bots with lower false/positive rate as possible. Multiple anti-spam tests avoid false/positive blocks for real website visitors even if one of the tests failed.
 

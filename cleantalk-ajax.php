@@ -83,28 +83,16 @@ function ct_get_stats()
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
 	global $ct_data;
 	//$ct_data=ct_get_data();
-	$t=time();
 	
-	if(!isset($ct_data['stat_accepted']))
+	if(!isset($ct_data['array_accepted']))
 	{
-		$ct_data['stat_accepted']=0;
-		$ct_data['stat_blocked']=0;
-		$ct_data['stat_all']=0;
-		$ct_data['last_time']=$t;
+		$ct_data['array_accepted']=Array();
+		$ct_data['array_blocked']=Array();
+		$ct_data['current_hour']=0;
 		update_option('cleantalk_data', $ct_data);
 	}
 	
-	$last_time=intval($ct_data['last_time']);
-	if($t-$last_time>86400)
-	{
-		$ct_data['stat_accepted']=0;
-		$ct_data['stat_blocked']=0;
-		$ct_data['stat_all']=0;
-		$ct_data['last_time']=$t;
-		update_option('cleantalk_data', $ct_data);
-	}
-	
-	$ret=Array('stat_accepted'=>$ct_data['stat_accepted'],'stat_blocked'=>$ct_data['stat_blocked'],'stat_all'=>$ct_data['stat_all']);
+	$ret=Array('stat_accepted'=>@array_sum($ct_data['array_accepted']), 'stat_blocked'=>@array_sum($ct_data['array_blocked']), 'stat_all'=>@array_sum($ct_data['array_accepted']) + @array_sum($ct_data['array_blocked']));
 	print json_encode($ret);
 	die();
 }

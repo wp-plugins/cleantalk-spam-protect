@@ -318,7 +318,7 @@ function ct_add_admin_menu( $wp_admin_bar ) {
 		//$ct_data=ct_get_data();
 		$args = array(
 			'id'    => 'ct_parent_node',
-			'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small1.png" alt=""  height="" style="margin-top:9px;" /><a href="#" class="ab-item alignright" title="allowed / blocked" alt="allowed / blocked"><span class="ab-label" id="ct_stats"></span></a>'
+			'title' => '<img src="' . plugin_dir_url(__FILE__) . 'inc/images/logo_small1.png" alt=""  height="" style="margin-top:9px;" /><a href="#" class="ab-item alignright" title="allowed / blocked" alt="allowed / blocked"><span class="ab-label" id="ct_stats"><span>0</span> / <span>0</span></span></a>'
 		);
 		$wp_admin_bar->add_node( $args );
 	
