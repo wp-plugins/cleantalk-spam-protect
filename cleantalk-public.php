@@ -1,5 +1,9 @@
 <?php
 
+$ct_options=ct_get_options();
+$ct_data=ct_get_data();
+
+
 /**
  * Init functions 
  * @return 	mixed[] Array of options
@@ -22,14 +26,14 @@ function ct_init() {
             $ct_direct_post = 1;
         }
     } else {
-    	if(isset($_SERVER['HTTP_REFERER']) && stripos($_SERVER['HTTP_REFERER'],'preview')!==false)
+    	/*if(isset($_SERVER['HTTP_REFERER']) && stripos($_SERVER['HTTP_REFERER'],'preview')!==false)
     	{
     		//do nothing
     	}
     	else
-    	{
+    	{*/
         	$_SESSION[$ct_formtime_label] = time();
-        }
+        //}
     }
     
     if($test_external_forms && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cleantalk_hidden_method']) && isset($_POST['cleantalk_hidden_action']))
@@ -954,6 +958,10 @@ function ct_test_registration($nickname, $email, $ip){
  */
 function ct_registration_errors($errors, $sanitized_user_login = null, $user_email = null) {
     global $ct_agent_version, $ct_checkjs_register_form, $ct_session_request_id_label, $ct_session_register_ok_label, $bp, $ct_signup_done, $ct_formtime_label, $ct_negative_comment, $ct_options, $ct_data;
+    
+    $ct_options=ct_get_options();
+	$ct_data=ct_get_data();
+
 
     // Go out if a registrered user action
     if (ct_is_user_enable() === false) {

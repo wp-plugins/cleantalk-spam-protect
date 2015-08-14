@@ -99,6 +99,10 @@ $ct_notice_autokey_label = 'ct_autokey';
 // Apikey automatic getting error text
 $ct_notice_autokey_value = '';
 
+$ct_options=ct_get_options();
+$ct_data=ct_get_data();
+
+
 /**
  * Public action 'plugins_loaded' - Loads locale, see http://codex.wordpress.org/Function_Reference/load_plugin_textdomain
  */

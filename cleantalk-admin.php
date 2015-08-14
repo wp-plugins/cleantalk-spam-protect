@@ -1,6 +1,8 @@
 <?php
 
 $ct_plugin_basename = 'cleantalk-spam-protect/cleantalk.php';
+$ct_options=ct_get_options();
+$ct_data=ct_get_data();
 
 if(isset($_GET['close_notice']))
 {
@@ -425,6 +427,7 @@ function ct_section_settings_autodel() {
 function ct_input_apikey() {
     global $ct_options, $ct_data, $ct_notice_online_label;
     $ct_options=ct_get_options();
+    $ct_data=ct_get_data();
     
     echo "<script src='".plugins_url( 'cleantalk-admin.js', __FILE__ )."'></script>\n";
     
