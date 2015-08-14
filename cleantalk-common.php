@@ -74,12 +74,6 @@ $ct_post_data_authnet_label = 's2member_pro_authnet_registration';
 // Form time load label  
 $ct_formtime_label = 'ct_formtime'; 
 
-// Plugin's options 
-$ct_options = null;
-
-// Plugin's data 
-$ct_data = null;
-
 // Post without page load
 $ct_direct_post = 0;
 
